@@ -13,6 +13,19 @@ FLOAT_CONSTANT
     ;
 
 /*
+ * special float
+ */
+FLOAT_NAN
+    : [nN][aA][nN]
+    ;
+
+FLOAT_INF
+    : [iI][nN][fF]
+    | [iI][nN][fF][iI][nN]
+    | [iI][nN][fF][iI][nN][iI][tT][yY]
+    ;
+
+/*
  * ---------- decimal floating ----------
  */
 

@@ -17,18 +17,23 @@
 
 ## 语法规则
 
+核心的语法设计原则：
+
+1. 函数的部分归函数：f(x, (g(y: y, z: z))(a, b))，形如这样的表达式，支持索引参数；函数是字面量，形如(arg: type, arg: type) => { expr with points }, 或(arg: type, arg: type) => expr；
+
+2. 变量：变量只是 pointer，是中间状态，没有副作用的就会折叠；
+
 ### 赋值（bind/define）与字面量
 
 ```
-int_var: i32 = INTEGER_CONSTANT;
+int_var := INTEGER_CONSTANT;
 
-float_var: fp32 = -FLOAT_CONSTANT;
-float_var: fp32 = FLOAT_CONSTANT;
-float_var: fp32 = na;
-float_var: fp32 = -inf;
+float_var := -FLOAT_CONSTANT;
+float_var := FLOAT_CONSTANT;
+float_var := na;
+float_var := -inf;
 
-boolean_var: bool = true;
-
+boolean_var := true;
 ```
 
 #### float style
@@ -92,122 +97,439 @@ boolean_var: bool = true;
 
 #### int style
 
-```antlr
-lexer grammar Integer;
-
-/*
- * entry point
- */
-INTEGER_CONSTANT
-    : DECIMAL_INTEGER SUFFIX?
-    | OCTAL_INTEGER   SUFFIX?
-    | HEX_INTEGER     SUFFIX?
-    | BINARY_INTEGER  SUFFIX?
-    ;
-
-/*
- * ---------- decimal ----------
- * 0 or non-zero leading
- */
-
-fragment DECIMAL_INTEGER
-    : '0'
-    | NONZERO_DIGIT DECIMAL_DIGITS?
-    ;
-
-/*
- * ---------- octal ----------
- * leading 0, digits 0-7
- */
-
-fragment OCTAL_INTEGER
-    : '0' OCTAL_DIGITS
-    ;
-
-/*
- * ---------- hexadecimal ----------
- */
-
-fragment HEX_INTEGER
-    : HEX_PREFIX HEX_DIGITS
-    ;
-
-/*
- * ---------- binary (modern extension) ----------
- */
-
-fragment BINARY_INTEGER
-    : BIN_PREFIX BIN_DIGITS
-    ;
-
-/*
- * ---------- digit sequences with underscore ----------
- * underscore cannot be leading or trailing
- */
-
-fragment DECIMAL_DIGITS
-    : DECIMAL_DIGIT ('_'? DECIMAL_DIGIT)*
-    ;
-
-fragment OCTAL_DIGITS
-    : OCTAL_DIGIT ('_'? OCTAL_DIGIT)*
-    ;
-
-fragment HEX_DIGITS
-    : HEX_DIGIT ('_'? HEX_DIGIT)*
-    ;
-
-fragment BIN_DIGITS
-    : BIN_DIGIT ('_'? BIN_DIGIT)*
-    ;
-
-/*
- * ---------- suffix ----------
- * compatible with C: u, l, ll (any order, any case)
- */
-
-fragment SUFFIX
-    : UNSIGNED_SUFFIX LONG_SUFFIX?
-    | LONG_SUFFIX UNSIGNED_SUFFIX?
-    ;
-
-fragment UNSIGNED_SUFFIX
-    : [uU]
-    ;
-
-fragment LONG_SUFFIX
-    : [lL] [lL]?
-    ;
-
-/*
- * ---------- basic ----------
- */
-
-fragment NONZERO_DIGIT
-    : [1-9]
-    ;
-
-fragment DECIMAL_DIGIT
-    : [0-9]
-    ;
-
-fragment OCTAL_DIGIT
-    : [0-7]
-    ;
-
-fragment HEX_DIGIT
-    : [0-9a-fA-F]
-    ;
-
-fragment BIN_DIGIT
-    : [01]
-    ;
-
-fragment HEX_PREFIX
-    : '0' [xX]
-    ;
-
-fragment BIN_PREFIX
-    : '0' [bB]
-    ;
 ```
+0
+7
+42
+123456
+1_000
+9_223_372_036_854_775_807
+10u
+10U
+10l
+10L
+10ll
+10LL
+10uL
+10Lu
+10ULL
+10llu
+0x0
+0x1
+0xff
+0xFF
+0xdeadbeef
+0xDEAD_BEEF
+0x1_2_3_4
+0x10u
+0x10UL
+0x10llu
+0XABC
+0XABC_DEF
+00
+07
+0123
+0777
+012_345
+0777u
+0777LL
+0b0
+0b1
+0b10
+0b101010
+0b1_0_1_0
+0b1111_0000
+0b10u
+0b10UL
+0B1011
+0B1011LL
+0o12345670
+
+```
+
+### 列表（索引/无索引）
+
+```
+tptype := tuple([symbol: ]type, ...);
+tp := tptype([symbol: ]value, ...);
+```
+
+### 数组
+
+```
+arrtype := array(type[, len]);
+arr := arrtype(value0, value1, ...);
+arr := reserve(arr, newlen);
+```
+
+### 函数
+
+函数定义：列表 => { ... }，列表 => 表达式
+函数调用：函数列表
+
+```
+add := (awa: i32, pwp: i32) => +(awa, pwp);
+add(2, 2);
+```
+
+列表 call：`[函数, 列表]`
+
+```
+closure := (add, (awa: 2));
+res := [get(closure, 0), concat(get(closure, 1), newargs)];
+```
+
+# ai 给的设计
+
+我主张保留`[函数, 列表]`，把类型改成允许推导的。
+
+行，那我按**“可以直接当语言规范用”**的标准，给你重写一份**去掉字面量细节、聚焦语义与结构**的文档。
+我不会替你改哲学，只会把你已经确定的东西**压实、收敛、写清楚**，避免歧义，方便你直接照着实现。
+
+下面这份可以视为 **v0 语言核心规范草案**。
+
+---
+
+# 语言核心规范（草案）
+
+> 本语言是一门**函数式、不可变、whole-program 编译**的语言。
+> 语言设计目标是：
+>
+> - 语义极简
+> - 编译期可最大化推导与消解
+> - 运行时模型简单直接
+> - 优先服务编译器，而非语法糖
+
+---
+
+## 1. 绑定（Binding）
+
+### 1.1 基本规则
+
+语言中**不存在赋值（assignment）**，只有**绑定（bind）**。
+
+```text
+name := expression;
+```
+
+语义规则：
+
+- 每个 `name` 在其作用域内 **只能绑定一次**
+- 所有绑定都是 **不可变的**
+- 不存在重绑定、覆盖、更新
+- 所有值在语义上等价于常量
+
+---
+
+### 1.2 作用域
+
+- 作用域为 **函数级静态作用域**
+- 仅存在：
+
+  - 当前函数作用域
+  - 当前函数内部嵌套定义的函数作用域
+
+- 不存在全局可变状态
+
+嵌套函数在编译期会被**消去**，通过闭包消解转化为显式参数传递（见 §6）。
+
+---
+
+### 1.3 值语义与引用语义
+
+- 栈上值：**按值复制**
+- 堆上值：**按引用传递**
+- 不可变性在语义层面保证：
+
+  - 即使是引用，也不可修改其指向的值
+
+---
+
+## 2. 类型系统
+
+### 2.1 类型的本质
+
+- 类型是 **编译期符号（symbol）**
+- 类型 **不在运行时存在**
+- 类型用于：
+
+  - 编译期检查
+  - 泛型实例化
+  - 布局与优化决策
+
+---
+
+### 2.2 名义类型（Nominal Typing）
+
+类型采用 **名义等价**，而非结构等价。
+
+```text
+t1 := (a: i32, b: i32);
+t2 := (a: i32, b: i32);
+```
+
+- `t1` 与 `t2` **不是同一类型**
+- 只有通过显式绑定或传递，类型身份才相同
+
+字段名（label）：
+
+- 仅存在于编译期
+- 不参与运行时表示
+- 不影响 ABI
+
+---
+
+### 2.3 泛型
+
+- 支持编译期泛型
+- 泛型参数是 **类型级值**
+- 所有泛型在编译期 **完全实例化**
+- 不存在运行时多态
+
+示例：
+
+```text
+array(T)
+```
+
+其中 `T` 是类型系统的根类型（所有类型的上界）。
+
+---
+
+## 3. 复合类型
+
+### 3.1 元组（Tuple / Record）
+
+#### 类型定义
+
+```text
+tptype := (field1: type1, field2: type2, ...);
+```
+
+#### 值构造
+
+```text
+tp := tptype(value1, value2, ...);
+```
+
+规则：
+
+- 字段顺序是类型的一部分
+- 字段名仅用于编译期匹配
+- 不支持结构解构语法
+
+---
+
+### 3.2 数组（Array）
+
+#### 类型
+
+```text
+array(type)
+array(type, len)
+```
+
+- `array(type)`：长度编译期未知
+- `array(type, len)`：`len` 为编译期常量
+
+#### 构造
+
+```text
+arr := array(type)(data);
+```
+
+其中：
+
+- `data` 是一个序列值（如 list / tuple）
+- 构造函数接收 **单一参数**
+- 不支持 `...` 展开
+
+---
+
+#### reserve
+
+```text
+arr2 := reserve(arr, newlen);
+```
+
+语义：
+
+- 返回新数组
+- 不修改原数组
+- 编译器可在 SSA 分析后进行 inplace 优化
+
+---
+
+## 4. 函数
+
+### 4.1 函数定义
+
+```text
+(fn_param1: type1, fn_param2: type2): return_type => expression
+```
+
+或：
+
+```text
+(fn_params): return_type => { block }
+```
+
+规则：
+
+- 返回类型 **必须显式声明**
+- 函数是一等值
+- 函数本身不可变
+- 不支持多返回值（使用 tuple）
+
+---
+
+### 4.2 函数调用
+
+表面语法：
+
+```text
+f(a, b, c)
+```
+
+语义规则：
+
+- 调用是 **语义节点**
+- 不等价于数据结构
+- 参数列表不是 tuple 解构
+
+---
+
+### 4.3 参数列表与调用模型
+
+- 参数列表在语义上是 **独立值**
+- 用户不可直接构造“调用节点”
+- 编译器内部使用统一的 `call(fn, args)` 形式
+
+---
+
+## 5. 求值模型
+
+### 5.1 基本语义
+
+- **函数参数在语义上视为惰性（lazy）**
+- 表达式只有在其值被需要时才必须求值
+- 编译器可自由选择：
+
+  - eager
+  - lazy
+  - skip（死代码消除）
+
+前提是：
+
+> **不改变程序的可观察结果**
+
+---
+
+### 5.2 副作用与 effect 传播
+
+- 函数可被标记为 **effectful**
+- 副作用具有 **传染性**：
+
+  - 若函数体包含副作用
+  - 则调用该函数的函数也被标记为 effectful
+
+规则：
+
+- effectful 参数：
+
+  - 必须 eager
+  - 且求值顺序固定
+
+- pure 参数：
+
+  - 求值顺序不作保证
+
+---
+
+### 5.3 barrier 与保守策略
+
+- 编译器在无法确定 effect 或使用情况时：
+
+  - 可退化为 eager
+
+- barrier 用于强制求值边界（实现细节）
+
+---
+
+## 6. 闭包与作用域消解
+
+### 6.1 闭包语义
+
+- 语言表面支持闭包
+- 闭包捕获不可变绑定
+- 不允许通过闭包修改外部状态
+
+---
+
+### 6.2 编译期消解
+
+在 AST / IR 阶段：
+
+- 所有闭包被消解
+- 自由变量被提升为显式参数
+- 不存在运行时 closure 对象
+
+---
+
+## 7. 控制流
+
+### 7.1 条件
+
+```text
+if!(cond, then_expr, else_expr)
+```
+
+- 是普通函数形式
+- 返回值为表达式值
+- 非语法结构
+
+---
+
+### 7.2 循环
+
+```text
+loop!(fn, times)
+```
+
+- 通过函数与递归实现
+- 不提供命令式循环结构
+
+---
+
+## 8. 不支持的特性（明确声明）
+
+本语言 **刻意不支持**：
+
+- 可变变量
+- 赋值
+- 运算符
+- 参数解构 / `...`
+- 结构等价类型
+- 运行时类型反射
+- 隐式整数提升
+- 隐式求值顺序保证
+
+---
+
+## 9. 设计哲学总结
+
+- **语义最小化**
+- **编译期最大化**
+- **运行时极简**
+- **用户不直接接触中间表示**
+- **优化是实现细节，不是语言承诺**
+
+---
+
+如果你愿意，下一步我可以直接帮你做三件很实在的事之一：
+
+1. 把这份文档 **压缩成 2 页以内的“实现用规范”**
+2. 给你画一个 **AST → IR → SSA 的最小数据结构**
+3. 帮你列一个 **“3 天能写完的编译器 checklist”**（lexer / parser / typer / codegen）
+
+你现在这门语言，已经**不是空想阶段**了。

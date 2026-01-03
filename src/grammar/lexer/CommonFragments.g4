@@ -74,9 +74,48 @@ fragment OCT_PREFIX
     ;
 
 /*
- * ========================= EOL ===============================
+ * ====================== identifier ===========================
  */
 
-EOL
+fragment UNICODE_LETTER
+    : '\u00A0'..'\uD7FF'
+    | '\uF900'..'\uFDCF'
+    | '\uFDF0'..'\uFFEF'
+    ;
+
+fragment SYMBOL_CHAR
+    : [+\-*/<>!?$%&^~|@#.]
+    | EQ_NOT_ARROW
+    ;
+
+fragment EQ_NOT_ARROW
+    : '=' { self._input.LA(1) != ord('>') }?
+    ;
+
+fragment DIGIT
+    : [0-9]
+    ;
+
+fragment ID_START
+    : UNICODE_LETTER
+    | [a-zA-Z_]
+    | SYMBOL_CHAR
+    ;
+
+fragment ID_CONTINUE
+    : ID_START
+    | DIGIT
+    ;
+
+/*
+ * ====================== whitespace ===========================
+ */
+
+fragment WS_CHAR
+    : [ \t\r]
+    ;
+
+fragment EOL
     : '\n'
+    | '\r\n'
     ;

@@ -1,0 +1,1343 @@
+'a'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'0'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'b'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'1'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'c'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'123_456'            -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'d'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'0xdead_beef'        -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'e'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'0b1010_0110'        -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'f'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'0o755'              -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'g'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'1.'                 -> FLOAT_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'h'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'.5'                 -> FLOAT_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'i'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'1.0'                -> FLOAT_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'j'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'1e10'               -> FLOAT_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'k'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'1.2e-3'             -> FLOAT_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'l'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'0x1.fp3'            -> FLOAT_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'m'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'nan'                -> FLOAT_NAN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'n'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'inf'                -> FLOAT_INF
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'o'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'infinity'           -> FLOAT_INF
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'p'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'true'               -> BOOLEAN_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'q'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'false'              -> BOOLEAN_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'r'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'null'               -> NULL_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'λ'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'1'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'你好'                 -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'2'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'变量_一'               -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'3'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'привет'             -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'4'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'日本語'                -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'5'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'한글'                 -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'6'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'＋'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+'=>'                 -> OP_ARROW
+'+'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'＞'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'y'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+'=>'                 -> OP_ARROW
+'>'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'y'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'＝'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'y'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+'=>'                 -> OP_ARROW
+'='                  -> EQ
+'='                  -> EQ
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'y'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'   '                -> WS
+'// 注意：这里是函数名，不是 operator' -> LINE_COMMENT
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'add'                -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'+'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'sub'                -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'-'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'10'                 -> INTEGER_CONSTANT
+','                  -> COMMA
+'3'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'mul'                -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'*'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'6'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'7'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'div'                -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'/'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'8'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'cmp1'               -> ID_IDENTIFIER
+':'                  -> COLON
+'=>'                 -> OP_ARROW
+'('                  -> LPAREN
+'3'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'cmp2'               -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'<'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'cmp3'               -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'='                  -> EQ
+'='                  -> EQ
+'('                  -> LPAREN
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'1'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'cmp4'               -> ID_IDENTIFIER
+':'                  -> COLON
+'!='                 -> ID_IDENTIFIER
+' '                  -> WS
+'('                  -> LPAREN
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'cmp5'               -> ID_IDENTIFIER
+':'                  -> COLON
+'>='                 -> ID_IDENTIFIER
+' '                  -> WS
+'('                  -> LPAREN
+'2'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'cmp6'               -> ID_IDENTIFIER
+':'                  -> COLON
+'<='                 -> ID_IDENTIFIER
+' '                  -> WS
+'('                  -> LPAREN
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'1'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'bang'               -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'!'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'true'               -> BOOLEAN_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'ifcall'             -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'if!'                -> ID_IDENTIFIER
+'('                  -> LPAREN
+'true'               -> BOOLEAN_CONSTANT
+','                  -> COMMA
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'0'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'id'                 -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+':'                  -> COLON
+'i32'                -> ID_IDENTIFIER
+'=>'                 -> OP_ARROW
+'x'                  -> ID_IDENTIFIER
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'pair'               -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'i32'                -> ID_IDENTIFIER
+','                  -> COMMA
+'b'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+':'                  -> COLON
+'('                  -> LPAREN
+'i32'                -> ID_IDENTIFIER
+','                  -> COMMA
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+'=>'                 -> OP_ARROW
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'complex'            -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'array'              -> ID_IDENTIFIER
+'('                  -> LPAREN
+'i32'                -> ID_IDENTIFIER
+','                  -> COMMA
+'4'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+','                  -> COMMA
+'y'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'array'              -> ID_IDENTIFIER
+'('                  -> LPAREN
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+')'                  -> RPAREN
+':'                  -> COLON
+'array'              -> ID_IDENTIFIER
+'('                  -> LPAREN
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+'=>'                 -> OP_ARROW
+'x'                  -> ID_IDENTIFIER
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'blk'                -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+')'                  -> RPAREN
+':'                  -> COLON
+'i32'                -> ID_IDENTIFIER
+'=>'                 -> OP_ARROW
+'{'                  -> LBRACE
+'\n'                 -> WS
+'    '               -> WS
+'a'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'1'                  -> INTEGER_CONSTANT
+'\n'                 -> WS
+'    '               -> WS
+'b'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'2'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'    '               -> WS
+'c'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'3'                  -> INTEGER_CONSTANT
+'\n'                 -> WS
+'    '               -> WS
+'a'                  -> ID_IDENTIFIER
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'}'                  -> RBRACE
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'blk2'               -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+')'                  -> RPAREN
+':'                  -> COLON
+'i32'                -> ID_IDENTIFIER
+'=>'                 -> OP_ARROW
+'{'                  -> LBRACE
+'a'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'1'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'b'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'2'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'c'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'3'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'}'                  -> RBRACE
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'closure'            -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'['                  -> LBRACK
+'add'                -> ID_IDENTIFIER
+','                  -> COMMA
+'('                  -> LPAREN
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+']'                  -> RBRACK
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'nested'             -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'['                  -> LBRACK
+'['                  -> LBRACK
+'add'                -> ID_IDENTIFIER
+','                  -> COMMA
+'('                  -> LPAREN
+'1'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+']'                  -> RBRACK
+','                  -> COMMA
+'('                  -> LPAREN
+'2'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'3'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+']'                  -> RBRACK
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'deep'               -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'['                  -> LBRACK
+' '                  -> WS
+'['                  -> LBRACK
+' '                  -> WS
+'['                  -> LBRACK
+' '                  -> WS
+'f'                  -> ID_IDENTIFIER
+' '                  -> WS
+','                  -> COMMA
+' '                  -> WS
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+' '                  -> WS
+']'                  -> RBRACK
+' '                  -> WS
+']'                  -> RBRACK
+' '                  -> WS
+','                  -> COMMA
+' '                  -> WS
+'('                  -> LPAREN
+'y'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+' '                  -> WS
+']'                  -> RBRACK
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'sum'                -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+'n'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+':'                  -> COLON
+'i32'                -> ID_IDENTIFIER
+'=>'                 -> OP_ARROW
+'\n'                 -> WS
+'    '               -> WS
+'loop!'              -> ID_IDENTIFIER
+'('                  -> LPAREN
+'\n'                 -> WS
+'        '           -> WS
+'('                  -> LPAREN
+'i'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'0'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'acc'                -> ID_IDENTIFIER
+':'                  -> COLON
+'0'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+','                  -> COMMA
+'\n'                 -> WS
+'        '           -> WS
+'n'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'\n'                 -> WS
+'        '           -> WS
+'('                  -> LPAREN
+'state'              -> ID_IDENTIFIER
+')'                  -> RPAREN
+'=>'                 -> OP_ARROW
+'{'                  -> LBRACE
+'\n'                 -> WS
+'            '       -> WS
+'i'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'get'                -> ID_IDENTIFIER
+'('                  -> LPAREN
+'state'              -> ID_IDENTIFIER
+','                  -> COMMA
+'0'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+'\n'                 -> WS
+'            '       -> WS
+'acc'                -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'get'                -> ID_IDENTIFIER
+'('                  -> LPAREN
+'state'              -> ID_IDENTIFIER
+','                  -> COMMA
+'1'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+'\n'                 -> WS
+'            '       -> WS
+'('                  -> LPAREN
+'+'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'i'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'1'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+','                  -> COMMA
+'+'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'acc'                -> ID_IDENTIFIER
+','                  -> COMMA
+'i'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+')'                  -> RPAREN
+'\n'                 -> WS
+'        '           -> WS
+'}'                  -> RBRACE
+'\n'                 -> WS
+'    '               -> WS
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'____'               -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'0'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'____123'            -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'1'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'λ_λ_λ'              -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'2'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'＋＋＋'                -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'b'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'c'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+'=>'                 -> OP_ARROW
+'+'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'+'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+','                  -> COMMA
+'c'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'f'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'('                  -> LPAREN
+'('                  -> LPAREN
+'('                  -> LPAREN
+'('                  -> LPAREN
+'('                  -> LPAREN
+'('                  -> LPAREN
+'('                  -> LPAREN
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+')'                  -> RPAREN
+')'                  -> RPAREN
+')'                  -> RPAREN
+')'                  -> RPAREN
+')'                  -> RPAREN
+')'                  -> RPAREN
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'g'                  -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'['                  -> LBRACK
+'['                  -> LBRACK
+'['                  -> LBRACK
+'['                  -> LBRACK
+'['                  -> LBRACK
+'['                  -> LBRACK
+'x'                  -> ID_IDENTIFIER
+']'                  -> RBRACK
+']'                  -> RBRACK
+']'                  -> RBRACK
+']'                  -> RBRACK
+']'                  -> RBRACK
+']'                  -> RBRACK
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'call1'              -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'add'                -> ID_IDENTIFIER
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+' '                  -> WS
+'y'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'call2'              -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'add'                -> ID_IDENTIFIER
+'('                  -> LPAREN
+'y'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'2'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+' '                  -> WS
+'x'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'1'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'call3'              -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'make'               -> ID_IDENTIFIER
+'('                  -> LPAREN
+'n'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'10'                 -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'call4'              -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'reserve'            -> ID_IDENTIFIER
+'('                  -> LPAREN
+'arr'                -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'arr0'               -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'newlen'             -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'16'                 -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'call5'              -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'array'              -> ID_IDENTIFIER
+'('                  -> LPAREN
+'type'               -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'len'                -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'4'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'call6'              -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'array'              -> ID_IDENTIFIER
+'('                  -> LPAREN
+'type'               -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'nested_named'       -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+'\n'                 -> WS
+'    '               -> WS
+'fn'                 -> ID_IDENTIFIER
+'('                  -> LPAREN
+'\n'                 -> WS
+'        '           -> WS
+'a'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'add'                -> ID_IDENTIFIER
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+' '                  -> WS
+'y'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+','                  -> COMMA
+'\n'                 -> WS
+'        '           -> WS
+'b'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'with_log'           -> ID_IDENTIFIER
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'10'                 -> INTEGER_CONSTANT
+')'                  -> RPAREN
+','                  -> COMMA
+'\n'                 -> WS
+'        '           -> WS
+'c'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'array'              -> ID_IDENTIFIER
+'('                  -> LPAREN
+'type'               -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'len'                -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'8'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+'\n'                 -> WS
+'    '               -> WS
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'+'                  -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'builtin_add'        -> ID_IDENTIFIER
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'-'                  -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'builtin_sub'        -> ID_IDENTIFIER
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'*'                  -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'builtin_mul'        -> ID_IDENTIFIER
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'map!'               -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'f'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'arr'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'builtin_map'        -> ID_IDENTIFIER
+'('                  -> LPAREN
+'f'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'arr'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'foldl!'             -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'f'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'init'               -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'arr'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'builtin_foldl'      -> ID_IDENTIFIER
+'('                  -> LPAREN
+'f'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'init'               -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'arr'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'is-zero?'           -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'i32'                -> ID_IDENTIFIER
+')'                  -> RPAREN
+':'                  -> COLON
+' '                  -> WS
+'bool'               -> ID_IDENTIFIER
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'='                  -> EQ
+'='                  -> EQ
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'0'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'not-null?'          -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+':'                  -> COLON
+' '                  -> WS
+'bool'               -> ID_IDENTIFIER
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'!='                 -> ID_IDENTIFIER
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'null'               -> NULL_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'>>='                -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'bind'               -> ID_IDENTIFIER
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'<<='                -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'shift'              -> ID_IDENTIFIER
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'<>'                 -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'concat'             -> ID_IDENTIFIER
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'result1'            -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'+'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'a'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'1'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+' '                  -> WS
+'b'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'result2'            -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'>'                  -> ID_IDENTIFIER
+'('                  -> LPAREN
+'left'               -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'x'                  -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'right'              -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'y'                  -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'result3'            -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'is-zero?'           -> ID_IDENTIFIER
+'('                  -> LPAREN
+'x'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'0'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'result4'            -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'map!'               -> ID_IDENTIFIER
+'('                  -> LPAREN
+'f'                  -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'add'                -> ID_IDENTIFIER
+','                  -> COMMA
+' '                  -> WS
+'arr'                -> ID_IDENTIFIER
+':'                  -> COLON
+' '                  -> WS
+'arr0'               -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'\n'                 -> WS
+'!!!!'               -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'1'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'????'               -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'2'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'++++'               -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'3'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'----'               -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'4'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'λ+λ'                -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'5'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'中文-函数!'             -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'6'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'数据->处理'             -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'7'                  -> INTEGER_CONSTANT
+';'                  -> SEMICOLON
+'     '              -> WS
+'// 注意：这里的 -> 是字符，不是 =>' -> LINE_COMMENT
+'\n'                 -> WS
+'\n'                 -> WS
+'>='                 -> ID_IDENTIFIER
+' '                  -> WS
+':'                  -> COLON
+'='                  -> EQ
+' '                  -> WS
+'('                  -> LPAREN
+')'                  -> RPAREN
+' '                  -> WS
+'=>'                 -> OP_ARROW
+' '                  -> WS
+'awa'                -> ID_IDENTIFIER
+'('                  -> LPAREN
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'assign'             -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'if!'                -> ID_IDENTIFIER
+'('                  -> LPAREN
+'cond'               -> ID_IDENTIFIER
+':'                  -> COLON
+'='                  -> EQ
+'='                  -> EQ
+'('                  -> LPAREN
+'2'                  -> INTEGER_CONSTANT
+','                  -> COMMA
+'2'                  -> INTEGER_CONSTANT
+')'                  -> RPAREN
+','                  -> COMMA
+'then'               -> ID_IDENTIFIER
+':'                  -> COLON
+'then'               -> ID_IDENTIFIER
+','                  -> COMMA
+'else'               -> ID_IDENTIFIER
+':'                  -> COLON
+'anything=else'      -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'<EOF>'              -> WS

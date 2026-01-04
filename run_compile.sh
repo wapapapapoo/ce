@@ -1,0 +1,1 @@
+PYTHONUTF8=1 python run.py > out.txt

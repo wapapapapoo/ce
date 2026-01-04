@@ -13,9 +13,39 @@ class WarpedTokenStream(BufferedTokenStream):
         self.pending = []
 
     # ========= 核心 =========
+    # def fetch(self, n):
+    #     fetched = 0
+    #     while fetched < n:
+    #         if self.pending:
+    #             self.tokens.append(self.pending.pop(0))
+    #             fetched += 1
+    #             continue
+
+    #         t = self.tokenSource.nextToken()
+    #         self._update_mode(t)
+
+    #         if t.type == Token.EOF:
+    #             self.tokens.append(t)
+    #             fetched += 1
+    #             break
+
+    #         if t.type == self.lexer.OP_BIND and self._should_split():
+    #             self._split_bind(t)
+    #             fetched += 1
+    #             continue
+
+    #         self.tokens.append(t)
+    #         fetched += 1
+
+    #     return fetched
     def fetch(self, n):
+        # Python antlr4 使用 self.index 而不是 self.p
+        needed = self.index + n - len(self.tokens)
+        if needed <= 0:
+            return 0
+
         fetched = 0
-        while fetched < n:
+        while fetched < needed:
             if self.pending:
                 self.tokens.append(self.pending.pop(0))
                 fetched += 1
@@ -24,18 +54,11 @@ class WarpedTokenStream(BufferedTokenStream):
             t = self.tokenSource.nextToken()
             self._update_mode(t)
 
-            if t.type == Token.EOF:
-                self.tokens.append(t)
-                fetched += 1
-                break
-
-            if t.type == self.lexer.OP_BIND and self._should_split():
-                self._split_bind(t)
-                fetched += 1
-                continue
-
             self.tokens.append(t)
             fetched += 1
+
+            if t.type == Token.EOF:
+                break
 
         return fetched
 

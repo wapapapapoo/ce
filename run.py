@@ -1,12 +1,12 @@
 from antlr4 import *
 from bin.MainLexer import MainLexer
-from bin.Test import Test
+from bin.MainParser import MainParser
 
 def run(input_text: str):
     input_stream = InputStream(input_text)
     lexer = MainLexer(input_stream)
     tokens = CommonTokenStream(lexer)
-    parser = Test(tokens)
+    parser = MainParser(tokens)
 
     tree = parser.file_()
     tokens.fill()

@@ -1,1 +1,1 @@
-PYTHONUTF8=1 python run.py > out.txt
+PYTHONUTF8=1 python pipeline.py test.txt -o out.txt

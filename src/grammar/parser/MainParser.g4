@@ -1,4 +1,4 @@
-parser grammar Test;
+parser grammar MainParser;
 
 options {
     tokenVocab = MainLexer;

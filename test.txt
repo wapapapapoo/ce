@@ -140,4 +140,7 @@ result4 := map!(f: add, arr: arr0);
 
 >= := () => awa();
 
-assign:=if!(cond:==(2,2),then:then,else:anything=else);
+assign:=if!(cond:= 123=(2,2),then:then,else:anything=else);
+
+awa :==123;
+(awa:=123u);

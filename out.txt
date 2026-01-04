@@ -1,155 +1,130 @@
 'a'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '0'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'b'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '1'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'c'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '123_456'            -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'd'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '0xdead_beef'        -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'e'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '0b1010_0110'        -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'f'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '0o755'              -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '\n'                 -> WS
 'g'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '1.'                 -> FLOAT_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'h'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '.5'                 -> FLOAT_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'i'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '1.0'                -> FLOAT_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'j'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '1e10'               -> FLOAT_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'k'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '1.2e-3'             -> FLOAT_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'l'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '0x1.fp3'            -> FLOAT_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'm'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'nan'                -> FLOAT_NAN
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'n'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'inf'                -> FLOAT_INF
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'o'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'infinity'           -> FLOAT_INF
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '\n'                 -> WS
 'p'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'true'               -> BOOLEAN_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'q'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'false'              -> BOOLEAN_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'r'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'null'               -> NULL_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '\n'                 -> WS
 '\n'                 -> WS
 'λ'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '1'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '你好'                 -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '2'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '变量_一'               -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '3'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'привет'             -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '4'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '日本語'                -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '5'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '한글'                 -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '6'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '\n'                 -> WS
 '＋'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 'a'                  -> ID_IDENTIFIER
 ','                  -> COMMA
@@ -165,8 +140,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '＞'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 'x'                  -> ID_IDENTIFIER
 ','                  -> COMMA
@@ -182,16 +156,14 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '＝'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 'x'                  -> ID_IDENTIFIER
 ','                  -> COMMA
 'y'                  -> ID_IDENTIFIER
 ')'                  -> RPAREN
 '=>'                 -> OP_ARROW
-'='                  -> EQ
-'='                  -> EQ
+'=='                 -> ID_IDENTIFIER
 '('                  -> LPAREN
 'x'                  -> ID_IDENTIFIER
 ','                  -> COMMA
@@ -204,8 +176,7 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'add'                -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '+'                  -> ID_IDENTIFIER
 '('                  -> LPAREN
 '1'                  -> INTEGER_CONSTANT
@@ -215,8 +186,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'sub'                -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '-'                  -> ID_IDENTIFIER
 '('                  -> LPAREN
 '10'                 -> INTEGER_CONSTANT
@@ -226,8 +196,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'mul'                -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '*'                  -> ID_IDENTIFIER
 '('                  -> LPAREN
 '6'                  -> INTEGER_CONSTANT
@@ -237,8 +206,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'div'                -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '/'                  -> ID_IDENTIFIER
 '('                  -> LPAREN
 '8'                  -> INTEGER_CONSTANT
@@ -249,8 +217,8 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'cmp1'               -> ID_IDENTIFIER
-':'                  -> COLON
-'=>'                 -> OP_ARROW
+':='                 -> OP_BIND
+'>'                  -> ID_IDENTIFIER
 '('                  -> LPAREN
 '3'                  -> INTEGER_CONSTANT
 ','                  -> COMMA
@@ -259,8 +227,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'cmp2'               -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '<'                  -> ID_IDENTIFIER
 '('                  -> LPAREN
 '1'                  -> INTEGER_CONSTANT
@@ -270,10 +237,8 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'cmp3'               -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
-'='                  -> EQ
-'='                  -> EQ
+':='                 -> OP_BIND
+'=='                 -> ID_IDENTIFIER
 '('                  -> LPAREN
 '1'                  -> INTEGER_CONSTANT
 ','                  -> COMMA
@@ -316,8 +281,7 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'bang'               -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '!'                  -> ID_IDENTIFIER
 '('                  -> LPAREN
 'true'               -> BOOLEAN_CONSTANT
@@ -325,8 +289,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'ifcall'             -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'if!'                -> ID_IDENTIFIER
 '('                  -> LPAREN
 'true'               -> BOOLEAN_CONSTANT
@@ -340,8 +303,7 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'id'                 -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 'x'                  -> ID_IDENTIFIER
 ':'                  -> COLON
@@ -354,8 +316,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'pair'               -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 'a'                  -> ID_IDENTIFIER
 ':'                  -> COLON
@@ -381,8 +342,7 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'complex'            -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 'x'                  -> ID_IDENTIFIER
 ':'                  -> COLON
@@ -412,8 +372,7 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'blk'                -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 ')'                  -> RPAREN
 ':'                  -> COLON
@@ -423,21 +382,18 @@
 '\n'                 -> WS
 '    '               -> WS
 'a'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '1'                  -> INTEGER_CONSTANT
 '\n'                 -> WS
 '    '               -> WS
 'b'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '2'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '    '               -> WS
 'c'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '3'                  -> INTEGER_CONSTANT
 '\n'                 -> WS
 '    '               -> WS
@@ -449,8 +405,7 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'blk2'               -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 ')'                  -> RPAREN
 ':'                  -> COLON
@@ -458,18 +413,15 @@
 '=>'                 -> OP_ARROW
 '{'                  -> LBRACE
 'a'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '1'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 'b'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '2'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 'c'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '3'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '}'                  -> RBRACE
@@ -477,8 +429,7 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'closure'            -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '['                  -> LBRACK
 'add'                -> ID_IDENTIFIER
 ','                  -> COMMA
@@ -491,8 +442,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'nested'             -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '['                  -> LBRACK
 '['                  -> LBRACK
 'add'                -> ID_IDENTIFIER
@@ -511,8 +461,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'deep'               -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '['                  -> LBRACK
 ' '                  -> WS
 '['                  -> LBRACK
@@ -543,8 +492,7 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'sum'                -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 'n'                  -> ID_IDENTIFIER
 ':'                  -> COLON
@@ -583,8 +531,7 @@
 '\n'                 -> WS
 '            '       -> WS
 'i'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'get'                -> ID_IDENTIFIER
 '('                  -> LPAREN
 'state'              -> ID_IDENTIFIER
@@ -594,8 +541,7 @@
 '\n'                 -> WS
 '            '       -> WS
 'acc'                -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'get'                -> ID_IDENTIFIER
 '('                  -> LPAREN
 'state'              -> ID_IDENTIFIER
@@ -630,26 +576,22 @@
 '\n'                 -> WS
 '\n'                 -> WS
 '____'               -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '0'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '____123'            -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '1'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'λ_λ_λ'              -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '2'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '＋＋＋'                -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 'a'                  -> ID_IDENTIFIER
 ','                  -> COMMA
@@ -673,8 +615,7 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'f'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '('                  -> LPAREN
 '('                  -> LPAREN
 '('                  -> LPAREN
@@ -695,8 +636,7 @@
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 'g'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '['                  -> LBRACK
 '['                  -> LBRACK
 '['                  -> LBRACK
@@ -716,8 +656,7 @@
 '\n'                 -> WS
 'call1'              -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 'add'                -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -736,8 +675,7 @@
 '\n'                 -> WS
 'call2'              -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 'add'                -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -757,8 +695,7 @@
 '\n'                 -> WS
 'call3'              -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 'make'               -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -771,8 +708,7 @@
 '\n'                 -> WS
 'call4'              -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 'reserve'            -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -792,8 +728,7 @@
 '\n'                 -> WS
 'call5'              -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 'array'              -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -812,8 +747,7 @@
 '\n'                 -> WS
 'call6'              -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 'array'              -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -827,8 +761,7 @@
 '\n'                 -> WS
 'nested_named'       -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 '\n'                 -> WS
 '    '               -> WS
 'fn'                 -> ID_IDENTIFIER
@@ -892,8 +825,7 @@
 '\n'                 -> WS
 '+'                  -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'a'                  -> ID_IDENTIFIER
@@ -924,8 +856,7 @@
 '\n'                 -> WS
 '-'                  -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'a'                  -> ID_IDENTIFIER
@@ -956,8 +887,7 @@
 '\n'                 -> WS
 '*'                  -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'a'                  -> ID_IDENTIFIER
@@ -990,8 +920,7 @@
 '\n'                 -> WS
 'map!'               -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'f'                  -> ID_IDENTIFIER
@@ -1013,8 +942,7 @@
 '\n'                 -> WS
 'foldl!'             -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'f'                  -> ID_IDENTIFIER
@@ -1043,8 +971,7 @@
 '\n'                 -> WS
 'is-zero?'           -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'x'                  -> ID_IDENTIFIER
@@ -1058,8 +985,7 @@
 ' '                  -> WS
 '=>'                 -> OP_ARROW
 ' '                  -> WS
-'='                  -> EQ
-'='                  -> EQ
+'=='                 -> ID_IDENTIFIER
 '('                  -> LPAREN
 'x'                  -> ID_IDENTIFIER
 ','                  -> COMMA
@@ -1070,8 +996,7 @@
 '\n'                 -> WS
 'not-null?'          -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'x'                  -> ID_IDENTIFIER
@@ -1095,8 +1020,7 @@
 '\n'                 -> WS
 '>>='                -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'a'                  -> ID_IDENTIFIER
@@ -1118,8 +1042,7 @@
 '\n'                 -> WS
 '<<='                -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'a'                  -> ID_IDENTIFIER
@@ -1141,8 +1064,7 @@
 '\n'                 -> WS
 '<>'                 -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 'a'                  -> ID_IDENTIFIER
@@ -1166,8 +1088,7 @@
 '\n'                 -> WS
 'result1'            -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '+'                  -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -1186,8 +1107,7 @@
 '\n'                 -> WS
 'result2'            -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '>'                  -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -1206,8 +1126,7 @@
 '\n'                 -> WS
 'result3'            -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 'is-zero?'           -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -1220,8 +1139,7 @@
 '\n'                 -> WS
 'result4'            -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 'map!'               -> ID_IDENTIFIER
 '('                  -> LPAREN
@@ -1242,32 +1160,28 @@
 '\n'                 -> WS
 '!!!!'               -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '1'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '????'               -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '2'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '++++'               -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '3'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '----'               -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '4'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
@@ -1275,24 +1189,21 @@
 '\n'                 -> WS
 'λ+λ'                -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '5'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '中文-函数!'             -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '6'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
 '\n'                 -> WS
 '数据->处理'             -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '7'                  -> INTEGER_CONSTANT
 ';'                  -> SEMICOLON
@@ -1302,8 +1213,7 @@
 '\n'                 -> WS
 '>='                 -> ID_IDENTIFIER
 ' '                  -> WS
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 ' '                  -> WS
 '('                  -> LPAREN
 ')'                  -> RPAREN
@@ -1317,14 +1227,14 @@
 '\n'                 -> WS
 '\n'                 -> WS
 'assign'             -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> EQ
+':='                 -> OP_BIND
 'if!'                -> ID_IDENTIFIER
 '('                  -> LPAREN
 'cond'               -> ID_IDENTIFIER
 ':'                  -> COLON
-'='                  -> EQ
-'='                  -> EQ
+' '                  -> WS
+'123'                -> INTEGER_CONSTANT
+'='                  -> ID_IDENTIFIER
 '('                  -> LPAREN
 '2'                  -> INTEGER_CONSTANT
 ','                  -> COMMA
@@ -1338,6 +1248,20 @@
 'else'               -> ID_IDENTIFIER
 ':'                  -> COLON
 'anything=else'      -> ID_IDENTIFIER
+')'                  -> RPAREN
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'\n'                 -> WS
+'awa'                -> ID_IDENTIFIER
+' '                  -> WS
+':='                 -> OP_BIND
+'=123'               -> ID_IDENTIFIER
+';'                  -> SEMICOLON
+'\n'                 -> WS
+'('                  -> LPAREN
+'awa'                -> ID_IDENTIFIER
+':'                  -> COLON
+'123u'               -> INTEGER_CONSTANT
 ')'                  -> RPAREN
 ';'                  -> SEMICOLON
 '<EOF>'              -> WS

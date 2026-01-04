@@ -1,157 +1,112 @@
-from antlr4 import CommonTokenStream, Token
+from antlr4 import Token
+from antlr4.BufferedTokenStream import BufferedTokenStream
 from antlr4.Token import CommonToken
-from collections import deque
 
 BLOCK = 0
 PAREN = 1
 
-
-class _WarpedTokenSource:
+class WarpedTokenStream(BufferedTokenStream):
     def __init__(self, lexer):
+        super().__init__(lexer)
         self.lexer = lexer
         self.mode_stack = [BLOCK]
-        self.buffer = deque()
-        self.prev_sig = None
+        self.pending = []
 
-    # -------- TokenSource API --------
+    # ========= 核心 =========
+    def fetch(self, n):
+        fetched = 0
+        while fetched < n:
+            if self.pending:
+                self.tokens.append(self.pending.pop(0))
+                fetched += 1
+                continue
 
-    def nextToken(self):
-        if self.buffer:
-            tok = self.buffer.popleft()
-            if tok.channel == Token.DEFAULT_CHANNEL:
-                self.prev_sig = tok
-            return tok
+            t = self.tokenSource.nextToken()
+            self._update_mode(t)
 
-        tok = self.lexer.nextToken()
+            if t.type == Token.EOF:
+                self.tokens.append(t)
+                fetched += 1
+                break
 
-        if tok.type == Token.EOF:
-            return tok
+            if t.type == self.lexer.OP_BIND and self._should_split():
+                self._split_bind(t)
+                fetched += 1
+                continue
 
-        self._update_mode(tok)
+            self.tokens.append(t)
+            fetched += 1
 
-        if tok.type == self.lexer.OP_BIND and self._should_split_bind():
-            self._split_bind(tok)
-            return self.nextToken()
+        return fetched
 
-        if tok.channel == Token.DEFAULT_CHANNEL:
-            self.prev_sig = tok
-        return tok
-
-    def getLine(self):
-        return self.lexer.line
-
-    def getCharPositionInLine(self):
-        return self.lexer.column
-
-    def getInputStream(self):
-        return self.lexer.inputStream
-
-    def getSourceName(self):
-        return self.lexer.getSourceName()
-
-    # -------- mode stack --------
-
+    # ========= 状态机 =========
     def _update_mode(self, tok):
         l = self.lexer
-        t = tok.type
-
-        if t in (l.LPAREN, l.LBRACK):
+        if tok.type in (l.LPAREN, l.LBRACK):
             self.mode_stack.append(PAREN)
-        elif t == l.LBRACE:
+        elif tok.type == l.LBRACE:
             self.mode_stack.append(BLOCK)
-        elif t in (l.RPAREN, l.RBRACK, l.RBRACE):
+        elif tok.type in (l.RPAREN, l.RBRACK, l.RBRACE):
             if len(self.mode_stack) > 1:
                 self.mode_stack.pop()
 
-    # -------- decision --------
-
-    def _should_split_bind(self):
+    def _should_split(self):
+        # 规则 1：当前在 PAREN
         if self.mode_stack[-1] == PAREN:
             return True
-        if self.prev_sig and self.prev_sig.type == self.lexer.RPAREN:
-            return True
+
+        # 规则 2：语义前一个 token 是 RPAREN（忽略 WS）
+        for tok in reversed(self.tokens):
+            if tok.channel == Token.HIDDEN_CHANNEL:
+                continue
+            return tok.type == self.lexer.RPAREN
+
         return False
 
-    # -------- rewrite := --------
 
+    # ========= 拆 := =========
     def _split_bind(self, bind_tok):
-        l = self.lexer
+        # 1) 先吐 COLON
+        colon = self._clone(bind_tok, self.lexer.COLON, ":")
+        self.tokens.append(colon)
 
-        # ':' token
-        colon = CommonToken(
-            source=bind_tok.source,
-            type=l.COLON,
+        # 2) RHS 一定以 "=" 开头
+        text = "="
+
+        while True:
+            nxt = self.tokenSource.nextToken()
+            self._update_mode(nxt)
+
+            # EOF 或 WS：停
+            if nxt.type == Token.EOF or nxt.channel == Token.HIDDEN_CHANNEL:
+                self.pending.append(nxt)
+                break
+
+            # 只要是连续 token（无 WS），都并进来
+            if nxt.type in (
+                self.lexer.INTEGER_CONSTANT,
+                self.lexer.ID_IDENTIFIER,
+            ) or nxt.text == "=":
+                text += nxt.text
+                continue
+
+            # 不可并：回退
+            self.pending.append(nxt)
+            break
+
+        merged = self._clone(bind_tok, self.lexer.ID_IDENTIFIER, text)
+        self.pending.insert(0, merged)
+
+    # ========= clone =========
+    def _clone(self, src, ttype, text):
+        tok = CommonToken(
+            source=(self.tokenSource, self.tokenSource.inputStream),
+            type=ttype,
             channel=Token.DEFAULT_CHANNEL,
-            start=bind_tok.start,
-            stop=bind_tok.start
+            start=src.start,
+            stop=src.stop,
         )
-        colon.line = bind_tok.line
-        colon.column = bind_tok.column
-        self.buffer.append(colon)
-
-        # skip / forward WS
-        tok = self.lexer.nextToken()
-        while tok.channel == Token.HIDDEN_CHANNEL:
-            self.buffer.append(tok)
-            tok = self.lexer.nextToken()
-
-        # '=' handling
-        if tok.text == "=":
-            start = tok.start
-            stop = tok.stop
-            line = tok.line
-            col = tok.column
-
-            nxt = self.lexer.nextToken()
-
-            # =INTEGER or =INTEGERID
-            if nxt.type == l.INTEGER_CONSTANT:
-                text = "=" + nxt.text
-                stop = nxt.stop
-
-                look = self.lexer.nextToken()
-                if (
-                    look.type == l.ID_IDENTIFIER
-                    and look.start == nxt.stop + 1
-                ):
-                    text += look.text
-                    stop = look.stop
-                else:
-                    self.buffer.append(look)
-
-                eq = CommonToken(
-                    source=tok.source,
-                    type=l.ID_IDENTIFIER,
-                    channel=Token.DEFAULT_CHANNEL,
-                    start=start,
-                    stop=stop
-                )
-                eq.text = text
-                eq.line = line
-                eq.column = col
-                self.buffer.append(eq)
-                return
-
-            # plain '='
-            eq = CommonToken(
-                source=tok.source,
-                type=l.ID_IDENTIFIER,
-                channel=Token.DEFAULT_CHANNEL,
-                start=start,
-                stop=stop
-            )
-            eq.text = "="
-            eq.line = line
-            eq.column = col
-            self.buffer.append(eq)
-            self.buffer.append(nxt)
-            return
-
-        # fallback
-        self.buffer.append(tok)
-
-
-class WarpedTokenStream(CommonTokenStream):
-    def __init__(self, lexer):
-        self._warped_source = _WarpedTokenSource(lexer)
-        super().__init__(self._warped_source)
+        tok.text = text
+        tok.line = src.line
+        tok.column = src.column
+        return tok

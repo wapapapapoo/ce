@@ -11,9 +11,9 @@ def run(input_text: str):
     lexer = MainLexer(input_stream)
     # tokens = CommonTokenStream(lexer)
     tokens = WarpedTokenStream(lexer)
-    parser = MainParser(tokens)
+    # parser = MainParser(tokens)
 
-    tree = parser.file_()
+    # tree = parser.file_()
     tokens.fill()
     for t in tokens.tokens:
         print(f"{t.text!r:20} -> {lexer.symbolicNames[t.type]}")

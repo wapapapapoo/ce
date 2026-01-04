@@ -1232,6 +1232,7 @@
 '('                  -> LPAREN
 'cond'               -> ID_IDENTIFIER
 ':'                  -> COLON
+'='                  -> ID_IDENTIFIER
 ' '                  -> WS
 '123'                -> INTEGER_CONSTANT
 '='                  -> ID_IDENTIFIER
@@ -1261,7 +1262,7 @@
 '('                  -> LPAREN
 'awa'                -> ID_IDENTIFIER
 ':'                  -> COLON
-'123u'               -> INTEGER_CONSTANT
+'=123u'              -> ID_IDENTIFIER
 ')'                  -> RPAREN
 ';'                  -> SEMICOLON
 '<EOF>'              -> WS

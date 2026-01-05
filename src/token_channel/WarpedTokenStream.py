@@ -29,6 +29,11 @@ class WarpedTokenStream(BufferedTokenStream):
 
             # 丢弃hidden
             if t.channel == Token.HIDDEN_CHANNEL:
+                if t.type == Token.EOF:
+                    self.tokens.append(t)
+                    self.fetchedEOF = True
+                    fetched += 1
+                    break
                 continue
 
             # 统一设置 tokenIndex
@@ -36,6 +41,7 @@ class WarpedTokenStream(BufferedTokenStream):
 
             # EOF 处理
             if t.type == Token.EOF:
+                t.tokenIndex = len(self.tokens)
                 self.tokens.append(t)
                 self.fetchedEOF = True
                 fetched += 1
@@ -48,6 +54,7 @@ class WarpedTokenStream(BufferedTokenStream):
                 continue
 
             # 其他token入流
+            t.tokenIndex = len(self.tokens)
             self.tokens.append(t)
             fetched += 1
 
@@ -83,6 +90,8 @@ class WarpedTokenStream(BufferedTokenStream):
     def _split_bind(self, bind_tok):
         # 1) 先吐 COLON
         colon = self._clone(bind_tok, self.lexer.COLON, ":")
+        colon.tokenIndex = len(self.tokens)
+        colon.column = bind_tok.column
         self.tokens.append(colon)
 
         # 2) RHS 一定以 "=" 开头

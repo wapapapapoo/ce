@@ -54,3 +54,6 @@ useList := (lst: (i32, i32)): i32 => {
 };
 
 awa:=-100;
+
+args := *((arg: i32), 5);
+fn := args: i32 => !pure { get!(arg, 0) };

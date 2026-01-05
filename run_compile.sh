@@ -1,1 +1,1 @@
-PYTHONUTF8=1 python bin/pipeline.py test.txt -o out.txt --antlr --xml
+PYTHONUTF8=1 python bin/pipeline.py test.txt -o out.txt

@@ -1,743 +1,632 @@
-<node name="program" start-line="2" start-column="0" end-line="56" end-column="9">
-  <node name="block" start-line="2" start-column="0" end-line="56" end-column="9">
-    <node name="statement" start-line="2" start-column="0" end-line="2" end-column="5">
-      <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="2" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="2" column="2" />
-      <node name="expression" start-line="2" start-column="5" end-line="2" end-column="5">
-        <node name="atom_expression" start-line="2" start-column="5" end-line="2" end-column="5">
-          <node name="literface" start-line="2" start-column="5" end-line="2" end-column="5">
-            <token text="42" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="2" column="5" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="2" column="7" />
-    <node name="statement" start-line="3" start-column="0" end-line="3" end-column="5">
-      <token text="y" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="3" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="3" column="2" />
-      <node name="expression" start-line="3" start-column="5" end-line="3" end-column="5">
-        <node name="atom_expression" start-line="3" start-column="5" end-line="3" end-column="5">
-          <node name="literface" start-line="3" start-column="5" end-line="3" end-column="5">
-            <token text="true" token-type="BOOLEAN_CONSTANT" token-type-id="5" channel="0" line="3" column="5" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="3" column="9" />
-    <node name="statement" start-line="4" start-column="0" end-line="4" end-column="5">
-      <token text="z" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="4" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="4" column="2" />
-      <node name="expression" start-line="4" start-column="5" end-line="4" end-column="5">
-        <node name="atom_expression" start-line="4" start-column="5" end-line="4" end-column="5">
-          <node name="literface" start-line="4" start-column="5" end-line="4" end-column="5">
-            <token text="&quot;hello&quot;" token-type="STRING_CONSTANT" token-type-id="7" channel="0" line="4" column="5" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="4" column="12" />
-    <node name="statement" start-line="7" start-column="0" end-line="7" end-column="17">
-      <token text="nums" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="7" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="7" column="5" />
-      <node name="expression" start-line="7" start-column="8" end-line="7" end-column="17">
-        <node name="atom_expression" start-line="7" start-column="8" end-line="7" end-column="17">
-          <node name="list" start-line="7" start-column="8" end-line="7" end-column="17">
-            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="7" column="8" />
-            <node name="list_element" start-line="7" start-column="9" end-line="7" end-column="9">
-              <node name="list_non_indexed_element" start-line="7" start-column="9" end-line="7" end-column="9">
-                <node name="expression" start-line="7" start-column="9" end-line="7" end-column="9">
-                  <node name="atom_expression" start-line="7" start-column="9" end-line="7" end-column="9">
-                    <node name="literface" start-line="7" start-column="9" end-line="7" end-column="9">
-                      <token text="1" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="7" column="9" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="7" column="10" />
-            <node name="list_element" start-line="7" start-column="12" end-line="7" end-column="12">
-              <node name="list_non_indexed_element" start-line="7" start-column="12" end-line="7" end-column="12">
-                <node name="expression" start-line="7" start-column="12" end-line="7" end-column="12">
-                  <node name="atom_expression" start-line="7" start-column="12" end-line="7" end-column="12">
-                    <node name="literface" start-line="7" start-column="12" end-line="7" end-column="12">
-                      <token text="2" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="7" column="12" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="7" column="13" />
-            <node name="list_element" start-line="7" start-column="15" end-line="7" end-column="15">
-              <node name="list_non_indexed_element" start-line="7" start-column="15" end-line="7" end-column="15">
-                <node name="expression" start-line="7" start-column="15" end-line="7" end-column="15">
-                  <node name="atom_expression" start-line="7" start-column="15" end-line="7" end-column="15">
-                    <node name="literface" start-line="7" start-column="15" end-line="7" end-column="15">
-                      <token text="3" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="7" column="15" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="7" column="16" />
-            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="7" column="17" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="7" column="18" />
-    <node name="statement" start-line="10" start-column="0" end-line="10" end-column="22">
-      <token text="point" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="10" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="10" column="6" />
-      <node name="expression" start-line="10" start-column="9" end-line="10" end-column="22">
-        <node name="atom_expression" start-line="10" start-column="9" end-line="10" end-column="22">
-          <node name="list" start-line="10" start-column="9" end-line="10" end-column="22">
-            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="10" column="9" />
-            <node name="list_element" start-line="10" start-column="10" end-line="10" end-column="13">
-              <node name="list_indexed_element" start-line="10" start-column="10" end-line="10" end-column="13">
-                <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="10" column="10" />
-                <token text=":" token-type="COLON" token-type-id="17" channel="0" line="10" column="11" />
-                <node name="expression" start-line="10" start-column="13" end-line="10" end-column="13">
-                  <node name="atom_expression" start-line="10" start-column="13" end-line="10" end-column="13">
-                    <node name="literface" start-line="10" start-column="13" end-line="10" end-column="13">
-                      <token text="10" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="10" column="13" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="10" column="15" />
-            <node name="list_element" start-line="10" start-column="17" end-line="10" end-column="20">
-              <node name="list_indexed_element" start-line="10" start-column="17" end-line="10" end-column="20">
-                <token text="y" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="10" column="17" />
-                <token text=":" token-type="COLON" token-type-id="17" channel="0" line="10" column="18" />
-                <node name="expression" start-line="10" start-column="20" end-line="10" end-column="20">
-                  <node name="atom_expression" start-line="10" start-column="20" end-line="10" end-column="20">
-                    <node name="literface" start-line="10" start-column="20" end-line="10" end-column="20">
-                      <token text="20" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="10" column="20" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="10" column="22" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="10" column="23" />
-    <node name="statement" start-line="13" start-column="0" end-line="13" end-column="26">
-      <token text="mixed" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="13" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="13" column="6" />
-      <node name="expression" start-line="13" start-column="9" end-line="13" end-column="26">
-        <node name="atom_expression" start-line="13" start-column="9" end-line="13" end-column="26">
-          <node name="list" start-line="13" start-column="9" end-line="13" end-column="26">
-            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="13" column="9" />
-            <node name="list_element" start-line="13" start-column="10" end-line="13" end-column="10">
-              <node name="list_non_indexed_element" start-line="13" start-column="10" end-line="13" end-column="10">
-                <node name="expression" start-line="13" start-column="10" end-line="13" end-column="10">
-                  <node name="atom_expression" start-line="13" start-column="10" end-line="13" end-column="10">
-                    <node name="literface" start-line="13" start-column="10" end-line="13" end-column="10">
-                      <token text="1" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="13" column="10" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="13" column="11" />
-            <node name="list_element" start-line="13" start-column="13" end-line="13" end-column="16">
-              <node name="list_indexed_element" start-line="13" start-column="13" end-line="13" end-column="16">
-                <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="13" column="13" />
-                <token text=":" token-type="COLON" token-type-id="17" channel="0" line="13" column="14" />
-                <node name="expression" start-line="13" start-column="16" end-line="13" end-column="16">
-                  <node name="atom_expression" start-line="13" start-column="16" end-line="13" end-column="16">
-                    <node name="literface" start-line="13" start-column="16" end-line="13" end-column="16">
-                      <token text="2" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="13" column="16" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="13" column="17" />
-            <node name="list_element" start-line="13" start-column="19" end-line="13" end-column="19">
-              <node name="list_non_indexed_element" start-line="13" start-column="19" end-line="13" end-column="19">
-                <node name="expression" start-line="13" start-column="19" end-line="13" end-column="19">
-                  <node name="atom_expression" start-line="13" start-column="19" end-line="13" end-column="19">
-                    <node name="literface" start-line="13" start-column="19" end-line="13" end-column="19">
-                      <token text="3" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="13" column="19" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="13" column="20" />
-            <node name="list_element" start-line="13" start-column="22" end-line="13" end-column="25">
-              <node name="list_indexed_element" start-line="13" start-column="22" end-line="13" end-column="25">
-                <token text="b" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="13" column="22" />
-                <token text=":" token-type="COLON" token-type-id="17" channel="0" line="13" column="23" />
-                <node name="expression" start-line="13" start-column="25" end-line="13" end-column="25">
-                  <node name="atom_expression" start-line="13" start-column="25" end-line="13" end-column="25">
-                    <node name="literface" start-line="13" start-column="25" end-line="13" end-column="25">
-                      <token text="4" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="13" column="25" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="13" column="26" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="13" column="27" />
-    <node name="statement" start-line="16" start-column="0" end-line="18" end-column="0">
-      <token text="id" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="16" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="16" column="3" />
-      <node name="expression" start-line="16" start-column="6" end-line="18" end-column="0">
-        <node name="atom_expression" start-line="16" start-column="6" end-line="18" end-column="0">
-          <node name="function" start-line="16" start-column="6" end-line="18" end-column="0">
-            <node name="function_params" start-line="16" start-column="6" end-line="16" end-column="11">
-              <node name="list" start-line="16" start-column="6" end-line="16" end-column="11">
-                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="16" column="6" />
-                <node name="list_indexed_element" start-line="16" start-column="7" end-line="16" end-column="10">
-                  <token text="v" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="16" column="7" />
-                  <token text=":" token-type="COLON" token-type-id="17" channel="0" line="16" column="8" />
-                  <node name="expression" start-line="16" start-column="10" end-line="16" end-column="10">
-                    <node name="atom_expression" start-line="16" start-column="10" end-line="16" end-column="10">
-                      <token text="T" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="16" column="10" />
-                    </node>
-                  </node>
-                </node>
-                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="16" column="11" />
-              </node>
-            </node>
-            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="16" column="13" />
-            <node name="function_body" start-line="16" start-column="16" end-line="18" end-column="0">
-              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="16" column="16" />
-              <node name="block" start-line="17" start-column="4" end-line="17" end-column="4">
-                <node name="statement" start-line="17" start-column="4" end-line="17" end-column="4">
-                  <node name="expression" start-line="17" start-column="4" end-line="17" end-column="4">
-                    <node name="atom_expression" start-line="17" start-column="4" end-line="17" end-column="4">
-                      <token text="v" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="17" column="4" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="18" column="0" />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="18" column="1" />
-    <node name="statement" start-line="22" start-column="0" end-line="24" end-column="0">
-      <token text="add" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="22" column="4" />
-      <node name="expression" start-line="22" start-column="7" end-line="24" end-column="0">
-        <node name="atom_expression" start-line="22" start-column="7" end-line="24" end-column="0">
-          <node name="function" start-line="22" start-column="7" end-line="24" end-column="0">
-            <node name="function_params" start-line="22" start-column="7" end-line="22" end-column="22">
-              <node name="list" start-line="22" start-column="7" end-line="22" end-column="22">
-                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="22" column="7" />
-                <node name="list_element" start-line="22" start-column="8" end-line="22" end-column="11">
-                  <node name="list_indexed_element" start-line="22" start-column="8" end-line="22" end-column="11">
-                    <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="8" />
-                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="22" column="9" />
-                    <node name="expression" start-line="22" start-column="11" end-line="22" end-column="11">
-                      <node name="atom_expression" start-line="22" start-column="11" end-line="22" end-column="11">
-                        <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="11" />
-                      </node>
-                    </node>
-                  </node>
-                </node>
-                <token text="," token-type="COMMA" token-type-id="16" channel="0" line="22" column="14" />
-                <node name="list_element" start-line="22" start-column="16" end-line="22" end-column="19">
-                  <node name="list_indexed_element" start-line="22" start-column="16" end-line="22" end-column="19">
-                    <token text="b" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="16" />
-                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="22" column="17" />
-                    <node name="expression" start-line="22" start-column="19" end-line="22" end-column="19">
-                      <node name="atom_expression" start-line="22" start-column="19" end-line="22" end-column="19">
-                        <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="19" />
-                      </node>
-                    </node>
-                  </node>
-                </node>
-                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="22" column="22" />
-              </node>
-            </node>
-            <node name="function_return_type" start-line="22" start-column="23" end-line="22" end-column="25">
-              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="22" column="23" />
-              <node name="atom_expression" start-line="22" start-column="25" end-line="22" end-column="25">
-                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="25" />
-              </node>
-            </node>
-            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="22" column="29" />
-            <node name="function_body" start-line="22" start-column="32" end-line="24" end-column="0">
-              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="22" column="32" />
-              <node name="block" start-line="23" start-column="4" end-line="23" end-column="4">
-                <node name="statement" start-line="23" start-column="4" end-line="23" end-column="4">
-                  <node name="expression" start-line="23" start-column="4" end-line="23" end-column="4">
-                    <node name="atom_expression" start-line="23" start-column="4" end-line="23" end-column="4">
-                      <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="23" column="4" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="24" column="0" />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="24" column="1" />
-    <node name="statement" start-line="28" start-column="0" end-line="30" end-column="4">
-      <token text="mul" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="28" column="4" />
-      <node name="expression" start-line="28" start-column="7" end-line="30" end-column="4">
-        <node name="atom_expression" start-line="28" start-column="7" end-line="30" end-column="4">
-          <node name="function" start-line="28" start-column="7" end-line="30" end-column="4">
-            <node name="function_params" start-line="28" start-column="7" end-line="28" end-column="22">
-              <node name="list" start-line="28" start-column="7" end-line="28" end-column="22">
-                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="28" column="7" />
-                <node name="list_element" start-line="28" start-column="8" end-line="28" end-column="11">
-                  <node name="list_indexed_element" start-line="28" start-column="8" end-line="28" end-column="11">
-                    <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="8" />
-                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="28" column="9" />
-                    <node name="expression" start-line="28" start-column="11" end-line="28" end-column="11">
-                      <node name="atom_expression" start-line="28" start-column="11" end-line="28" end-column="11">
-                        <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="11" />
-                      </node>
-                    </node>
-                  </node>
-                </node>
-                <token text="," token-type="COMMA" token-type-id="16" channel="0" line="28" column="14" />
-                <node name="list_element" start-line="28" start-column="16" end-line="28" end-column="19">
-                  <node name="list_indexed_element" start-line="28" start-column="16" end-line="28" end-column="19">
-                    <token text="b" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="16" />
-                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="28" column="17" />
-                    <node name="expression" start-line="28" start-column="19" end-line="28" end-column="19">
-                      <node name="atom_expression" start-line="28" start-column="19" end-line="28" end-column="19">
-                        <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="19" />
-                      </node>
-                    </node>
-                  </node>
-                </node>
-                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="28" column="22" />
-              </node>
-            </node>
-            <node name="function_return_type" start-line="28" start-column="23" end-line="28" end-column="25">
-              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="28" column="23" />
-              <node name="atom_expression" start-line="28" start-column="25" end-line="28" end-column="25">
-                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="25" />
-              </node>
-            </node>
-            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="28" column="29" />
-            <node name="function_annotations" start-line="28" start-column="32" end-line="28" end-column="32">
-              <node name="atom_expression" start-line="28" start-column="32" end-line="28" end-column="32">
-                <token text="pure" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="32" />
-              </node>
-            </node>
-            <node name="function_annotations" start-line="28" start-column="37" end-line="28" end-column="37">
-              <node name="atom_expression" start-line="28" start-column="37" end-line="28" end-column="37">
-                <token text="inline" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="37" />
-              </node>
-            </node>
-            <node name="function_body" start-line="28" start-column="44" end-line="30" end-column="4">
-              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="28" column="44" />
-              <node name="block" start-line="29" start-column="8" end-line="29" end-column="8">
-                <node name="statement" start-line="29" start-column="8" end-line="29" end-column="8">
-                  <node name="expression" start-line="29" start-column="8" end-line="29" end-column="8">
-                    <node name="atom_expression" start-line="29" start-column="8" end-line="29" end-column="8">
-                      <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="29" column="8" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="30" column="4" />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="30" column="5" />
-    <node name="statement" start-line="33" start-column="0" end-line="37" end-column="0">
-      <token text="makeAdder" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="33" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="33" column="10" />
-      <node name="expression" start-line="33" start-column="13" end-line="37" end-column="0">
-        <node name="atom_expression" start-line="33" start-column="13" end-line="37" end-column="0">
-          <node name="function" start-line="33" start-column="13" end-line="37" end-column="0">
-            <node name="function_params" start-line="33" start-column="13" end-line="33" end-column="20">
-              <node name="list" start-line="33" start-column="13" end-line="33" end-column="20">
-                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="33" column="13" />
-                <node name="list_indexed_element" start-line="33" start-column="14" end-line="33" end-column="17">
-                  <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="33" column="14" />
-                  <token text=":" token-type="COLON" token-type-id="17" channel="0" line="33" column="15" />
-                  <node name="expression" start-line="33" start-column="17" end-line="33" end-column="17">
-                    <node name="atom_expression" start-line="33" start-column="17" end-line="33" end-column="17">
-                      <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="33" column="17" />
-                    </node>
-                  </node>
-                </node>
-                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="33" column="20" />
-              </node>
-            </node>
-            <node name="function_return_type" start-line="33" start-column="21" end-line="33" end-column="35">
-              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="33" column="21" />
-              <node name="atom_expression" start-line="33" start-column="23" end-line="33" end-column="35">
-                <node name="function" start-line="33" start-column="23" end-line="33" end-column="35">
-                  <node name="function_params" start-line="33" start-column="23" end-line="33" end-column="24">
-                    <node name="list" start-line="33" start-column="23" end-line="33" end-column="24">
-                      <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="33" column="23" />
-                      <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="33" column="24" />
-                    </node>
-                  </node>
-                  <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="33" column="26" />
-                  <node name="function_body" start-line="33" start-column="29" end-line="33" end-column="35">
-                    <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="33" column="29" />
-                    <node name="block" start-line="33" start-column="31" end-line="33" end-column="31">
-                      <node name="statement" start-line="33" start-column="31" end-line="33" end-column="31">
-                        <node name="expression" start-line="33" start-column="31" end-line="33" end-column="31">
-                          <node name="atom_expression" start-line="33" start-column="31" end-line="33" end-column="31">
-                            <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="33" column="31" />
-                          </node>
-                        </node>
-                      </node>
-                    </node>
-                    <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="33" column="35" />
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="33" column="37" />
-            <node name="function_body" start-line="33" start-column="40" end-line="37" end-column="0">
-              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="33" column="40" />
-              <node name="block" start-line="34" start-column="4" end-line="36" end-column="4">
-                <node name="statement" start-line="34" start-column="4" end-line="36" end-column="4">
-                  <node name="expression" start-line="34" start-column="4" end-line="36" end-column="4">
-                    <node name="atom_expression" start-line="34" start-column="4" end-line="36" end-column="4">
-                      <node name="function" start-line="34" start-column="4" end-line="36" end-column="4">
-                        <node name="function_params" start-line="34" start-column="4" end-line="34" end-column="11">
-                          <node name="list" start-line="34" start-column="4" end-line="34" end-column="11">
-                            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="34" column="4" />
-                            <node name="list_indexed_element" start-line="34" start-column="5" end-line="34" end-column="8">
-                              <token text="y" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="34" column="5" />
-                              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="34" column="6" />
-                              <node name="expression" start-line="34" start-column="8" end-line="34" end-column="8">
-                                <node name="atom_expression" start-line="34" start-column="8" end-line="34" end-column="8">
-                                  <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="34" column="8" />
-                                </node>
-                              </node>
-                            </node>
-                            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="34" column="11" />
-                          </node>
-                        </node>
-                        <node name="function_return_type" start-line="34" start-column="12" end-line="34" end-column="14">
-                          <token text=":" token-type="COLON" token-type-id="17" channel="0" line="34" column="12" />
-                          <node name="atom_expression" start-line="34" start-column="14" end-line="34" end-column="14">
-                            <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="34" column="14" />
-                          </node>
-                        </node>
-                        <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="34" column="18" />
-                        <node name="function_body" start-line="34" start-column="21" end-line="36" end-column="4">
-                          <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="34" column="21" />
-                          <node name="block" start-line="35" start-column="8" end-line="35" end-column="8">
-                            <node name="statement" start-line="35" start-column="8" end-line="35" end-column="8">
-                              <node name="expression" start-line="35" start-column="8" end-line="35" end-column="8">
-                                <node name="atom_expression" start-line="35" start-column="8" end-line="35" end-column="8">
-                                  <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="35" column="8" />
-                                </node>
-                              </node>
-                            </node>
-                          </node>
-                          <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="36" column="4" />
-                        </node>
-                      </node>
-                    </node>
-                  </node>
-                </node>
-              </node>
-              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="37" column="0" />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="37" column="1" />
-    <node name="statement" start-line="40" start-column="0" end-line="40" end-column="14">
-      <token text="r1" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="40" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="40" column="3" />
-      <node name="expression" start-line="40" start-column="6" end-line="40" end-column="14">
-        <node name="function_call" start-line="40" start-column="6" end-line="40" end-column="14">
-          <node name="atom_expression" start-line="40" start-column="6" end-line="40" end-column="6">
-            <token text="add" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="40" column="6" />
-          </node>
-          <node name="function_arg_list" start-line="40" start-column="9" end-line="40" end-column="14">
-            <node name="list" start-line="40" start-column="9" end-line="40" end-column="14">
-              <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="40" column="9" />
-              <node name="list_element" start-line="40" start-column="10" end-line="40" end-column="10">
-                <node name="list_non_indexed_element" start-line="40" start-column="10" end-line="40" end-column="10">
-                  <node name="expression" start-line="40" start-column="10" end-line="40" end-column="10">
-                    <node name="atom_expression" start-line="40" start-column="10" end-line="40" end-column="10">
-                      <node name="literface" start-line="40" start-column="10" end-line="40" end-column="10">
-                        <token text="1" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="40" column="10" />
-                      </node>
-                    </node>
-                  </node>
-                </node>
-              </node>
-              <token text="," token-type="COMMA" token-type-id="16" channel="0" line="40" column="11" />
-              <node name="list_element" start-line="40" start-column="13" end-line="40" end-column="13">
-                <node name="list_non_indexed_element" start-line="40" start-column="13" end-line="40" end-column="13">
-                  <node name="expression" start-line="40" start-column="13" end-line="40" end-column="13">
-                    <node name="atom_expression" start-line="40" start-column="13" end-line="40" end-column="13">
-                      <node name="literface" start-line="40" start-column="13" end-line="40" end-column="13">
-                        <token text="2" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="40" column="13" />
-                      </node>
-                    </node>
-                  </node>
-                </node>
-              </node>
-              <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="40" column="14" />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="40" column="15" />
-    <node name="statement" start-line="43" start-column="0" end-line="43" end-column="24">
-      <token text="r2" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="43" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="43" column="3" />
-      <node name="expression" start-line="43" start-column="6" end-line="43" end-column="24">
-        <node name="function_call" start-line="43" start-column="6" end-line="43" end-column="24">
-          <node name="atom_expression" start-line="43" start-column="6" end-line="43" end-column="20">
-            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="43" column="6" />
-            <node name="expression" start-line="43" start-column="7" end-line="43" end-column="19">
-              <node name="function_call" start-line="43" start-column="7" end-line="43" end-column="19">
-                <node name="atom_expression" start-line="43" start-column="7" end-line="43" end-column="7">
-                  <token text="makeAdder" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="43" column="7" />
-                </node>
-                <node name="function_arg_list" start-line="43" start-column="16" end-line="43" end-column="19">
-                  <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="43" column="16" />
-                  <node name="expression" start-line="43" start-column="17" end-line="43" end-column="17">
-                    <node name="atom_expression" start-line="43" start-column="17" end-line="43" end-column="17">
-                      <node name="literface" start-line="43" start-column="17" end-line="43" end-column="17">
-                        <token text="10" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="43" column="17" />
-                      </node>
-                    </node>
-                  </node>
-                  <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="43" column="19" />
-                </node>
-              </node>
-            </node>
-            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="43" column="20" />
-          </node>
-          <node name="function_arg_list" start-line="43" start-column="21" end-line="43" end-column="24">
-            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="43" column="21" />
-            <node name="expression" start-line="43" start-column="22" end-line="43" end-column="22">
-              <node name="atom_expression" start-line="43" start-column="22" end-line="43" end-column="22">
-                <node name="literface" start-line="43" start-column="22" end-line="43" end-column="22">
-                  <token text="32" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="43" column="22" />
-                </node>
-              </node>
-            </node>
-            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="43" column="24" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="43" column="25" />
-    <node name="statement" start-line="46" start-column="0" end-line="46" end-column="32">
-      <token text="r3" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="46" column="3" />
-      <node name="expression" start-line="46" start-column="6" end-line="46" end-column="32">
-        <node name="function_call" start-line="46" start-column="6" end-line="46" end-column="32">
-          <node name="atom_expression" start-line="46" start-column="6" end-line="46" end-column="29">
-            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="46" column="6" />
-            <node name="expression" start-line="46" start-column="7" end-line="46" end-column="28">
-              <node name="atom_expression" start-line="46" start-column="7" end-line="46" end-column="28">
-                <node name="function" start-line="46" start-column="7" end-line="46" end-column="28">
-                  <node name="function_params" start-line="46" start-column="7" end-line="46" end-column="14">
-                    <node name="list" start-line="46" start-column="7" end-line="46" end-column="14">
-                      <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="46" column="7" />
-                      <node name="list_indexed_element" start-line="46" start-column="8" end-line="46" end-column="11">
-                        <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="8" />
-                        <token text=":" token-type="COLON" token-type-id="17" channel="0" line="46" column="9" />
-                        <node name="expression" start-line="46" start-column="11" end-line="46" end-column="11">
-                          <node name="atom_expression" start-line="46" start-column="11" end-line="46" end-column="11">
-                            <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="11" />
-                          </node>
-                        </node>
-                      </node>
-                      <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="46" column="14" />
-                    </node>
-                  </node>
-                  <node name="function_return_type" start-line="46" start-column="15" end-line="46" end-column="17">
-                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="46" column="15" />
-                    <node name="atom_expression" start-line="46" start-column="17" end-line="46" end-column="17">
-                      <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="17" />
-                    </node>
-                  </node>
-                  <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="46" column="21" />
-                  <node name="function_body" start-line="46" start-column="24" end-line="46" end-column="28">
-                    <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="46" column="24" />
-                    <node name="block" start-line="46" start-column="26" end-line="46" end-column="26">
-                      <node name="statement" start-line="46" start-column="26" end-line="46" end-column="26">
-                        <node name="expression" start-line="46" start-column="26" end-line="46" end-column="26">
-                          <node name="atom_expression" start-line="46" start-column="26" end-line="46" end-column="26">
-                            <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="26" />
-                          </node>
-                        </node>
-                      </node>
-                    </node>
-                    <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="46" column="28" />
-                  </node>
-                </node>
-              </node>
-            </node>
-            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="46" column="29" />
-          </node>
-          <node name="function_arg_list" start-line="46" start-column="30" end-line="46" end-column="32">
-            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="46" column="30" />
-            <node name="expression" start-line="46" start-column="31" end-line="46" end-column="31">
-              <node name="atom_expression" start-line="46" start-column="31" end-line="46" end-column="31">
-                <node name="literface" start-line="46" start-column="31" end-line="46" end-column="31">
-                  <token text="5" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="46" column="31" />
-                </node>
-              </node>
-            </node>
-            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="46" column="32" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="46" column="33" />
-    <node name="statement" start-line="49" start-column="0" end-line="49" end-column="18">
-      <token text="r4" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="49" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="49" column="3" />
-      <node name="expression" start-line="49" start-column="6" end-line="49" end-column="18">
-        <node name="function_call" start-line="49" start-column="6" end-line="49" end-column="18">
-          <token text="[" token-type="LBRACK" token-type-id="14" channel="0" line="49" column="6" />
-          <node name="expression" start-line="49" start-column="7" end-line="49" end-column="7">
-            <node name="atom_expression" start-line="49" start-column="7" end-line="49" end-column="7">
-              <token text="add" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="49" column="7" />
-            </node>
-          </node>
-          <token text="," token-type="COMMA" token-type-id="16" channel="0" line="49" column="10" />
-          <node name="expression" start-line="49" start-column="12" end-line="49" end-column="17">
-            <node name="atom_expression" start-line="49" start-column="12" end-line="49" end-column="17">
-              <node name="list" start-line="49" start-column="12" end-line="49" end-column="17">
-                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="49" column="12" />
-                <node name="list_element" start-line="49" start-column="13" end-line="49" end-column="13">
-                  <node name="list_non_indexed_element" start-line="49" start-column="13" end-line="49" end-column="13">
-                    <node name="expression" start-line="49" start-column="13" end-line="49" end-column="13">
-                      <node name="atom_expression" start-line="49" start-column="13" end-line="49" end-column="13">
-                        <node name="literface" start-line="49" start-column="13" end-line="49" end-column="13">
-                          <token text="3" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="49" column="13" />
-                        </node>
-                      </node>
-                    </node>
-                  </node>
-                </node>
-                <token text="," token-type="COMMA" token-type-id="16" channel="0" line="49" column="14" />
-                <node name="list_element" start-line="49" start-column="16" end-line="49" end-column="16">
-                  <node name="list_non_indexed_element" start-line="49" start-column="16" end-line="49" end-column="16">
-                    <node name="expression" start-line="49" start-column="16" end-line="49" end-column="16">
-                      <node name="atom_expression" start-line="49" start-column="16" end-line="49" end-column="16">
-                        <node name="literface" start-line="49" start-column="16" end-line="49" end-column="16">
-                          <token text="4" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="49" column="16" />
-                        </node>
-                      </node>
-                    </node>
-                  </node>
-                </node>
-                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="49" column="17" />
-              </node>
-            </node>
-          </node>
-          <token text="]" token-type="RBRACK" token-type-id="15" channel="0" line="49" column="18" />
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="49" column="19" />
-    <node name="statement" start-line="52" start-column="0" end-line="54" end-column="0">
-      <token text="useList" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="52" column="8" />
-      <node name="expression" start-line="52" start-column="11" end-line="54" end-column="0">
-        <node name="atom_expression" start-line="52" start-column="11" end-line="54" end-column="0">
-          <node name="function" start-line="52" start-column="11" end-line="54" end-column="0">
-            <node name="function_params" start-line="52" start-column="11" end-line="52" end-column="27">
-              <node name="list" start-line="52" start-column="11" end-line="52" end-column="27">
-                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="52" column="11" />
-                <node name="list_indexed_element" start-line="52" start-column="12" end-line="52" end-column="26">
-                  <token text="lst" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="12" />
-                  <token text=":" token-type="COLON" token-type-id="17" channel="0" line="52" column="15" />
-                  <node name="expression" start-line="52" start-column="17" end-line="52" end-column="26">
-                    <node name="atom_expression" start-line="52" start-column="17" end-line="52" end-column="26">
-                      <node name="list" start-line="52" start-column="17" end-line="52" end-column="26">
-                        <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="52" column="17" />
-                        <node name="list_element" start-line="52" start-column="18" end-line="52" end-column="18">
-                          <node name="list_non_indexed_element" start-line="52" start-column="18" end-line="52" end-column="18">
-                            <node name="expression" start-line="52" start-column="18" end-line="52" end-column="18">
-                              <node name="atom_expression" start-line="52" start-column="18" end-line="52" end-column="18">
-                                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="18" />
-                              </node>
-                            </node>
-                          </node>
-                        </node>
-                        <token text="," token-type="COMMA" token-type-id="16" channel="0" line="52" column="21" />
-                        <node name="list_element" start-line="52" start-column="23" end-line="52" end-column="23">
-                          <node name="list_non_indexed_element" start-line="52" start-column="23" end-line="52" end-column="23">
-                            <node name="expression" start-line="52" start-column="23" end-line="52" end-column="23">
-                              <node name="atom_expression" start-line="52" start-column="23" end-line="52" end-column="23">
-                                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="23" />
-                              </node>
-                            </node>
-                          </node>
-                        </node>
-                        <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="52" column="26" />
-                      </node>
-                    </node>
-                  </node>
-                </node>
-                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="52" column="27" />
-              </node>
-            </node>
-            <node name="function_return_type" start-line="52" start-column="28" end-line="52" end-column="30">
-              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="52" column="28" />
-              <node name="atom_expression" start-line="52" start-column="30" end-line="52" end-column="30">
-                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="30" />
-              </node>
-            </node>
-            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="52" column="34" />
-            <node name="function_body" start-line="52" start-column="37" end-line="54" end-column="0">
-              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="52" column="37" />
-              <node name="block" start-line="53" start-column="4" end-line="53" end-column="4">
-                <node name="statement" start-line="53" start-column="4" end-line="53" end-column="4">
-                  <node name="expression" start-line="53" start-column="4" end-line="53" end-column="4">
-                    <node name="atom_expression" start-line="53" start-column="4" end-line="53" end-column="4">
-                      <token text="lst" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="53" column="4" />
-                    </node>
-                  </node>
-                </node>
-              </node>
-              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="54" column="0" />
-            </node>
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="54" column="1" />
-    <node name="statement" start-line="56" start-column="0" end-line="56" end-column="5">
-      <token text="awa" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="56" column="0" />
-      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="56" column="3" />
-      <node name="expression" start-line="56" start-column="5" end-line="56" end-column="5">
-        <node name="atom_expression" start-line="56" start-column="5" end-line="56" end-column="5">
-          <node name="literface" start-line="56" start-column="5" end-line="56" end-column="5">
-            <token text="-100" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="56" column="5" />
-          </node>
-        </node>
-      </node>
-    </node>
-    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="56" column="9" />
-  </node>
-  <token text="&lt;EOF&gt;" token-type="WS" token-type-id="-1" channel="0" line="56" column="10" />
-</node>
+Program
+  block:
+    Block
+      stmts:
+        Stmt
+          target:
+            Identifier
+              name:
+                'x'
+          expr:
+            Literal
+              raw:
+                '42'
+              type:
+                'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'y'
+          expr:
+            Literal
+              raw:
+                'true'
+              type:
+                'boolean'
+        Stmt
+          target:
+            Identifier
+              name:
+                'z'
+          expr:
+            Literal
+              raw:
+                '"hello"'
+              type:
+                'string'
+        Stmt
+          target:
+            Identifier
+              name:
+                'nums'
+          expr:
+            List
+              items:
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '1'
+                      type:
+                        'integer'
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '2'
+                      type:
+                        'integer'
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '3'
+                      type:
+                        'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'point'
+          expr:
+            List
+              items:
+                ListItem
+                  key:
+                    Identifier
+                      name:
+                        'x'
+                  value:
+                    Literal
+                      raw:
+                        '10'
+                      type:
+                        'integer'
+                ListItem
+                  key:
+                    Identifier
+                      name:
+                        'y'
+                  value:
+                    Literal
+                      raw:
+                        '20'
+                      type:
+                        'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'mixed'
+          expr:
+            List
+              items:
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '1'
+                      type:
+                        'integer'
+                ListItem
+                  key:
+                    Identifier
+                      name:
+                        'a'
+                  value:
+                    Literal
+                      raw:
+                        '2'
+                      type:
+                        'integer'
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '3'
+                      type:
+                        'integer'
+                ListItem
+                  key:
+                    Identifier
+                      name:
+                        'b'
+                  value:
+                    Literal
+                      raw:
+                        '4'
+                      type:
+                        'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'id'
+          expr:
+            Function
+              params:
+                List
+                  items:
+                    ListItem
+                      key:
+                        Identifier
+                          name:
+                            'v'
+                      value:
+                        Identifier
+                          name:
+                            'T'
+              body:
+                Block
+                  stmts:
+                    Stmt
+                      target:
+                        None
+                      expr:
+                        Identifier
+                          name:
+                            'v'
+              ret:
+                None
+              ann:
+                []
+        Stmt
+          target:
+            Identifier
+              name:
+                'add'
+          expr:
+            Function
+              params:
+                List
+                  items:
+                    ListItem
+                      key:
+                        Identifier
+                          name:
+                            'a'
+                      value:
+                        Identifier
+                          name:
+                            'i32'
+                    ListItem
+                      key:
+                        Identifier
+                          name:
+                            'b'
+                      value:
+                        Identifier
+                          name:
+                            'i32'
+              body:
+                Block
+                  stmts:
+                    Stmt
+                      target:
+                        None
+                      expr:
+                        Identifier
+                          name:
+                            'a'
+              ret:
+                Identifier
+                  name:
+                    'i32'
+              ann:
+                []
+        Stmt
+          target:
+            Identifier
+              name:
+                'mul'
+          expr:
+            Function
+              params:
+                List
+                  items:
+                    ListItem
+                      key:
+                        Identifier
+                          name:
+                            'a'
+                      value:
+                        Identifier
+                          name:
+                            'i32'
+                    ListItem
+                      key:
+                        Identifier
+                          name:
+                            'b'
+                      value:
+                        Identifier
+                          name:
+                            'i32'
+              body:
+                Block
+                  stmts:
+                    Stmt
+                      target:
+                        None
+                      expr:
+                        Identifier
+                          name:
+                            'a'
+              ret:
+                Identifier
+                  name:
+                    'i32'
+              ann:
+                Identifier
+                  name:
+                    'pure'
+                Identifier
+                  name:
+                    'inline'
+        Stmt
+          target:
+            Identifier
+              name:
+                'makeAdder'
+          expr:
+            Function
+              params:
+                List
+                  items:
+                    ListItem
+                      key:
+                        Identifier
+                          name:
+                            'x'
+                      value:
+                        Identifier
+                          name:
+                            'i32'
+              body:
+                Block
+                  stmts:
+                    Stmt
+                      target:
+                        None
+                      expr:
+                        Function
+                          params:
+                            List
+                              items:
+                                ListItem
+                                  key:
+                                    Identifier
+                                      name:
+                                        'y'
+                                  value:
+                                    Identifier
+                                      name:
+                                        'i32'
+                          body:
+                            Block
+                              stmts:
+                                Stmt
+                                  target:
+                                    None
+                                  expr:
+                                    Identifier
+                                      name:
+                                        'x'
+                          ret:
+                            Identifier
+                              name:
+                                'i32'
+                          ann:
+                            []
+              ret:
+                Function
+                  params:
+                    List
+                      items:
+                        []
+                  body:
+                    Block
+                      stmts:
+                        Stmt
+                          target:
+                            None
+                          expr:
+                            Identifier
+                              name:
+                                'i32'
+                  ret:
+                    None
+                  ann:
+                    []
+              ann:
+                []
+        Stmt
+          target:
+            Identifier
+              name:
+                'r1'
+          expr:
+            Call
+              fn:
+                Identifier
+                  name:
+                    'add'
+              arg:
+                List
+                  items:
+                    ListItem
+                      key:
+                        None
+                      value:
+                        Literal
+                          raw:
+                            '1'
+                          type:
+                            'integer'
+                    ListItem
+                      key:
+                        None
+                      value:
+                        Literal
+                          raw:
+                            '2'
+                          type:
+                            'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'r2'
+          expr:
+            Call
+              fn:
+                Call
+                  fn:
+                    Identifier
+                      name:
+                        'makeAdder'
+                  arg:
+                    Literal
+                      raw:
+                        '10'
+                      type:
+                        'integer'
+              arg:
+                Literal
+                  raw:
+                    '32'
+                  type:
+                    'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'r3'
+          expr:
+            Call
+              fn:
+                Function
+                  params:
+                    List
+                      items:
+                        ListItem
+                          key:
+                            Identifier
+                              name:
+                                'x'
+                          value:
+                            Identifier
+                              name:
+                                'i32'
+                  body:
+                    Block
+                      stmts:
+                        Stmt
+                          target:
+                            None
+                          expr:
+                            Identifier
+                              name:
+                                'x'
+                  ret:
+                    Identifier
+                      name:
+                        'i32'
+                  ann:
+                    []
+              arg:
+                Literal
+                  raw:
+                    '5'
+                  type:
+                    'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'r4'
+          expr:
+            Call
+              fn:
+                Identifier
+                  name:
+                    'add'
+              arg:
+                List
+                  items:
+                    ListItem
+                      key:
+                        None
+                      value:
+                        Literal
+                          raw:
+                            '3'
+                          type:
+                            'integer'
+                    ListItem
+                      key:
+                        None
+                      value:
+                        Literal
+                          raw:
+                            '4'
+                          type:
+                            'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'useList'
+          expr:
+            Function
+              params:
+                List
+                  items:
+                    ListItem
+                      key:
+                        Identifier
+                          name:
+                            'lst'
+                      value:
+                        List
+                          items:
+                            ListItem
+                              key:
+                                None
+                              value:
+                                Identifier
+                                  name:
+                                    'i32'
+                            ListItem
+                              key:
+                                None
+                              value:
+                                Identifier
+                                  name:
+                                    'i32'
+              body:
+                Block
+                  stmts:
+                    Stmt
+                      target:
+                        None
+                      expr:
+                        Identifier
+                          name:
+                            'lst'
+              ret:
+                Identifier
+                  name:
+                    'i32'
+              ann:
+                []
+        Stmt
+          target:
+            Identifier
+              name:
+                'awa'
+          expr:
+            Literal
+              raw:
+                '-100'
+              type:
+                'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'args'
+          expr:
+            Call
+              fn:
+                Identifier
+                  name:
+                    '*'
+              arg:
+                List
+                  items:
+                    ListItem
+                      key:
+                        None
+                      value:
+                        List
+                          items:
+                            ListItem
+                              key:
+                                Identifier
+                                  name:
+                                    'arg'
+                              value:
+                                Identifier
+                                  name:
+                                    'i32'
+                    ListItem
+                      key:
+                        None
+                      value:
+                        Literal
+                          raw:
+                            '5'
+                          type:
+                            'integer'
+        Stmt
+          target:
+            Identifier
+              name:
+                'fn'
+          expr:
+            Function
+              params:
+                Identifier
+                  name:
+                    'args'
+              body:
+                Block
+                  stmts:
+                    Stmt
+                      target:
+                        None
+                      expr:
+                        Call
+                          fn:
+                            Identifier
+                              name:
+                                'get!'
+                          arg:
+                            List
+                              items:
+                                ListItem
+                                  key:
+                                    None
+                                  value:
+                                    Identifier
+                                      name:
+                                        'arg'
+                                ListItem
+                                  key:
+                                    None
+                                  value:
+                                    Literal
+                                      raw:
+                                        '0'
+                                      type:
+                                        'integer'
+              ret:
+                Identifier
+                  name:
+                    'i32'
+              ann:
+                Identifier
+                  name:
+                    '!pure'

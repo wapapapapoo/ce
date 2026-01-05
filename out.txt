@@ -1,1268 +1,743 @@
-'a'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'0'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'b'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'1'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'c'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'123_456'            -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'d'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'0xdead_beef'        -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'e'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'0b1010_0110'        -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'f'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'0o755'              -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'g'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'1.'                 -> FLOAT_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'h'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'.5'                 -> FLOAT_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'i'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'1.0'                -> FLOAT_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'j'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'1e10'               -> FLOAT_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'k'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'1.2e-3'             -> FLOAT_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'l'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'0x1.fp3'            -> FLOAT_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'m'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'nan'                -> FLOAT_NAN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'n'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'inf'                -> FLOAT_INF
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'o'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'infinity'           -> FLOAT_INF
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'p'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'true'               -> BOOLEAN_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'q'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'false'              -> BOOLEAN_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'r'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'null'               -> NULL_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'λ'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'1'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'你好'                 -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'2'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'变量_一'               -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'3'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'привет'             -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'4'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'日本語'                -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'5'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'한글'                 -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'6'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'＋'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-'=>'                 -> OP_ARROW
-'+'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'＞'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'y'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-'=>'                 -> OP_ARROW
-'>'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'y'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'＝'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'y'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-'=>'                 -> OP_ARROW
-'=='                 -> ID_IDENTIFIER
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'y'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'   '                -> WS
-'// 注意：这里是函数名，不是 operator' -> LINE_COMMENT
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'add'                -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'+'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'sub'                -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'-'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'10'                 -> INTEGER_CONSTANT
-','                  -> COMMA
-'3'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'mul'                -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'*'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'6'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'7'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'div'                -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'/'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'8'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'cmp1'               -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'>'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'3'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'cmp2'               -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'<'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'cmp3'               -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'=='                 -> ID_IDENTIFIER
-'('                  -> LPAREN
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'1'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'cmp4'               -> ID_IDENTIFIER
-':'                  -> COLON
-'!='                 -> ID_IDENTIFIER
-' '                  -> WS
-'('                  -> LPAREN
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'cmp5'               -> ID_IDENTIFIER
-':'                  -> COLON
-'>='                 -> ID_IDENTIFIER
-' '                  -> WS
-'('                  -> LPAREN
-'2'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'cmp6'               -> ID_IDENTIFIER
-':'                  -> COLON
-'<='                 -> ID_IDENTIFIER
-' '                  -> WS
-'('                  -> LPAREN
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'1'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'bang'               -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'!'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'true'               -> BOOLEAN_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'ifcall'             -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'if!'                -> ID_IDENTIFIER
-'('                  -> LPAREN
-'true'               -> BOOLEAN_CONSTANT
-','                  -> COMMA
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'0'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'id'                 -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-':'                  -> COLON
-'i32'                -> ID_IDENTIFIER
-'=>'                 -> OP_ARROW
-'x'                  -> ID_IDENTIFIER
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'pair'               -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'i32'                -> ID_IDENTIFIER
-','                  -> COMMA
-'b'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-':'                  -> COLON
-'('                  -> LPAREN
-'i32'                -> ID_IDENTIFIER
-','                  -> COMMA
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-'=>'                 -> OP_ARROW
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'complex'            -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'array'              -> ID_IDENTIFIER
-'('                  -> LPAREN
-'i32'                -> ID_IDENTIFIER
-','                  -> COMMA
-'4'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-','                  -> COMMA
-'y'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'array'              -> ID_IDENTIFIER
-'('                  -> LPAREN
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-')'                  -> RPAREN
-':'                  -> COLON
-'array'              -> ID_IDENTIFIER
-'('                  -> LPAREN
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-'=>'                 -> OP_ARROW
-'x'                  -> ID_IDENTIFIER
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'blk'                -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-')'                  -> RPAREN
-':'                  -> COLON
-'i32'                -> ID_IDENTIFIER
-'=>'                 -> OP_ARROW
-'{'                  -> LBRACE
-'\n'                 -> WS
-'    '               -> WS
-'a'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'1'                  -> INTEGER_CONSTANT
-'\n'                 -> WS
-'    '               -> WS
-'b'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'2'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'    '               -> WS
-'c'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'3'                  -> INTEGER_CONSTANT
-'\n'                 -> WS
-'    '               -> WS
-'a'                  -> ID_IDENTIFIER
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'}'                  -> RBRACE
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'blk2'               -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-')'                  -> RPAREN
-':'                  -> COLON
-'i32'                -> ID_IDENTIFIER
-'=>'                 -> OP_ARROW
-'{'                  -> LBRACE
-'a'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'1'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'b'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'2'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'c'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'3'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'}'                  -> RBRACE
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'closure'            -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'['                  -> LBRACK
-'add'                -> ID_IDENTIFIER
-','                  -> COMMA
-'('                  -> LPAREN
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-']'                  -> RBRACK
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'nested'             -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'['                  -> LBRACK
-'['                  -> LBRACK
-'add'                -> ID_IDENTIFIER
-','                  -> COMMA
-'('                  -> LPAREN
-'1'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-']'                  -> RBRACK
-','                  -> COMMA
-'('                  -> LPAREN
-'2'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'3'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-']'                  -> RBRACK
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'deep'               -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'['                  -> LBRACK
-' '                  -> WS
-'['                  -> LBRACK
-' '                  -> WS
-'['                  -> LBRACK
-' '                  -> WS
-'f'                  -> ID_IDENTIFIER
-' '                  -> WS
-','                  -> COMMA
-' '                  -> WS
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-' '                  -> WS
-']'                  -> RBRACK
-' '                  -> WS
-']'                  -> RBRACK
-' '                  -> WS
-','                  -> COMMA
-' '                  -> WS
-'('                  -> LPAREN
-'y'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-' '                  -> WS
-']'                  -> RBRACK
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'sum'                -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-'n'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-':'                  -> COLON
-'i32'                -> ID_IDENTIFIER
-'=>'                 -> OP_ARROW
-'\n'                 -> WS
-'    '               -> WS
-'loop!'              -> ID_IDENTIFIER
-'('                  -> LPAREN
-'\n'                 -> WS
-'        '           -> WS
-'('                  -> LPAREN
-'i'                  -> ID_IDENTIFIER
-':'                  -> COLON
-'0'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'acc'                -> ID_IDENTIFIER
-':'                  -> COLON
-'0'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-','                  -> COMMA
-'\n'                 -> WS
-'        '           -> WS
-'n'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'\n'                 -> WS
-'        '           -> WS
-'('                  -> LPAREN
-'state'              -> ID_IDENTIFIER
-')'                  -> RPAREN
-'=>'                 -> OP_ARROW
-'{'                  -> LBRACE
-'\n'                 -> WS
-'            '       -> WS
-'i'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'get'                -> ID_IDENTIFIER
-'('                  -> LPAREN
-'state'              -> ID_IDENTIFIER
-','                  -> COMMA
-'0'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-'\n'                 -> WS
-'            '       -> WS
-'acc'                -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'get'                -> ID_IDENTIFIER
-'('                  -> LPAREN
-'state'              -> ID_IDENTIFIER
-','                  -> COMMA
-'1'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-'\n'                 -> WS
-'            '       -> WS
-'('                  -> LPAREN
-'+'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'i'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'1'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-','                  -> COMMA
-'+'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'acc'                -> ID_IDENTIFIER
-','                  -> COMMA
-'i'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-')'                  -> RPAREN
-'\n'                 -> WS
-'        '           -> WS
-'}'                  -> RBRACE
-'\n'                 -> WS
-'    '               -> WS
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'____'               -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'0'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'____123'            -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'1'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'λ_λ_λ'              -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'2'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'＋＋＋'                -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'b'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'c'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-'=>'                 -> OP_ARROW
-'+'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'+'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-','                  -> COMMA
-'c'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'f'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'('                  -> LPAREN
-'('                  -> LPAREN
-'('                  -> LPAREN
-'('                  -> LPAREN
-'('                  -> LPAREN
-'('                  -> LPAREN
-'('                  -> LPAREN
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-')'                  -> RPAREN
-')'                  -> RPAREN
-')'                  -> RPAREN
-')'                  -> RPAREN
-')'                  -> RPAREN
-')'                  -> RPAREN
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'g'                  -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'['                  -> LBRACK
-'['                  -> LBRACK
-'['                  -> LBRACK
-'['                  -> LBRACK
-'['                  -> LBRACK
-'['                  -> LBRACK
-'x'                  -> ID_IDENTIFIER
-']'                  -> RBRACK
-']'                  -> RBRACK
-']'                  -> RBRACK
-']'                  -> RBRACK
-']'                  -> RBRACK
-']'                  -> RBRACK
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'call1'              -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'add'                -> ID_IDENTIFIER
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-' '                  -> WS
-'y'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'call2'              -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'add'                -> ID_IDENTIFIER
-'('                  -> LPAREN
-'y'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'2'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-' '                  -> WS
-'x'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'1'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'call3'              -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'make'               -> ID_IDENTIFIER
-'('                  -> LPAREN
-'n'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'10'                 -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'call4'              -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'reserve'            -> ID_IDENTIFIER
-'('                  -> LPAREN
-'arr'                -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'arr0'               -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'newlen'             -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'16'                 -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'call5'              -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'array'              -> ID_IDENTIFIER
-'('                  -> LPAREN
-'type'               -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'len'                -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'4'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'call6'              -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'array'              -> ID_IDENTIFIER
-'('                  -> LPAREN
-'type'               -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'nested_named'       -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-'\n'                 -> WS
-'    '               -> WS
-'fn'                 -> ID_IDENTIFIER
-'('                  -> LPAREN
-'\n'                 -> WS
-'        '           -> WS
-'a'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'add'                -> ID_IDENTIFIER
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-' '                  -> WS
-'y'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-','                  -> COMMA
-'\n'                 -> WS
-'        '           -> WS
-'b'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'with_log'           -> ID_IDENTIFIER
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'10'                 -> INTEGER_CONSTANT
-')'                  -> RPAREN
-','                  -> COMMA
-'\n'                 -> WS
-'        '           -> WS
-'c'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'array'              -> ID_IDENTIFIER
-'('                  -> LPAREN
-'type'               -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'len'                -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'8'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-'\n'                 -> WS
-'    '               -> WS
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'+'                  -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'builtin_add'        -> ID_IDENTIFIER
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'-'                  -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'builtin_sub'        -> ID_IDENTIFIER
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'*'                  -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'builtin_mul'        -> ID_IDENTIFIER
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'map!'               -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'f'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'arr'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'builtin_map'        -> ID_IDENTIFIER
-'('                  -> LPAREN
-'f'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'arr'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'foldl!'             -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'f'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'init'               -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'arr'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'builtin_foldl'      -> ID_IDENTIFIER
-'('                  -> LPAREN
-'f'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'init'               -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'arr'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'is-zero?'           -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'i32'                -> ID_IDENTIFIER
-')'                  -> RPAREN
-':'                  -> COLON
-' '                  -> WS
-'bool'               -> ID_IDENTIFIER
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'=='                 -> ID_IDENTIFIER
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'0'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'not-null?'          -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-':'                  -> COLON
-' '                  -> WS
-'bool'               -> ID_IDENTIFIER
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'!='                 -> ID_IDENTIFIER
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'null'               -> NULL_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'>>='                -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'bind'               -> ID_IDENTIFIER
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'<<='                -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'shift'              -> ID_IDENTIFIER
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'<>'                 -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'concat'             -> ID_IDENTIFIER
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'result1'            -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'+'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'a'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'1'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-' '                  -> WS
-'b'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'result2'            -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'>'                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'left'               -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'x'                  -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'right'              -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'y'                  -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'result3'            -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'is-zero?'           -> ID_IDENTIFIER
-'('                  -> LPAREN
-'x'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'0'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'result4'            -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'map!'               -> ID_IDENTIFIER
-'('                  -> LPAREN
-'f'                  -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'add'                -> ID_IDENTIFIER
-','                  -> COMMA
-' '                  -> WS
-'arr'                -> ID_IDENTIFIER
-':'                  -> COLON
-' '                  -> WS
-'arr0'               -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'\n'                 -> WS
-'!!!!'               -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'1'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'????'               -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'2'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'++++'               -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'3'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'----'               -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'4'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'λ+λ'                -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'5'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'中文-函数!'             -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'6'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'数据->处理'             -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'7'                  -> INTEGER_CONSTANT
-';'                  -> SEMICOLON
-'     '              -> WS
-'// 注意：这里的 -> 是字符，不是 =>' -> LINE_COMMENT
-'\n'                 -> WS
-'\n'                 -> WS
-'>='                 -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-' '                  -> WS
-'('                  -> LPAREN
-')'                  -> RPAREN
-' '                  -> WS
-'=>'                 -> OP_ARROW
-' '                  -> WS
-'awa'                -> ID_IDENTIFIER
-'('                  -> LPAREN
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'assign'             -> ID_IDENTIFIER
-':='                 -> OP_BIND
-'if!'                -> ID_IDENTIFIER
-'('                  -> LPAREN
-'cond'               -> ID_IDENTIFIER
-':'                  -> COLON
-'='                  -> ID_IDENTIFIER
-' '                  -> WS
-'123'                -> INTEGER_CONSTANT
-'='                  -> ID_IDENTIFIER
-'('                  -> LPAREN
-'2'                  -> INTEGER_CONSTANT
-','                  -> COMMA
-'2'                  -> INTEGER_CONSTANT
-')'                  -> RPAREN
-','                  -> COMMA
-'then'               -> ID_IDENTIFIER
-':'                  -> COLON
-'then'               -> ID_IDENTIFIER
-','                  -> COMMA
-'else'               -> ID_IDENTIFIER
-':'                  -> COLON
-'anything=else'      -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'\n'                 -> WS
-'awa'                -> ID_IDENTIFIER
-' '                  -> WS
-':='                 -> OP_BIND
-'=123'               -> ID_IDENTIFIER
-';'                  -> SEMICOLON
-'\n'                 -> WS
-'('                  -> LPAREN
-'awa'                -> ID_IDENTIFIER
-':'                  -> COLON
-'=123u'              -> ID_IDENTIFIER
-')'                  -> RPAREN
-';'                  -> SEMICOLON
-'<EOF>'              -> WS
+<node name="program" start-line="2" start-column="0" end-line="56" end-column="9">
+  <node name="block" start-line="2" start-column="0" end-line="56" end-column="9">
+    <node name="statement" start-line="2" start-column="0" end-line="2" end-column="5">
+      <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="2" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="2" column="2" />
+      <node name="expression" start-line="2" start-column="5" end-line="2" end-column="5">
+        <node name="atom_expression" start-line="2" start-column="5" end-line="2" end-column="5">
+          <node name="literface" start-line="2" start-column="5" end-line="2" end-column="5">
+            <token text="42" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="2" column="5" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="2" column="7" />
+    <node name="statement" start-line="3" start-column="0" end-line="3" end-column="5">
+      <token text="y" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="3" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="3" column="2" />
+      <node name="expression" start-line="3" start-column="5" end-line="3" end-column="5">
+        <node name="atom_expression" start-line="3" start-column="5" end-line="3" end-column="5">
+          <node name="literface" start-line="3" start-column="5" end-line="3" end-column="5">
+            <token text="true" token-type="BOOLEAN_CONSTANT" token-type-id="5" channel="0" line="3" column="5" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="3" column="9" />
+    <node name="statement" start-line="4" start-column="0" end-line="4" end-column="5">
+      <token text="z" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="4" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="4" column="2" />
+      <node name="expression" start-line="4" start-column="5" end-line="4" end-column="5">
+        <node name="atom_expression" start-line="4" start-column="5" end-line="4" end-column="5">
+          <node name="literface" start-line="4" start-column="5" end-line="4" end-column="5">
+            <token text="&quot;hello&quot;" token-type="STRING_CONSTANT" token-type-id="7" channel="0" line="4" column="5" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="4" column="12" />
+    <node name="statement" start-line="7" start-column="0" end-line="7" end-column="17">
+      <token text="nums" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="7" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="7" column="5" />
+      <node name="expression" start-line="7" start-column="8" end-line="7" end-column="17">
+        <node name="atom_expression" start-line="7" start-column="8" end-line="7" end-column="17">
+          <node name="list" start-line="7" start-column="8" end-line="7" end-column="17">
+            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="7" column="8" />
+            <node name="list_element" start-line="7" start-column="9" end-line="7" end-column="9">
+              <node name="list_non_indexed_element" start-line="7" start-column="9" end-line="7" end-column="9">
+                <node name="expression" start-line="7" start-column="9" end-line="7" end-column="9">
+                  <node name="atom_expression" start-line="7" start-column="9" end-line="7" end-column="9">
+                    <node name="literface" start-line="7" start-column="9" end-line="7" end-column="9">
+                      <token text="1" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="7" column="9" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="7" column="10" />
+            <node name="list_element" start-line="7" start-column="12" end-line="7" end-column="12">
+              <node name="list_non_indexed_element" start-line="7" start-column="12" end-line="7" end-column="12">
+                <node name="expression" start-line="7" start-column="12" end-line="7" end-column="12">
+                  <node name="atom_expression" start-line="7" start-column="12" end-line="7" end-column="12">
+                    <node name="literface" start-line="7" start-column="12" end-line="7" end-column="12">
+                      <token text="2" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="7" column="12" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="7" column="13" />
+            <node name="list_element" start-line="7" start-column="15" end-line="7" end-column="15">
+              <node name="list_non_indexed_element" start-line="7" start-column="15" end-line="7" end-column="15">
+                <node name="expression" start-line="7" start-column="15" end-line="7" end-column="15">
+                  <node name="atom_expression" start-line="7" start-column="15" end-line="7" end-column="15">
+                    <node name="literface" start-line="7" start-column="15" end-line="7" end-column="15">
+                      <token text="3" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="7" column="15" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="7" column="16" />
+            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="7" column="17" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="7" column="18" />
+    <node name="statement" start-line="10" start-column="0" end-line="10" end-column="22">
+      <token text="point" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="10" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="10" column="6" />
+      <node name="expression" start-line="10" start-column="9" end-line="10" end-column="22">
+        <node name="atom_expression" start-line="10" start-column="9" end-line="10" end-column="22">
+          <node name="list" start-line="10" start-column="9" end-line="10" end-column="22">
+            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="10" column="9" />
+            <node name="list_element" start-line="10" start-column="10" end-line="10" end-column="13">
+              <node name="list_indexed_element" start-line="10" start-column="10" end-line="10" end-column="13">
+                <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="10" column="10" />
+                <token text=":" token-type="COLON" token-type-id="17" channel="0" line="10" column="11" />
+                <node name="expression" start-line="10" start-column="13" end-line="10" end-column="13">
+                  <node name="atom_expression" start-line="10" start-column="13" end-line="10" end-column="13">
+                    <node name="literface" start-line="10" start-column="13" end-line="10" end-column="13">
+                      <token text="10" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="10" column="13" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="10" column="15" />
+            <node name="list_element" start-line="10" start-column="17" end-line="10" end-column="20">
+              <node name="list_indexed_element" start-line="10" start-column="17" end-line="10" end-column="20">
+                <token text="y" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="10" column="17" />
+                <token text=":" token-type="COLON" token-type-id="17" channel="0" line="10" column="18" />
+                <node name="expression" start-line="10" start-column="20" end-line="10" end-column="20">
+                  <node name="atom_expression" start-line="10" start-column="20" end-line="10" end-column="20">
+                    <node name="literface" start-line="10" start-column="20" end-line="10" end-column="20">
+                      <token text="20" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="10" column="20" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="10" column="22" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="10" column="23" />
+    <node name="statement" start-line="13" start-column="0" end-line="13" end-column="26">
+      <token text="mixed" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="13" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="13" column="6" />
+      <node name="expression" start-line="13" start-column="9" end-line="13" end-column="26">
+        <node name="atom_expression" start-line="13" start-column="9" end-line="13" end-column="26">
+          <node name="list" start-line="13" start-column="9" end-line="13" end-column="26">
+            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="13" column="9" />
+            <node name="list_element" start-line="13" start-column="10" end-line="13" end-column="10">
+              <node name="list_non_indexed_element" start-line="13" start-column="10" end-line="13" end-column="10">
+                <node name="expression" start-line="13" start-column="10" end-line="13" end-column="10">
+                  <node name="atom_expression" start-line="13" start-column="10" end-line="13" end-column="10">
+                    <node name="literface" start-line="13" start-column="10" end-line="13" end-column="10">
+                      <token text="1" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="13" column="10" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="13" column="11" />
+            <node name="list_element" start-line="13" start-column="13" end-line="13" end-column="16">
+              <node name="list_indexed_element" start-line="13" start-column="13" end-line="13" end-column="16">
+                <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="13" column="13" />
+                <token text=":" token-type="COLON" token-type-id="17" channel="0" line="13" column="14" />
+                <node name="expression" start-line="13" start-column="16" end-line="13" end-column="16">
+                  <node name="atom_expression" start-line="13" start-column="16" end-line="13" end-column="16">
+                    <node name="literface" start-line="13" start-column="16" end-line="13" end-column="16">
+                      <token text="2" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="13" column="16" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="13" column="17" />
+            <node name="list_element" start-line="13" start-column="19" end-line="13" end-column="19">
+              <node name="list_non_indexed_element" start-line="13" start-column="19" end-line="13" end-column="19">
+                <node name="expression" start-line="13" start-column="19" end-line="13" end-column="19">
+                  <node name="atom_expression" start-line="13" start-column="19" end-line="13" end-column="19">
+                    <node name="literface" start-line="13" start-column="19" end-line="13" end-column="19">
+                      <token text="3" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="13" column="19" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text="," token-type="COMMA" token-type-id="16" channel="0" line="13" column="20" />
+            <node name="list_element" start-line="13" start-column="22" end-line="13" end-column="25">
+              <node name="list_indexed_element" start-line="13" start-column="22" end-line="13" end-column="25">
+                <token text="b" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="13" column="22" />
+                <token text=":" token-type="COLON" token-type-id="17" channel="0" line="13" column="23" />
+                <node name="expression" start-line="13" start-column="25" end-line="13" end-column="25">
+                  <node name="atom_expression" start-line="13" start-column="25" end-line="13" end-column="25">
+                    <node name="literface" start-line="13" start-column="25" end-line="13" end-column="25">
+                      <token text="4" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="13" column="25" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="13" column="26" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="13" column="27" />
+    <node name="statement" start-line="16" start-column="0" end-line="18" end-column="0">
+      <token text="id" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="16" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="16" column="3" />
+      <node name="expression" start-line="16" start-column="6" end-line="18" end-column="0">
+        <node name="atom_expression" start-line="16" start-column="6" end-line="18" end-column="0">
+          <node name="function" start-line="16" start-column="6" end-line="18" end-column="0">
+            <node name="function_params" start-line="16" start-column="6" end-line="16" end-column="11">
+              <node name="list" start-line="16" start-column="6" end-line="16" end-column="11">
+                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="16" column="6" />
+                <node name="list_indexed_element" start-line="16" start-column="7" end-line="16" end-column="10">
+                  <token text="v" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="16" column="7" />
+                  <token text=":" token-type="COLON" token-type-id="17" channel="0" line="16" column="8" />
+                  <node name="expression" start-line="16" start-column="10" end-line="16" end-column="10">
+                    <node name="atom_expression" start-line="16" start-column="10" end-line="16" end-column="10">
+                      <token text="T" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="16" column="10" />
+                    </node>
+                  </node>
+                </node>
+                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="16" column="11" />
+              </node>
+            </node>
+            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="16" column="13" />
+            <node name="function_body" start-line="16" start-column="16" end-line="18" end-column="0">
+              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="16" column="16" />
+              <node name="block" start-line="17" start-column="4" end-line="17" end-column="4">
+                <node name="statement" start-line="17" start-column="4" end-line="17" end-column="4">
+                  <node name="expression" start-line="17" start-column="4" end-line="17" end-column="4">
+                    <node name="atom_expression" start-line="17" start-column="4" end-line="17" end-column="4">
+                      <token text="v" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="17" column="4" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="18" column="0" />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="18" column="1" />
+    <node name="statement" start-line="22" start-column="0" end-line="24" end-column="0">
+      <token text="add" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="22" column="4" />
+      <node name="expression" start-line="22" start-column="7" end-line="24" end-column="0">
+        <node name="atom_expression" start-line="22" start-column="7" end-line="24" end-column="0">
+          <node name="function" start-line="22" start-column="7" end-line="24" end-column="0">
+            <node name="function_params" start-line="22" start-column="7" end-line="22" end-column="22">
+              <node name="list" start-line="22" start-column="7" end-line="22" end-column="22">
+                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="22" column="7" />
+                <node name="list_element" start-line="22" start-column="8" end-line="22" end-column="11">
+                  <node name="list_indexed_element" start-line="22" start-column="8" end-line="22" end-column="11">
+                    <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="8" />
+                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="22" column="9" />
+                    <node name="expression" start-line="22" start-column="11" end-line="22" end-column="11">
+                      <node name="atom_expression" start-line="22" start-column="11" end-line="22" end-column="11">
+                        <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="11" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <token text="," token-type="COMMA" token-type-id="16" channel="0" line="22" column="14" />
+                <node name="list_element" start-line="22" start-column="16" end-line="22" end-column="19">
+                  <node name="list_indexed_element" start-line="22" start-column="16" end-line="22" end-column="19">
+                    <token text="b" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="16" />
+                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="22" column="17" />
+                    <node name="expression" start-line="22" start-column="19" end-line="22" end-column="19">
+                      <node name="atom_expression" start-line="22" start-column="19" end-line="22" end-column="19">
+                        <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="19" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="22" column="22" />
+              </node>
+            </node>
+            <node name="function_return_type" start-line="22" start-column="23" end-line="22" end-column="25">
+              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="22" column="23" />
+              <node name="atom_expression" start-line="22" start-column="25" end-line="22" end-column="25">
+                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="22" column="25" />
+              </node>
+            </node>
+            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="22" column="29" />
+            <node name="function_body" start-line="22" start-column="32" end-line="24" end-column="0">
+              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="22" column="32" />
+              <node name="block" start-line="23" start-column="4" end-line="23" end-column="4">
+                <node name="statement" start-line="23" start-column="4" end-line="23" end-column="4">
+                  <node name="expression" start-line="23" start-column="4" end-line="23" end-column="4">
+                    <node name="atom_expression" start-line="23" start-column="4" end-line="23" end-column="4">
+                      <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="23" column="4" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="24" column="0" />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="24" column="1" />
+    <node name="statement" start-line="28" start-column="0" end-line="30" end-column="4">
+      <token text="mul" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="28" column="4" />
+      <node name="expression" start-line="28" start-column="7" end-line="30" end-column="4">
+        <node name="atom_expression" start-line="28" start-column="7" end-line="30" end-column="4">
+          <node name="function" start-line="28" start-column="7" end-line="30" end-column="4">
+            <node name="function_params" start-line="28" start-column="7" end-line="28" end-column="22">
+              <node name="list" start-line="28" start-column="7" end-line="28" end-column="22">
+                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="28" column="7" />
+                <node name="list_element" start-line="28" start-column="8" end-line="28" end-column="11">
+                  <node name="list_indexed_element" start-line="28" start-column="8" end-line="28" end-column="11">
+                    <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="8" />
+                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="28" column="9" />
+                    <node name="expression" start-line="28" start-column="11" end-line="28" end-column="11">
+                      <node name="atom_expression" start-line="28" start-column="11" end-line="28" end-column="11">
+                        <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="11" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <token text="," token-type="COMMA" token-type-id="16" channel="0" line="28" column="14" />
+                <node name="list_element" start-line="28" start-column="16" end-line="28" end-column="19">
+                  <node name="list_indexed_element" start-line="28" start-column="16" end-line="28" end-column="19">
+                    <token text="b" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="16" />
+                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="28" column="17" />
+                    <node name="expression" start-line="28" start-column="19" end-line="28" end-column="19">
+                      <node name="atom_expression" start-line="28" start-column="19" end-line="28" end-column="19">
+                        <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="19" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="28" column="22" />
+              </node>
+            </node>
+            <node name="function_return_type" start-line="28" start-column="23" end-line="28" end-column="25">
+              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="28" column="23" />
+              <node name="atom_expression" start-line="28" start-column="25" end-line="28" end-column="25">
+                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="25" />
+              </node>
+            </node>
+            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="28" column="29" />
+            <node name="function_annotations" start-line="28" start-column="32" end-line="28" end-column="32">
+              <node name="atom_expression" start-line="28" start-column="32" end-line="28" end-column="32">
+                <token text="pure" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="32" />
+              </node>
+            </node>
+            <node name="function_annotations" start-line="28" start-column="37" end-line="28" end-column="37">
+              <node name="atom_expression" start-line="28" start-column="37" end-line="28" end-column="37">
+                <token text="inline" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="28" column="37" />
+              </node>
+            </node>
+            <node name="function_body" start-line="28" start-column="44" end-line="30" end-column="4">
+              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="28" column="44" />
+              <node name="block" start-line="29" start-column="8" end-line="29" end-column="8">
+                <node name="statement" start-line="29" start-column="8" end-line="29" end-column="8">
+                  <node name="expression" start-line="29" start-column="8" end-line="29" end-column="8">
+                    <node name="atom_expression" start-line="29" start-column="8" end-line="29" end-column="8">
+                      <token text="a" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="29" column="8" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="30" column="4" />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="30" column="5" />
+    <node name="statement" start-line="33" start-column="0" end-line="37" end-column="0">
+      <token text="makeAdder" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="33" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="33" column="10" />
+      <node name="expression" start-line="33" start-column="13" end-line="37" end-column="0">
+        <node name="atom_expression" start-line="33" start-column="13" end-line="37" end-column="0">
+          <node name="function" start-line="33" start-column="13" end-line="37" end-column="0">
+            <node name="function_params" start-line="33" start-column="13" end-line="33" end-column="20">
+              <node name="list" start-line="33" start-column="13" end-line="33" end-column="20">
+                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="33" column="13" />
+                <node name="list_indexed_element" start-line="33" start-column="14" end-line="33" end-column="17">
+                  <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="33" column="14" />
+                  <token text=":" token-type="COLON" token-type-id="17" channel="0" line="33" column="15" />
+                  <node name="expression" start-line="33" start-column="17" end-line="33" end-column="17">
+                    <node name="atom_expression" start-line="33" start-column="17" end-line="33" end-column="17">
+                      <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="33" column="17" />
+                    </node>
+                  </node>
+                </node>
+                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="33" column="20" />
+              </node>
+            </node>
+            <node name="function_return_type" start-line="33" start-column="21" end-line="33" end-column="35">
+              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="33" column="21" />
+              <node name="atom_expression" start-line="33" start-column="23" end-line="33" end-column="35">
+                <node name="function" start-line="33" start-column="23" end-line="33" end-column="35">
+                  <node name="function_params" start-line="33" start-column="23" end-line="33" end-column="24">
+                    <node name="list" start-line="33" start-column="23" end-line="33" end-column="24">
+                      <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="33" column="23" />
+                      <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="33" column="24" />
+                    </node>
+                  </node>
+                  <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="33" column="26" />
+                  <node name="function_body" start-line="33" start-column="29" end-line="33" end-column="35">
+                    <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="33" column="29" />
+                    <node name="block" start-line="33" start-column="31" end-line="33" end-column="31">
+                      <node name="statement" start-line="33" start-column="31" end-line="33" end-column="31">
+                        <node name="expression" start-line="33" start-column="31" end-line="33" end-column="31">
+                          <node name="atom_expression" start-line="33" start-column="31" end-line="33" end-column="31">
+                            <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="33" column="31" />
+                          </node>
+                        </node>
+                      </node>
+                    </node>
+                    <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="33" column="35" />
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="33" column="37" />
+            <node name="function_body" start-line="33" start-column="40" end-line="37" end-column="0">
+              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="33" column="40" />
+              <node name="block" start-line="34" start-column="4" end-line="36" end-column="4">
+                <node name="statement" start-line="34" start-column="4" end-line="36" end-column="4">
+                  <node name="expression" start-line="34" start-column="4" end-line="36" end-column="4">
+                    <node name="atom_expression" start-line="34" start-column="4" end-line="36" end-column="4">
+                      <node name="function" start-line="34" start-column="4" end-line="36" end-column="4">
+                        <node name="function_params" start-line="34" start-column="4" end-line="34" end-column="11">
+                          <node name="list" start-line="34" start-column="4" end-line="34" end-column="11">
+                            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="34" column="4" />
+                            <node name="list_indexed_element" start-line="34" start-column="5" end-line="34" end-column="8">
+                              <token text="y" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="34" column="5" />
+                              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="34" column="6" />
+                              <node name="expression" start-line="34" start-column="8" end-line="34" end-column="8">
+                                <node name="atom_expression" start-line="34" start-column="8" end-line="34" end-column="8">
+                                  <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="34" column="8" />
+                                </node>
+                              </node>
+                            </node>
+                            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="34" column="11" />
+                          </node>
+                        </node>
+                        <node name="function_return_type" start-line="34" start-column="12" end-line="34" end-column="14">
+                          <token text=":" token-type="COLON" token-type-id="17" channel="0" line="34" column="12" />
+                          <node name="atom_expression" start-line="34" start-column="14" end-line="34" end-column="14">
+                            <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="34" column="14" />
+                          </node>
+                        </node>
+                        <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="34" column="18" />
+                        <node name="function_body" start-line="34" start-column="21" end-line="36" end-column="4">
+                          <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="34" column="21" />
+                          <node name="block" start-line="35" start-column="8" end-line="35" end-column="8">
+                            <node name="statement" start-line="35" start-column="8" end-line="35" end-column="8">
+                              <node name="expression" start-line="35" start-column="8" end-line="35" end-column="8">
+                                <node name="atom_expression" start-line="35" start-column="8" end-line="35" end-column="8">
+                                  <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="35" column="8" />
+                                </node>
+                              </node>
+                            </node>
+                          </node>
+                          <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="36" column="4" />
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="37" column="0" />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="37" column="1" />
+    <node name="statement" start-line="40" start-column="0" end-line="40" end-column="14">
+      <token text="r1" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="40" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="40" column="3" />
+      <node name="expression" start-line="40" start-column="6" end-line="40" end-column="14">
+        <node name="function_call" start-line="40" start-column="6" end-line="40" end-column="14">
+          <node name="atom_expression" start-line="40" start-column="6" end-line="40" end-column="6">
+            <token text="add" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="40" column="6" />
+          </node>
+          <node name="function_arg_list" start-line="40" start-column="9" end-line="40" end-column="14">
+            <node name="list" start-line="40" start-column="9" end-line="40" end-column="14">
+              <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="40" column="9" />
+              <node name="list_element" start-line="40" start-column="10" end-line="40" end-column="10">
+                <node name="list_non_indexed_element" start-line="40" start-column="10" end-line="40" end-column="10">
+                  <node name="expression" start-line="40" start-column="10" end-line="40" end-column="10">
+                    <node name="atom_expression" start-line="40" start-column="10" end-line="40" end-column="10">
+                      <node name="literface" start-line="40" start-column="10" end-line="40" end-column="10">
+                        <token text="1" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="40" column="10" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <token text="," token-type="COMMA" token-type-id="16" channel="0" line="40" column="11" />
+              <node name="list_element" start-line="40" start-column="13" end-line="40" end-column="13">
+                <node name="list_non_indexed_element" start-line="40" start-column="13" end-line="40" end-column="13">
+                  <node name="expression" start-line="40" start-column="13" end-line="40" end-column="13">
+                    <node name="atom_expression" start-line="40" start-column="13" end-line="40" end-column="13">
+                      <node name="literface" start-line="40" start-column="13" end-line="40" end-column="13">
+                        <token text="2" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="40" column="13" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="40" column="14" />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="40" column="15" />
+    <node name="statement" start-line="43" start-column="0" end-line="43" end-column="24">
+      <token text="r2" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="43" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="43" column="3" />
+      <node name="expression" start-line="43" start-column="6" end-line="43" end-column="24">
+        <node name="function_call" start-line="43" start-column="6" end-line="43" end-column="24">
+          <node name="atom_expression" start-line="43" start-column="6" end-line="43" end-column="20">
+            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="43" column="6" />
+            <node name="expression" start-line="43" start-column="7" end-line="43" end-column="19">
+              <node name="function_call" start-line="43" start-column="7" end-line="43" end-column="19">
+                <node name="atom_expression" start-line="43" start-column="7" end-line="43" end-column="7">
+                  <token text="makeAdder" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="43" column="7" />
+                </node>
+                <node name="function_arg_list" start-line="43" start-column="16" end-line="43" end-column="19">
+                  <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="43" column="16" />
+                  <node name="expression" start-line="43" start-column="17" end-line="43" end-column="17">
+                    <node name="atom_expression" start-line="43" start-column="17" end-line="43" end-column="17">
+                      <node name="literface" start-line="43" start-column="17" end-line="43" end-column="17">
+                        <token text="10" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="43" column="17" />
+                      </node>
+                    </node>
+                  </node>
+                  <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="43" column="19" />
+                </node>
+              </node>
+            </node>
+            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="43" column="20" />
+          </node>
+          <node name="function_arg_list" start-line="43" start-column="21" end-line="43" end-column="24">
+            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="43" column="21" />
+            <node name="expression" start-line="43" start-column="22" end-line="43" end-column="22">
+              <node name="atom_expression" start-line="43" start-column="22" end-line="43" end-column="22">
+                <node name="literface" start-line="43" start-column="22" end-line="43" end-column="22">
+                  <token text="32" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="43" column="22" />
+                </node>
+              </node>
+            </node>
+            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="43" column="24" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="43" column="25" />
+    <node name="statement" start-line="46" start-column="0" end-line="46" end-column="32">
+      <token text="r3" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="46" column="3" />
+      <node name="expression" start-line="46" start-column="6" end-line="46" end-column="32">
+        <node name="function_call" start-line="46" start-column="6" end-line="46" end-column="32">
+          <node name="atom_expression" start-line="46" start-column="6" end-line="46" end-column="29">
+            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="46" column="6" />
+            <node name="expression" start-line="46" start-column="7" end-line="46" end-column="28">
+              <node name="atom_expression" start-line="46" start-column="7" end-line="46" end-column="28">
+                <node name="function" start-line="46" start-column="7" end-line="46" end-column="28">
+                  <node name="function_params" start-line="46" start-column="7" end-line="46" end-column="14">
+                    <node name="list" start-line="46" start-column="7" end-line="46" end-column="14">
+                      <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="46" column="7" />
+                      <node name="list_indexed_element" start-line="46" start-column="8" end-line="46" end-column="11">
+                        <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="8" />
+                        <token text=":" token-type="COLON" token-type-id="17" channel="0" line="46" column="9" />
+                        <node name="expression" start-line="46" start-column="11" end-line="46" end-column="11">
+                          <node name="atom_expression" start-line="46" start-column="11" end-line="46" end-column="11">
+                            <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="11" />
+                          </node>
+                        </node>
+                      </node>
+                      <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="46" column="14" />
+                    </node>
+                  </node>
+                  <node name="function_return_type" start-line="46" start-column="15" end-line="46" end-column="17">
+                    <token text=":" token-type="COLON" token-type-id="17" channel="0" line="46" column="15" />
+                    <node name="atom_expression" start-line="46" start-column="17" end-line="46" end-column="17">
+                      <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="17" />
+                    </node>
+                  </node>
+                  <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="46" column="21" />
+                  <node name="function_body" start-line="46" start-column="24" end-line="46" end-column="28">
+                    <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="46" column="24" />
+                    <node name="block" start-line="46" start-column="26" end-line="46" end-column="26">
+                      <node name="statement" start-line="46" start-column="26" end-line="46" end-column="26">
+                        <node name="expression" start-line="46" start-column="26" end-line="46" end-column="26">
+                          <node name="atom_expression" start-line="46" start-column="26" end-line="46" end-column="26">
+                            <token text="x" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="46" column="26" />
+                          </node>
+                        </node>
+                      </node>
+                    </node>
+                    <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="46" column="28" />
+                  </node>
+                </node>
+              </node>
+            </node>
+            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="46" column="29" />
+          </node>
+          <node name="function_arg_list" start-line="46" start-column="30" end-line="46" end-column="32">
+            <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="46" column="30" />
+            <node name="expression" start-line="46" start-column="31" end-line="46" end-column="31">
+              <node name="atom_expression" start-line="46" start-column="31" end-line="46" end-column="31">
+                <node name="literface" start-line="46" start-column="31" end-line="46" end-column="31">
+                  <token text="5" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="46" column="31" />
+                </node>
+              </node>
+            </node>
+            <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="46" column="32" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="46" column="33" />
+    <node name="statement" start-line="49" start-column="0" end-line="49" end-column="18">
+      <token text="r4" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="49" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="49" column="3" />
+      <node name="expression" start-line="49" start-column="6" end-line="49" end-column="18">
+        <node name="function_call" start-line="49" start-column="6" end-line="49" end-column="18">
+          <token text="[" token-type="LBRACK" token-type-id="14" channel="0" line="49" column="6" />
+          <node name="expression" start-line="49" start-column="7" end-line="49" end-column="7">
+            <node name="atom_expression" start-line="49" start-column="7" end-line="49" end-column="7">
+              <token text="add" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="49" column="7" />
+            </node>
+          </node>
+          <token text="," token-type="COMMA" token-type-id="16" channel="0" line="49" column="10" />
+          <node name="expression" start-line="49" start-column="12" end-line="49" end-column="17">
+            <node name="atom_expression" start-line="49" start-column="12" end-line="49" end-column="17">
+              <node name="list" start-line="49" start-column="12" end-line="49" end-column="17">
+                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="49" column="12" />
+                <node name="list_element" start-line="49" start-column="13" end-line="49" end-column="13">
+                  <node name="list_non_indexed_element" start-line="49" start-column="13" end-line="49" end-column="13">
+                    <node name="expression" start-line="49" start-column="13" end-line="49" end-column="13">
+                      <node name="atom_expression" start-line="49" start-column="13" end-line="49" end-column="13">
+                        <node name="literface" start-line="49" start-column="13" end-line="49" end-column="13">
+                          <token text="3" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="49" column="13" />
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <token text="," token-type="COMMA" token-type-id="16" channel="0" line="49" column="14" />
+                <node name="list_element" start-line="49" start-column="16" end-line="49" end-column="16">
+                  <node name="list_non_indexed_element" start-line="49" start-column="16" end-line="49" end-column="16">
+                    <node name="expression" start-line="49" start-column="16" end-line="49" end-column="16">
+                      <node name="atom_expression" start-line="49" start-column="16" end-line="49" end-column="16">
+                        <node name="literface" start-line="49" start-column="16" end-line="49" end-column="16">
+                          <token text="4" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="49" column="16" />
+                        </node>
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="49" column="17" />
+              </node>
+            </node>
+          </node>
+          <token text="]" token-type="RBRACK" token-type-id="15" channel="0" line="49" column="18" />
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="49" column="19" />
+    <node name="statement" start-line="52" start-column="0" end-line="54" end-column="0">
+      <token text="useList" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="52" column="8" />
+      <node name="expression" start-line="52" start-column="11" end-line="54" end-column="0">
+        <node name="atom_expression" start-line="52" start-column="11" end-line="54" end-column="0">
+          <node name="function" start-line="52" start-column="11" end-line="54" end-column="0">
+            <node name="function_params" start-line="52" start-column="11" end-line="52" end-column="27">
+              <node name="list" start-line="52" start-column="11" end-line="52" end-column="27">
+                <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="52" column="11" />
+                <node name="list_indexed_element" start-line="52" start-column="12" end-line="52" end-column="26">
+                  <token text="lst" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="12" />
+                  <token text=":" token-type="COLON" token-type-id="17" channel="0" line="52" column="15" />
+                  <node name="expression" start-line="52" start-column="17" end-line="52" end-column="26">
+                    <node name="atom_expression" start-line="52" start-column="17" end-line="52" end-column="26">
+                      <node name="list" start-line="52" start-column="17" end-line="52" end-column="26">
+                        <token text="(" token-type="LPAREN" token-type-id="10" channel="0" line="52" column="17" />
+                        <node name="list_element" start-line="52" start-column="18" end-line="52" end-column="18">
+                          <node name="list_non_indexed_element" start-line="52" start-column="18" end-line="52" end-column="18">
+                            <node name="expression" start-line="52" start-column="18" end-line="52" end-column="18">
+                              <node name="atom_expression" start-line="52" start-column="18" end-line="52" end-column="18">
+                                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="18" />
+                              </node>
+                            </node>
+                          </node>
+                        </node>
+                        <token text="," token-type="COMMA" token-type-id="16" channel="0" line="52" column="21" />
+                        <node name="list_element" start-line="52" start-column="23" end-line="52" end-column="23">
+                          <node name="list_non_indexed_element" start-line="52" start-column="23" end-line="52" end-column="23">
+                            <node name="expression" start-line="52" start-column="23" end-line="52" end-column="23">
+                              <node name="atom_expression" start-line="52" start-column="23" end-line="52" end-column="23">
+                                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="23" />
+                              </node>
+                            </node>
+                          </node>
+                        </node>
+                        <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="52" column="26" />
+                      </node>
+                    </node>
+                  </node>
+                </node>
+                <token text=")" token-type="RPAREN" token-type-id="11" channel="0" line="52" column="27" />
+              </node>
+            </node>
+            <node name="function_return_type" start-line="52" start-column="28" end-line="52" end-column="30">
+              <token text=":" token-type="COLON" token-type-id="17" channel="0" line="52" column="28" />
+              <node name="atom_expression" start-line="52" start-column="30" end-line="52" end-column="30">
+                <token text="i32" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="52" column="30" />
+              </node>
+            </node>
+            <token text="=&gt;" token-type="OP_ARROW" token-type-id="9" channel="0" line="52" column="34" />
+            <node name="function_body" start-line="52" start-column="37" end-line="54" end-column="0">
+              <token text="{" token-type="LBRACE" token-type-id="12" channel="0" line="52" column="37" />
+              <node name="block" start-line="53" start-column="4" end-line="53" end-column="4">
+                <node name="statement" start-line="53" start-column="4" end-line="53" end-column="4">
+                  <node name="expression" start-line="53" start-column="4" end-line="53" end-column="4">
+                    <node name="atom_expression" start-line="53" start-column="4" end-line="53" end-column="4">
+                      <token text="lst" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="53" column="4" />
+                    </node>
+                  </node>
+                </node>
+              </node>
+              <token text="}" token-type="RBRACE" token-type-id="13" channel="0" line="54" column="0" />
+            </node>
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="54" column="1" />
+    <node name="statement" start-line="56" start-column="0" end-line="56" end-column="5">
+      <token text="awa" token-type="ID_IDENTIFIER" token-type-id="19" channel="0" line="56" column="0" />
+      <token text=":=" token-type="OP_BIND" token-type-id="8" channel="0" line="56" column="3" />
+      <node name="expression" start-line="56" start-column="5" end-line="56" end-column="5">
+        <node name="atom_expression" start-line="56" start-column="5" end-line="56" end-column="5">
+          <node name="literface" start-line="56" start-column="5" end-line="56" end-column="5">
+            <token text="-100" token-type="INTEGER_CONSTANT" token-type-id="1" channel="0" line="56" column="5" />
+          </node>
+        </node>
+      </node>
+    </node>
+    <token text=";" token-type="SEMICOLON" token-type-id="18" channel="0" line="56" column="9" />
+  </node>
+  <token text="&lt;EOF&gt;" token-type="WS" token-type-id="-1" channel="0" line="56" column="10" />
+</node>

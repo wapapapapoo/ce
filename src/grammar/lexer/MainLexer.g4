@@ -4,6 +4,7 @@ import
     IntegerLexer,
     FloatLexer,
     BooleanNullLexer,
+    StringLexer,
     OperatorLexer,
     IdentifierLexer,
     CommentLexer,

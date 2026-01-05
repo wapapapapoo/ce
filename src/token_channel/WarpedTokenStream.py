@@ -13,54 +13,46 @@ class WarpedTokenStream(BufferedTokenStream):
         self.pending = []
 
     # ========= 核心 =========
-    # def fetch(self, n):
-    #     fetched = 0
-    #     while fetched < n:
-    #         if self.pending:
-    #             self.tokens.append(self.pending.pop(0))
-    #             fetched += 1
-    #             continue
-
-    #         t = self.tokenSource.nextToken()
-    #         self._update_mode(t)
-
-    #         if t.type == Token.EOF:
-    #             self.tokens.append(t)
-    #             fetched += 1
-    #             break
-
-    #         if t.type == self.lexer.OP_BIND and self._should_split():
-    #             self._split_bind(t)
-    #             fetched += 1
-    #             continue
-
-    #         self.tokens.append(t)
-    #         fetched += 1
-
-    #     return fetched
     def fetch(self, n):
-        # Python antlr4 使用 self.index 而不是 self.p
-        needed = self.index + n - len(self.tokens)
-        if needed <= 0:
+        if self.fetchedEOF:
             return 0
 
         fetched = 0
-        while fetched < needed:
+
+        while fetched < n:
+            # pending 优先
             if self.pending:
-                self.tokens.append(self.pending.pop(0))
+                t = self.pending.pop(0)
+            else:
+                t = self.tokenSource.nextToken()
+                self._update_mode(t)
+
+            # 丢弃hidden
+            if t.channel == Token.HIDDEN_CHANNEL:
+                continue
+
+            # 统一设置 tokenIndex
+            t.tokenIndex = len(self.tokens)
+
+            # EOF 处理
+            if t.type == Token.EOF:
+                self.tokens.append(t)
+                self.fetchedEOF = True
+                fetched += 1
+                break
+
+            # OP_BIND：在 fetch 阶段 split（这是现在唯一合法点）
+            if t.type == self.lexer.OP_BIND and self._should_split():
+                self._split_bind(t)
                 fetched += 1
                 continue
 
-            t = self.tokenSource.nextToken()
-            self._update_mode(t)
-
+            # 其他token入流
             self.tokens.append(t)
             fetched += 1
 
-            if t.type == Token.EOF:
-                break
-
         return fetched
+
 
     # ========= 状态机 =========
     def _update_mode(self, tok):

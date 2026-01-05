@@ -1,146 +1,56 @@
-a:=0;
-b:=1;
-c:=123_456;
-d:=0xdead_beef;
-e:=0b1010_0110;
-f:=0o755;
+// 基础绑定：字面量
+x := 42;
+y := true;
+z := "hello";
 
-g:=1.;
-h:=.5;
-i:=1.0;
-j:=1e10;
-k:=1.2e-3;
-l:=0x1.fp3;
-m:=nan;
-n:=inf;
-o:=infinity;
+// 非 indexed list
+nums := (1, 2, 3,);
 
-p:=true;
-q:=false;
-r:=null;
+// indexed list（作为 record / 参数）
+point := (x: 10, y: 20);
 
+// mixed list（你 grammar 允许）
+mixed := (1, a: 2, 3, b: 4);
 
-λ:=1;
-你好:=2;
-变量_一:=3;
-привет:=4;
-日本語:=5;
-한글:=6;
-
-＋:=(a,b)=>+(a,b);
-＞:=(x,y)=>>(x,y);
-＝:=(x,y)=>==(x,y);   // 注意：这里是函数名，不是 operator
-
-
-add:=+(1,2);
-sub:=-(10,3);
-mul:=*(6,7);
-div:=/(8,2);
-
-cmp1:=>(3,2);
-cmp2:=<(1,2);
-cmp3:===(1,1);
-cmp4:!= (1,2);
-cmp5:>= (2,2);
-cmp6:<= (1,1);
-
-bang:=!(true);
-ifcall:=if!(true,1,0);
-
-
-id:=(x:i32):i32=>x;
-pair:=(a:i32,b:i32):(i32,i32)=>(a,b);
-
-complex:=(x:array(i32,4),y:array(i32)):array(i32)=>x;
-
-
-blk:=():i32=>{
-    a:=1
-    b:=2;
-    c:=3
-    a;
+// 简单函数，无返回类型标注，无 annotation
+id := (v: T) => {
+    v
 };
 
-blk2:=():i32=>{a:=1;b:=2;c:=3;};
+// 带返回类型（atom_expression）
+// 注意：复杂类型必须加括号
+add := (a: i32, b: i32): i32 => {
+    a
+};
 
-closure:=[add,(1,2)];
-nested:=[[add,(1)],(2,3)];
-deep:=[ [ [ f , (x) ] ] , (y) ];
+// 带 annotation（atom_expression）
+// annotation 本身是表达式，但这里用 atom
+mul := (a: i32, b: i32): i32 => pure inline {
+        a
+    };
 
+// 函数作为值，嵌套函数
+makeAdder := (x: i32): () => { i32 } => {
+    (y: i32): i32 => {
+        x
+    }
+};
 
-sum:=(n:i32):i32=>
-    loop!(
-        (i:0,acc:0),
-        n,
-        (state)=>{
-            i:=get(state,0)
-            acc:=get(state,1)
-            (+(i,1),+(acc,i))
-        }
-    );
+// 直接调用（convenient_call）
+r1 := add(1, 2);
 
+// 调用函数值
+r2 := (makeAdder(10))(32);
 
-____:=0;
-____123:=1;
-λ_λ_λ:=2;
-＋＋＋:=(a,b,c)=>+(+(a,b),c);
+// function literal 直接作为 callee
+r3 := ((x: i32): i32 => { x })(5);
 
-f:=((((((((x))))))));
-g:=[[[[[[x]]]]]];
+// common_call 形式
+r4 := [add, (3, 4)];
 
+// list 作为普通表达式参与计算
+useList := (lst: (i32, i32)): i32 => {
+    lst
+};
 
-call1 := add(x: 1, y: 2);
-call2 := add(y: 2, x: 1);
-
-call3 := make(n: 10);
-call4 := reserve(arr: arr0, newlen: 16);
-
-call5 := array(type: i32, len: 4);
-call6 := array(type: i32);
-
-nested_named :=
-    fn(
-        a: add(x: 1, y: 2),
-        b: with_log(x: 10),
-        c: array(type: i32, len: 8)
-    );
-
-
-+ := (a: i32, b: i32): i32 => builtin_add(a, b);
-- := (a: i32, b: i32): i32 => builtin_sub(a, b);
-* := (a: i32, b: i32): i32 => builtin_mul(a, b);
-
-
-map! := (f, arr) => builtin_map(f, arr);
-foldl! := (f, init, arr) => builtin_foldl(f, init, arr);
-
-is-zero? := (x: i32): bool => ==(x, 0);
-not-null? := (x): bool => !=(x, null);
-
-
->>= := (a, b) => bind(a, b);
-<<= := (a, b) => shift(a, b);
-<> := (a, b) => concat(a, b);
-
-
-result1 := +(a: 1, b: 2);
-result2 := >(left: x, right: y);
-result3 := is-zero?(x: 0);
-result4 := map!(f: add, arr: arr0);
-
-
-!!!! := 1;
-???? := 2;
-++++ := 3;
----- := 4;
-
-λ+λ := 5;
-中文-函数! := 6;
-数据->处理 := 7;     // 注意：这里的 -> 是字符，不是 =>
-
->= := () => awa();
-
-assign:=if!(cond:= 123=(2,2),then:then,else:anything=else);
-
-awa :==123;
-(awa:=123u);
+awa:=-100;

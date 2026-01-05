@@ -25,8 +25,8 @@ INTEGER_CONSTANT
  */
 
 fragment DECIMAL_INTEGER
-    : '0'
-    | NONZERO_DIGIT DECIMAL_TAIL?
+    : SIGN? '0'
+    | SIGN? NONZERO_DIGIT DECIMAL_TAIL?
     ;
 
 fragment DECIMAL_TAIL
@@ -39,7 +39,7 @@ fragment DECIMAL_TAIL
  */
 
 fragment HEX_INTEGER
-    : HEX_PREFIX HEX_DIGITS
+    : SIGN? HEX_PREFIX HEX_DIGITS
     ;
 
 /*
@@ -49,8 +49,8 @@ fragment HEX_INTEGER
  */
 
 fragment OCTAL_INTEGER
-    : '0' OCTAL_TAIL?
-    | OCT_PREFIX OCT_DIGITS
+    : SIGN? '0' OCTAL_TAIL?
+    | SIGN? OCT_PREFIX OCT_DIGITS
     ;
 
 fragment OCTAL_TAIL
@@ -63,7 +63,7 @@ fragment OCTAL_TAIL
  */
 
 fragment BINARY_INTEGER
-    : BIN_PREFIX BIN_DIGITS
+    : SIGN? BIN_PREFIX BIN_DIGITS
     ;
 
 /*

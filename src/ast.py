@@ -1,5 +1,5 @@
 from typing import List
-from .ast_types import (
+from ast_types import (
     Program,
     Block,
     Stmt,

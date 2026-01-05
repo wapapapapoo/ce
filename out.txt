@@ -630,3 +630,46 @@ Program
                 Identifier
                   name:
                     '!pure'
+        Stmt
+          target:
+            None
+          expr:
+            Call
+              fn:
+                Identifier
+                  name:
+                    'awa'
+              arg:
+                Identifier
+                  name:
+                    'pwp'
+        Stmt
+          target:
+            None
+          expr:
+            Call
+              fn:
+                Identifier
+                  name:
+                    'awa'
+              arg:
+                List
+                  items:
+                    ListItem
+                      key:
+                        None
+                      value:
+                        Literal
+                          raw:
+                            '1'
+                          type:
+                            'integer'
+                    ListItem
+                      key:
+                        None
+                      value:
+                        Literal
+                          raw:
+                            '2'
+                          type:
+                            'integer'

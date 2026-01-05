@@ -25,9 +25,13 @@ def is_token(node: dict, token_type: str) -> bool:
 
 
 def first_rule(node: dict, name: str):
+    print(f"called first_rule {name}: ", end='')
     for c in node.get("children", []):
+        print(c.get("node-type"), c.get("rule"), is_rule(c, name), end='; ')
         if is_rule(c, name):
+            print("find.")
             return c
+    print("not find.")
     return None
 
 
@@ -106,7 +110,7 @@ def build_list_item(cst: dict) -> ListItem:
             value=value_expr,
         )
 
-    # non-indexed: expression（⚠️ 不要再剥 children）
+    # non-indexed: expression
     if is_rule(inner, "list_non_indexed_element"):
         expr = build_expr(inner["children"][0])
         return ListItem(value=expr, key=None)
@@ -131,16 +135,20 @@ def build_call(cst: dict) -> Call:
         fn = build_expr(children[0])
 
         arg_list = children[1]
+        assert is_rule(arg_list, 'function_arg_list')
+        arg_list_children = arg_list['children']
 
         # case 1: (expression)
-        expr_node = first_rule(arg_list, "expression")
-        if expr_node is not None:
+        if len(arg_list_children) == 3:
+            expr_node = arg_list_children[1]
+            assert is_rule(expr_node, 'expression')
             arg = build_expr(expr_node)
             return Call(fn=fn, arg=arg)
 
         # case 2: list
-        list_node = first_rule(arg_list, "list")
-        if list_node is not None:
+        elif len(arg_list_children) == 1:
+            list_node = arg_list_children[0]
+            assert is_rule(list_node, 'list')
             arg = build_list(list_node)
             return Call(fn=fn, arg=arg)
 
@@ -212,7 +220,10 @@ def build_function(cst: dict) -> Function:
         idx += 1
 
     # body
-    body = build_block(first_rule(children[idx], "block"))
+    body_wrap = children[idx]['children']
+    assert len(body_wrap) == 3
+    assert is_rule(body_wrap[1], 'block')
+    body = build_block(body_wrap[1])
 
     return Function(
         params=params_expr,
@@ -281,7 +292,10 @@ def build_expr(cst: dict) -> Expr:
 # ==================================================
 
 def build_program(cst: dict) -> Program:
-    block = first_rule(cst, "block")
+    block_list = cst.get('children')
+    assert len(block_list) == 2
+    block = block_list[0]
+    assert is_rule(block, 'block')
     return Program(build_block(block))
 
 
@@ -295,10 +309,12 @@ def build_block(cst: dict) -> Block:
 
 def build_stmt(cst: dict) -> Stmt:
     children = cst["children"]
+    assert len(children) == 1 or len(children) == 3
+    assert is_rule(children[len(children) - 1], 'expression')
 
     # ID OP_BIND expression
     if (
-        len(children) >= 3
+        len(children) == 3
         and is_token(children[0], "ID_IDENTIFIER")
         and is_token(children[1], "OP_BIND")
     ):
@@ -307,7 +323,7 @@ def build_stmt(cst: dict) -> Stmt:
         return Stmt(expr=value, target=target)
 
     # expression-only
-    expr = build_expr(first_rule(cst, "expression"))
+    expr = build_expr(children[len(children) - 1])
     return Stmt(expr=expr, target=None)
 
 

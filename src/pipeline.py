@@ -1,6 +1,6 @@
-from tasks.ast import build_ast_entry
-from tasks.cst import run_antlr
-from tasks.ast_dump import dump_ast
+from ast import build_ast_entry
+from cst import run_antlr
+from ast_dump import dump_ast
 
 import xml.etree.ElementTree as ET
 import argparse

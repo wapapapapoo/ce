@@ -1,4 +1,4 @@
-from token_channel.WarpedTokenStream import WarpedTokenStream
+from WarpedTokenStream import WarpedTokenStream
 from grammar.MainLexer import MainLexer
 from grammar.MainParser import MainParser
 

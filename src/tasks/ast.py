@@ -40,6 +40,8 @@ def build_literal(cst: dict) -> Literal:
     table = {
         "INTEGER_CONSTANT": "integer",
         "FLOAT_CONSTANT": "float",
+        "FLOAT_NAN": "float",
+        "FLOAT_INF": "float",
         "STRING_CONSTANT": "string",
         "BOOLEAN_CONSTANT": "boolean",
         "NULL_CONSTANT": "null",

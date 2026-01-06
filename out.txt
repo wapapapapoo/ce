@@ -7,41 +7,143 @@ Program
             Identifier
               name:
                 'x'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Literal
               raw:
                 '42'
               type:
                 'integer'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'y'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Literal
               raw:
                 'true'
               type:
                 'boolean'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'z'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
-            Literal
-              raw:
-                '"hello"'
-              type:
-                'string'
+            AstList
+              items:
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '104'
+                      type:
+                        'integer'
+                      parent:
+                        <recur>
+                  parent:
+                    <recur>
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '101'
+                      type:
+                        'integer'
+                      parent:
+                        <recur>
+                  parent:
+                    <recur>
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '108'
+                      type:
+                        'integer'
+                      parent:
+                        <recur>
+                  parent:
+                    <recur>
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '108'
+                      type:
+                        'integer'
+                      parent:
+                        <recur>
+                  parent:
+                    <recur>
+                ListItem
+                  key:
+                    None
+                  value:
+                    Literal
+                      raw:
+                        '111'
+                      type:
+                        'integer'
+                      parent:
+                        <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'nums'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
-            List
+            AstList
               items:
                 ListItem
                   key:
@@ -52,6 +154,14 @@ Program
                         '1'
                       type:
                         'integer'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
                 ListItem
                   key:
                     None
@@ -61,6 +171,14 @@ Program
                         '2'
                       type:
                         'integer'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
                 ListItem
                   key:
                     None
@@ -70,43 +188,95 @@ Program
                         '3'
                       type:
                         'integer'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'point'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
-            List
+            AstList
               items:
                 ListItem
                   key:
                     Identifier
                       name:
                         'x'
+                      parent:
+                        <recur>
                   value:
                     Literal
                       raw:
                         '10'
                       type:
                         'integer'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
                 ListItem
                   key:
                     Identifier
                       name:
                         'y'
+                      parent:
+                        <recur>
                   value:
                     Literal
                       raw:
                         '20'
                       type:
                         'integer'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'mixed'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
-            List
+            AstList
               items:
                 ListItem
                   key:
@@ -117,17 +287,35 @@ Program
                         '1'
                       type:
                         'integer'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
                 ListItem
                   key:
                     Identifier
                       name:
                         'a'
+                      parent:
+                        <recur>
                   value:
                     Literal
                       raw:
                         '2'
                       type:
                         'integer'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
                 ListItem
                   key:
                     None
@@ -137,36 +325,80 @@ Program
                         '3'
                       type:
                         'integer'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
                 ListItem
                   key:
                     Identifier
                       name:
                         'b'
+                      parent:
+                        <recur>
                   value:
                     Literal
                       raw:
                         '4'
                       type:
                         'integer'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'id'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Function
               params:
-                List
+                AstList
                   items:
                     ListItem
                       key:
                         Identifier
                           name:
                             'v'
+                          parent:
+                            <recur>
                       value:
                         Identifier
                           name:
                             'T'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               body:
                 Block
                   stmts:
@@ -177,38 +409,86 @@ Program
                         Identifier
                           name:
                             'v'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ret:
                 None
               ann:
                 []
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'add'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Function
               params:
-                List
+                AstList
                   items:
                     ListItem
                       key:
                         Identifier
                           name:
                             'a'
+                          parent:
+                            <recur>
                       value:
                         Identifier
                           name:
                             'i32'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                     ListItem
                       key:
                         Identifier
                           name:
                             'b'
+                          parent:
+                            <recur>
                       value:
                         Identifier
                           name:
                             'i32'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               body:
                 Block
                   stmts:
@@ -219,40 +499,92 @@ Program
                         Identifier
                           name:
                             'a'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ret:
                 Identifier
                   name:
                     'i32'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ann:
                 []
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'mul'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Function
               params:
-                List
+                AstList
                   items:
                     ListItem
                       key:
                         Identifier
                           name:
                             'a'
+                          parent:
+                            <recur>
                       value:
                         Identifier
                           name:
                             'i32'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                     ListItem
                       key:
                         Identifier
                           name:
                             'b'
+                          parent:
+                            <recur>
                       value:
                         Identifier
                           name:
                             'i32'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               body:
                 Block
                   stmts:
@@ -263,36 +595,86 @@ Program
                         Identifier
                           name:
                             'a'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ret:
                 Identifier
                   name:
                     'i32'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ann:
                 Identifier
                   name:
                     'pure'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
                 Identifier
                   name:
                     'inline'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'makeAdder'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Function
               params:
-                List
+                AstList
                   items:
                     ListItem
                       key:
                         Identifier
                           name:
                             'x'
+                          parent:
+                            <recur>
                       value:
                         Identifier
                           name:
                             'i32'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               body:
                 Block
                   stmts:
@@ -302,17 +684,31 @@ Program
                       expr:
                         Function
                           params:
-                            List
+                            AstList
                               items:
                                 ListItem
                                   key:
                                     Identifier
                                       name:
                                         'y'
+                                      parent:
+                                        <recur>
                                   value:
                                     Identifier
                                       name:
                                         'i32'
+                                      cstPointer:
+                                        <recur>
+                                      parent:
+                                        <recur>
+                                  cstPointer:
+                                    <recur>
+                                  parent:
+                                    <recur>
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
                           body:
                             Block
                               stmts:
@@ -323,18 +719,50 @@ Program
                                     Identifier
                                       name:
                                         'x'
+                                      cstPointer:
+                                        <recur>
+                                      parent:
+                                        <recur>
+                                  cstPointer:
+                                    <recur>
+                                  parent:
+                                    <recur>
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
                           ret:
                             Identifier
                               name:
                                 'i32'
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
                           ann:
                             []
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ret:
                 Function
                   params:
-                    List
+                    AstList
                       items:
                         []
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                   body:
                     Block
                       stmts:
@@ -345,25 +773,57 @@ Program
                             Identifier
                               name:
                                 'i32'
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                   ret:
                     None
                   ann:
                     []
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ann:
                 []
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'r1'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Call
               fn:
                 Identifier
                   name:
                     'add'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               arg:
-                List
+                AstList
                   items:
                     ListItem
                       key:
@@ -374,6 +834,14 @@ Program
                             '1'
                           type:
                             'integer'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                     ListItem
                       key:
                         None
@@ -383,11 +851,35 @@ Program
                             '2'
                           type:
                             'integer'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'r2'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Call
               fn:
@@ -396,39 +888,109 @@ Program
                     Identifier
                       name:
                         'makeAdder'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                   arg:
-                    Literal
-                      raw:
-                        '10'
-                      type:
-                        'integer'
+                    AstList
+                      items:
+                        ListItem
+                          key:
+                            None
+                          value:
+                            Literal
+                              raw:
+                                '10'
+                              type:
+                                'integer'
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
+                          parent:
+                            <recur>
+                          cstPointer:
+                            <recur>
+                      parent:
+                        <recur>
+                      cstPointer:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               arg:
-                Literal
-                  raw:
-                    '32'
-                  type:
-                    'integer'
+                AstList
+                  items:
+                    ListItem
+                      key:
+                        None
+                      value:
+                        Literal
+                          raw:
+                            '32'
+                          type:
+                            'integer'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      parent:
+                        <recur>
+                      cstPointer:
+                        <recur>
+                  parent:
+                    <recur>
+                  cstPointer:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'r3'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Call
               fn:
                 Function
                   params:
-                    List
+                    AstList
                       items:
                         ListItem
                           key:
                             Identifier
                               name:
                                 'x'
+                              parent:
+                                <recur>
                           value:
                             Identifier
                               name:
                                 'i32'
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                   body:
                     Block
                       stmts:
@@ -439,31 +1001,85 @@ Program
                             Identifier
                               name:
                                 'x'
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                   ret:
                     Identifier
                       name:
                         'i32'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                   ann:
                     []
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               arg:
-                Literal
-                  raw:
-                    '5'
-                  type:
-                    'integer'
+                AstList
+                  items:
+                    ListItem
+                      key:
+                        None
+                      value:
+                        Literal
+                          raw:
+                            '5'
+                          type:
+                            'integer'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      parent:
+                        <recur>
+                      cstPointer:
+                        <recur>
+                  parent:
+                    <recur>
+                  cstPointer:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'r4'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Call
               fn:
                 Identifier
                   name:
                     'add'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               arg:
-                List
+                AstList
                   items:
                     ListItem
                       key:
@@ -474,6 +1090,14 @@ Program
                             '3'
                           type:
                             'integer'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                     ListItem
                       key:
                         None
@@ -483,23 +1107,49 @@ Program
                             '4'
                           type:
                             'integer'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'useList'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Function
               params:
-                List
+                AstList
                   items:
                     ListItem
                       key:
                         Identifier
                           name:
                             'lst'
+                          parent:
+                            <recur>
                       value:
-                        List
+                        AstList
                           items:
                             ListItem
                               key:
@@ -508,6 +1158,14 @@ Program
                                 Identifier
                                   name:
                                     'i32'
+                                  cstPointer:
+                                    <recur>
+                                  parent:
+                                    <recur>
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
                             ListItem
                               key:
                                 None
@@ -515,6 +1173,26 @@ Program
                                 Identifier
                                   name:
                                     'i32'
+                                  cstPointer:
+                                    <recur>
+                                  parent:
+                                    <recur>
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               body:
                 Block
                   stmts:
@@ -525,52 +1203,114 @@ Program
                         Identifier
                           name:
                             'lst'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ret:
                 Identifier
                   name:
                     'i32'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ann:
                 []
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'awa'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Literal
               raw:
                 '-100'
               type:
                 'integer'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'args'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Call
               fn:
                 Identifier
                   name:
                     '*'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               arg:
-                List
+                AstList
                   items:
                     ListItem
                       key:
                         None
                       value:
-                        List
+                        AstList
                           items:
                             ListItem
                               key:
                                 Identifier
                                   name:
                                     'arg'
+                                  parent:
+                                    <recur>
                               value:
                                 Identifier
                                   name:
                                     'i32'
+                                  cstPointer:
+                                    <recur>
+                                  parent:
+                                    <recur>
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                     ListItem
                       key:
                         None
@@ -580,17 +1320,45 @@ Program
                             '5'
                           type:
                             'integer'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             Identifier
               name:
                 'fn'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
           expr:
             Function
               params:
                 Identifier
                   name:
                     'args'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               body:
                 Block
                   stmts:
@@ -603,8 +1371,12 @@ Program
                             Identifier
                               name:
                                 'get!'
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
                           arg:
-                            List
+                            AstList
                               items:
                                 ListItem
                                   key:
@@ -613,6 +1385,14 @@ Program
                                     Identifier
                                       name:
                                         'arg'
+                                      cstPointer:
+                                        <recur>
+                                      parent:
+                                        <recur>
+                                  cstPointer:
+                                    <recur>
+                                  parent:
+                                    <recur>
                                 ListItem
                                   key:
                                     None
@@ -622,14 +1402,54 @@ Program
                                         '0'
                                       type:
                                         'integer'
+                                      cstPointer:
+                                        <recur>
+                                      parent:
+                                        <recur>
+                                  cstPointer:
+                                    <recur>
+                                  parent:
+                                    <recur>
+                              cstPointer:
+                                <recur>
+                              parent:
+                                <recur>
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ret:
                 Identifier
                   name:
                     'i32'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               ann:
                 Identifier
                   name:
                     '!pure'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             None
@@ -639,10 +1459,26 @@ Program
                 Identifier
                   name:
                     'awa'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               arg:
                 Identifier
                   name:
                     'pwp'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
         Stmt
           target:
             None
@@ -652,8 +1488,12 @@ Program
                 Identifier
                   name:
                     'awa'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
               arg:
-                List
+                AstList
                   items:
                     ListItem
                       key:
@@ -664,6 +1504,14 @@ Program
                             '1'
                           type:
                             'integer'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
                     ListItem
                       key:
                         None
@@ -673,3 +1521,150 @@ Program
                             '2'
                           type:
                             'integer'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
+        Stmt
+          target:
+            Identifier
+              name:
+                'type'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          expr:
+            AstList
+              items:
+                ListItem
+                  key:
+                    Identifier
+                      name:
+                        'chrs'
+                      parent:
+                        <recur>
+                  value:
+                    Identifier
+                      name:
+                        '...'
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
+        Stmt
+          target:
+            Identifier
+              name:
+                'print'
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          expr:
+            Function
+              params:
+                AstList
+                  items:
+                    ListItem
+                      key:
+                        Identifier
+                          name:
+                            'len'
+                          parent:
+                            <recur>
+                      value:
+                        Identifier
+                          name:
+                            'i32'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                    ListItem
+                      key:
+                        Identifier
+                          name:
+                            'str'
+                          parent:
+                            <recur>
+                      value:
+                        Identifier
+                          name:
+                            'type'
+                          cstPointer:
+                            <recur>
+                          parent:
+                            <recur>
+                      cstPointer:
+                        <recur>
+                      parent:
+                        <recur>
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              body:
+                Block
+                  stmts:
+                    []
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              ret:
+                None
+              ann:
+                Identifier
+                  name:
+                    '!effect'
+                  cstPointer:
+                    <recur>
+                  parent:
+                    <recur>
+              cstPointer:
+                <recur>
+              parent:
+                <recur>
+          cstPointer:
+            <recur>
+          parent:
+            <recur>
+      cstPointer:
+        <recur>
+      parent:
+        <recur>
+  cstPointer:
+    <recur>

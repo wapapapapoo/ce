@@ -6,11 +6,47 @@ from ast_types import (
     Expr,
     Identifier,
     Literal,
-    List as AstList,
+    AstList,
     ListItem,
     Function,
     Call,
 )
+
+import ast
+
+def parse_string_literal(token: str) -> bytes:
+    """
+    token: lexer 返回的完整 string literal（包含引号）
+    return: UTF-8 encoded bytes
+    """
+
+    if len(token) < 2:
+        raise ValueError("invalid string literal")
+
+    quote = token[0]
+
+    # backtick raw string
+    if quote == '`':
+        if token[-1] != '`':
+            raise ValueError("unterminated backtick string")
+        raw = token[1:-1]
+        return raw.encode("utf-8")
+
+    # single / double quoted -> Python-style escapes
+    if quote in ("'", '"'):
+        try:
+            # ast.literal_eval 严格按 Python 字符串规则解析
+            s = ast.literal_eval(token)
+        except Exception as e:
+            raise ValueError(f"invalid string literal: {e}")
+
+        if not isinstance(s, str):
+            raise ValueError("not a string literal")
+
+        return s.encode("utf-8")
+
+    raise ValueError(f"unknown string delimiter: {quote}")
+
 
 # ==================================================
 # CST helpers
@@ -53,7 +89,21 @@ def build_literal(cst: dict) -> Literal:
     ty = table.get(tok["token-type"])
     if ty is None:
         raise ValueError(f"unknown literal token: {tok['token-type']}")
-    return Literal(raw=tok["text"], type=ty)
+    if ty == 'string':
+        crlist: list[ListItem] = []
+        for ch in parse_string_literal(tok.get('text')):
+            kpt = Literal(raw=str(ch), type='integer')
+            wrap = ListItem(kpt, key=None)
+            kpt.setParent(wrap)
+            crlist.append(wrap)
+        literal_ast_node = AstList(items=crlist)
+        for wrap in crlist:
+            wrap.setParent(literal_ast_node)
+        literal_ast_node.setCstPointer(cst)
+        return literal_ast_node
+    literal_ast_node = Literal(raw=tok["text"], type=ty)
+    literal_ast_node.setCstPointer(cst)
+    return literal_ast_node
 
 
 # ==================================================
@@ -69,7 +119,7 @@ def build_list(cst: dict) -> AstList:
         and is_token(children[0], "LPAREN")
         and is_token(children[1], "RPAREN")
     ):
-        return AstList([])
+        return AstList([]).setCstPointer(cst)
 
     # (id: expr)
     if (
@@ -83,14 +133,19 @@ def build_list(cst: dict) -> AstList:
             "rule": "list_element",
             "children": [children[1]],
         })
-        return AstList([item])
+        list_ast_node = AstList([item]).setCstPointer(cst)
+        item.setParent(list_ast_node)
+        return list_ast_node
 
     # (list_element, ...)
     items: List[ListItem] = []
     for child in children:
         if is_rule(child, "list_element"):
-            items.append(build_list_item(child))
-    return AstList(items)
+            items.append(build_list_item(child).setCstPointer(child))
+    list_ast_node = AstList(items)
+    for child in items:
+        child.setParent(list_ast_node)
+    return list_ast_node.setCstPointer(cst)
 
 
 
@@ -105,15 +160,22 @@ def build_list_item(cst: dict) -> ListItem:
     if is_rule(inner, "list_indexed_element"):
         key_tok = inner["children"][0]          # ID_IDENTIFIER
         value_expr = build_expr(inner["children"][2])
-        return ListItem(
-            key=Identifier(key_tok["text"]),
+        key = build_identifier(key_tok["text"])
+        li = ListItem(
+            key=key,
             value=value_expr,
         )
+        value_expr.setParent(li)
+        key.setParent(li)
+        return li.setCstPointer(cst)
 
     # non-indexed: expression
     if is_rule(inner, "list_non_indexed_element"):
         expr = build_expr(inner["children"][0])
-        return ListItem(value=expr, key=None)
+        li = ListItem(value=expr, key=None)
+        expr.setParent(li)
+        li.setCstPointer(cst)
+        return li
 
     raise RuntimeError("invalid list_element structure")
 
@@ -133,6 +195,7 @@ def build_call(cst: dict) -> Call:
     # fn(arg)
     if is_rule(children[0], "atom_expression"):
         fn = build_expr(children[0])
+        fn.setCstPointer(children[0])
 
         arg_list = children[1]
         assert is_rule(arg_list, 'function_arg_list')
@@ -143,23 +206,42 @@ def build_call(cst: dict) -> Call:
             expr_node = arg_list_children[1]
             assert is_rule(expr_node, 'expression')
             arg = build_expr(expr_node)
-            return Call(fn=fn, arg=arg)
+            arg_li = ListItem(value=arg)
+            arg_list = AstList([arg_li])
+            call = Call(fn=fn, arg=arg_list).setCstPointer(cst)
+            arg.setParent(arg_li)
+            arg_li.setParent(arg_list)
+            arg_list.setParent(call)
+            arg.setCstPointer(arg_list_children[1])
+            arg_li.setCstPointer(arg_list_children[1])
+            arg_list.setCstPointer(arg_list_children[0])
+            fn.setParent(call)
+            assert isinstance(call.arg, AstList)
+            return call
 
         # case 2: list
         elif len(arg_list_children) == 1:
             list_node = arg_list_children[0]
             assert is_rule(list_node, 'list')
-            arg = build_list(list_node)
-            return Call(fn=fn, arg=arg)
+            arg = build_list(list_node).setCstPointer(list_node)
+            call = Call(fn=fn, arg=arg).setCstPointer(cst)
+            arg.setParent(call)
+            fn.setParent(call)
+            assert isinstance(call.arg, AstList)
+            return call
 
         raise RuntimeError(
             "function_arg_list contains neither expression nor list"
         )
 
     # [expr, expr] common_call
-    fn = build_expr(children[1])
-    arg = build_expr(children[3])
-    return Call(fn=fn, arg=arg)
+    fn = build_expr(children[1]).setCstPointer(children[1])
+    arg = build_expr(children[3]).setCstPointer(children[3])
+    call = Call(fn=fn, arg=arg).setCstPointer(cst)
+    fn.setParent(call)
+    arg.setParent(call)
+    assert isinstance(call.arg, Expr)
+    return call
 
 
 # ==================================================
@@ -176,11 +258,11 @@ def build_function_params(cst: dict) -> Expr:
 
     # case 1: ID_IDENTIFIER
     if len(children) == 1 and is_token(children[0], "ID_IDENTIFIER"):
-        return Identifier(children[0]["text"])
+        return build_identifier(children[0]["text"]).setCstPointer(cst)
 
     # case 2: list
     if len(children) == 1 and is_rule(children[0], "list"):
-        return build_list(children[0])
+        return build_list(children[0]).setCstPointer(children[0])
 
     # case 3: ( expression )
     if (
@@ -189,7 +271,7 @@ def build_function_params(cst: dict) -> Expr:
         and is_rule(children[1], "expression")
         and is_token(children[2], "RPAREN")
     ):
-        return build_expr(children[1])
+        return build_expr(children[1]).setCstPointer(children[1])
 
     raise RuntimeError(
         "invalid function_params structure, grammar violated"
@@ -207,7 +289,7 @@ def build_function(cst: dict) -> Function:
     # return type
     ret = None
     if idx < len(children) and is_rule(children[idx], "function_return_type"):
-        ret = build_expr(children[idx]["children"][1])
+        ret = build_expr(children[idx]["children"][1]).setCstPointer(children[idx]["children"][1])
         idx += 1
 
     # OP_ARROW
@@ -216,21 +298,28 @@ def build_function(cst: dict) -> Function:
     # annotations（atom_expression*，不是 list）
     ann: List[Expr] = []
     while idx < len(children) and is_rule(children[idx], "function_annotations"):
-        ann.append(build_expr(children[idx]["children"][0]))
+        ann.append(build_expr(children[idx]["children"][0]).setCstPointer(children[idx]["children"][0]))
         idx += 1
 
     # body
     body_wrap = children[idx]['children']
     assert len(body_wrap) == 3
     assert is_rule(body_wrap[1], 'block')
-    body = build_block(body_wrap[1])
+    body = build_block(body_wrap[1]).setCstPointer(body_wrap[1])
 
-    return Function(
+    fn = Function(
         params=params_expr,
         body=body,
         ret=ret,
         ann=ann,
-    )
+    ).setCstPointer(cst)
+    params_expr.setParent(fn)
+    body.setParent(fn)
+    if ret is not None:
+        ret.setParent(fn)
+    for a in ann:
+        a.setParent(fn)
+    return fn
 
 
 # ==================================================
@@ -242,7 +331,7 @@ def build_expr(cst: dict) -> Expr:
     if cst["node-type"] == "token":
         # 语义 token
         if cst["token-type"] == "ID_IDENTIFIER":
-            return Identifier(cst["text"])
+            return build_identifier(cst["text"]).setCstPointer(cst)
 
         # 结构性 token：直接忽略，让上层 rule 负责结构
         if cst["token-type"] in {
@@ -266,21 +355,21 @@ def build_expr(cst: dict) -> Expr:
             len(cst["children"]) == 3
             and is_token(cst["children"][0], "LPAREN")
         ):
-            return build_expr(cst["children"][1])
+            return build_expr(cst["children"][1]).setCstPointer(cst["children"][1])
 
-        return build_expr(cst["children"][0])
+        return build_expr(cst["children"][0]).setCstPointer(cst["children"][0])
 
     if is_rule(cst, "literface"):
-        return build_literal(cst)
+        return build_literal(cst).setCstPointer(cst)
 
     if is_rule(cst, "list"):
-        return build_list(cst)
+        return build_list(cst).setCstPointer(cst)
 
     if is_rule(cst, "function"):
-        return build_function(cst)
+        return build_function(cst).setCstPointer(cst)
 
     if is_rule(cst, "function_call"):
-        return build_call(cst)
+        return build_call(cst).setCstPointer(cst)
 
     raise NotImplementedError(
         f"unhandled expr rule: {cst.get('rule')} / node-type={cst.get('node-type')}"
@@ -296,16 +385,24 @@ def build_program(cst: dict) -> Program:
     assert len(block_list) == 2
     block = block_list[0]
     assert is_rule(block, 'block')
-    return Program(build_block(block))
+    block_ast_node = build_block(block)
+    block_ast_node.setCstPointer(block)
+    program_ast_node = Program(block_ast_node)
+    block_ast_node.setParent(program_ast_node)
+    return program_ast_node
 
 
 def build_block(cst: dict) -> Block:
     stmts: List[Stmt] = []
     for child in cst["children"]:
         if is_rule(child, "statement"):
-            stmts.append(build_stmt(child))
-    return Block(stmts)
-
+            stmt_ast_node = build_stmt(child)
+            stmt_ast_node.setCstPointer(child)
+            stmts.append(stmt_ast_node)
+    block_ast_node = Block(stmts)
+    for stmt in block_ast_node.stmts:
+        stmt.setParent(block_ast_node)
+    return block_ast_node
 
 def build_stmt(cst: dict) -> Stmt:
     children = cst["children"]
@@ -318,18 +415,30 @@ def build_stmt(cst: dict) -> Stmt:
         and is_token(children[0], "ID_IDENTIFIER")
         and is_token(children[1], "OP_BIND")
     ):
-        target = Identifier(children[0]["text"])
+        target = build_identifier(children[0]["text"])
+        target.setCstPointer(children[0])
         value = build_expr(children[2])
-        return Stmt(expr=value, target=target)
+        value.setCstPointer(children[2])
+        stmt_ast_node = Stmt(expr=value, target=target)
+        target.setParent(stmt_ast_node)
+        value.setParent(stmt_ast_node)
+        return stmt_ast_node
 
     # expression-only
     expr = build_expr(children[len(children) - 1])
-    return Stmt(expr=expr, target=None)
+    expr.setCstPointer(children[len(children) - 1])
+    stmt_ast_node = Stmt(expr=expr, target=None)
+    expr.setParent(stmt_ast_node)
+    return stmt_ast_node
 
+def build_identifier(name: str):
+    return Identifier(name)
 
 # ==================================================
 # Entry
 # ==================================================
 
 def build_ast_entry(cst: dict) -> Program:
-    return build_program(cst)
+    program_ast_node = build_program(cst)
+    program_ast_node.setCstPointer(cst)
+    return program_ast_node

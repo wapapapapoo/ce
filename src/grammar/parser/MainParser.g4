@@ -9,7 +9,7 @@ program
     ;
 
 block
-    : (statement (SEMICOLON statement)* SEMICOLON?)
+    : (statement (SEMICOLON statement)* SEMICOLON?)?
     ;
 
 statement

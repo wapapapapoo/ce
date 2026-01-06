@@ -1,4 +1,4 @@
-from ast import build_ast_entry
+from ast_convert import build_ast_entry
 from cst import run_antlr
 from ast_dump import dump_ast
 

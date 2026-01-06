@@ -15,6 +15,9 @@ def dump_ast(node: Any, level: int = 0):
     # 约定：AST 节点只包含简单字段
     for name, value in vars(node).items():
         print(pad + INDENT + f"{name}:")
+        if (name in { 'parent', 'cstPointer' }):
+            print(pad + INDENT * 2 + '<recur>')
+            continue
 
         if isinstance(value, list):
             if not value:

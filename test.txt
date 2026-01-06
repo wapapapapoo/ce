@@ -61,3 +61,6 @@ fn := args: i32 => !pure { get!(arg, 0) };
 [awa, pwp];
 
 [awa, (1, 2)];
+
+type := (chrs: ...);
+print := (len: i32, str: type) => !effect { };

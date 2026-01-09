@@ -1,4 +1,4 @@
-from typing import List
+from typing import Any, List
 from ast_types import (
     Program,
     Block,
@@ -13,6 +13,8 @@ from ast_types import (
 )
 
 import ast
+
+from intr import INTRINSIC
 
 def parse_string_literal(token: str) -> bytes:
     """
@@ -58,17 +60,6 @@ def is_rule(node: dict, name: str) -> bool:
 
 def is_token(node: dict, token_type: str) -> bool:
     return node is not None and node.get("node-type") == "token" and node.get("token-type") == token_type
-
-
-def first_rule(node: dict, name: str):
-    print(f"called first_rule {name}: ", end='')
-    for c in node.get("children", []):
-        print(c.get("node-type"), c.get("rule"), is_rule(c, name), end='; ')
-        if is_rule(c, name):
-            print("find.")
-            return c
-    print("not find.")
-    return None
 
 
 # ==================================================
@@ -141,7 +132,7 @@ def build_list(cst: dict) -> AstList:
     items: List[ListItem] = []
     for child in children:
         if is_rule(child, "list_element"):
-            items.append(build_list_item(child).setCstPointer(child))
+            items.append(build_list_item(child))
     list_ast_node = AstList(items)
     for child in items:
         child.setParent(list_ast_node)
@@ -167,6 +158,7 @@ def build_list_item(cst: dict) -> ListItem:
         )
         value_expr.setParent(li)
         key.setParent(li)
+        key.setCstPointer(key_tok)
         return li.setCstPointer(cst)
 
     # non-indexed: expression
@@ -195,7 +187,6 @@ def build_call(cst: dict) -> Call:
     # fn(arg)
     if is_rule(children[0], "atom_expression"):
         fn = build_expr(children[0])
-        fn.setCstPointer(children[0])
 
         arg_list = children[1]
         assert is_rule(arg_list, 'function_arg_list')
@@ -212,7 +203,6 @@ def build_call(cst: dict) -> Call:
             arg.setParent(arg_li)
             arg_li.setParent(arg_list)
             arg_list.setParent(call)
-            arg.setCstPointer(arg_list_children[1])
             arg_li.setCstPointer(arg_list_children[1])
             arg_list.setCstPointer(arg_list_children[0])
             fn.setParent(call)
@@ -223,7 +213,7 @@ def build_call(cst: dict) -> Call:
         elif len(arg_list_children) == 1:
             list_node = arg_list_children[0]
             assert is_rule(list_node, 'list')
-            arg = build_list(list_node).setCstPointer(list_node)
+            arg = build_list(list_node)
             call = Call(fn=fn, arg=arg).setCstPointer(cst)
             arg.setParent(call)
             fn.setParent(call)
@@ -235,8 +225,8 @@ def build_call(cst: dict) -> Call:
         )
 
     # [expr, expr] common_call
-    fn = build_expr(children[1]).setCstPointer(children[1])
-    arg = build_expr(children[3]).setCstPointer(children[3])
+    fn = build_expr(children[1])
+    arg = build_expr(children[3])
     call = Call(fn=fn, arg=arg).setCstPointer(cst)
     fn.setParent(call)
     arg.setParent(call)
@@ -258,11 +248,11 @@ def build_function_params(cst: dict) -> Expr:
 
     # case 1: ID_IDENTIFIER
     if len(children) == 1 and is_token(children[0], "ID_IDENTIFIER"):
-        return build_identifier(children[0]["text"]).setCstPointer(cst)
+        return build_identifier(children[0]["text"]).setCstPointer(children[0])
 
     # case 2: list
     if len(children) == 1 and is_rule(children[0], "list"):
-        return build_list(children[0]).setCstPointer(children[0])
+        return build_list(children[0])
 
     # case 3: ( expression )
     if (
@@ -289,7 +279,7 @@ def build_function(cst: dict) -> Function:
     # return type
     ret = None
     if idx < len(children) and is_rule(children[idx], "function_return_type"):
-        ret = build_expr(children[idx]["children"][1]).setCstPointer(children[idx]["children"][1])
+        ret = build_expr(children[idx]["children"][1])
         idx += 1
 
     # OP_ARROW
@@ -298,7 +288,7 @@ def build_function(cst: dict) -> Function:
     # annotations（atom_expression*，不是 list）
     ann: List[Expr] = []
     while idx < len(children) and is_rule(children[idx], "function_annotations"):
-        ann.append(build_expr(children[idx]["children"][0]).setCstPointer(children[idx]["children"][0]))
+        ann.append(build_expr(children[idx]["children"][0]))
         idx += 1
 
     # body
@@ -355,21 +345,21 @@ def build_expr(cst: dict) -> Expr:
             len(cst["children"]) == 3
             and is_token(cst["children"][0], "LPAREN")
         ):
-            return build_expr(cst["children"][1]).setCstPointer(cst["children"][1])
+            return build_expr(cst["children"][1])
 
-        return build_expr(cst["children"][0]).setCstPointer(cst["children"][0])
+        return build_expr(cst["children"][0])
 
     if is_rule(cst, "literface"):
-        return build_literal(cst).setCstPointer(cst)
+        return build_literal(cst)
 
     if is_rule(cst, "list"):
-        return build_list(cst).setCstPointer(cst)
+        return build_list(cst)
 
     if is_rule(cst, "function"):
-        return build_function(cst).setCstPointer(cst)
+        return build_function(cst)
 
     if is_rule(cst, "function_call"):
-        return build_call(cst).setCstPointer(cst)
+        return build_call(cst)
 
     raise NotImplementedError(
         f"unhandled expr rule: {cst.get('rule')} / node-type={cst.get('node-type')}"
@@ -418,7 +408,6 @@ def build_stmt(cst: dict) -> Stmt:
         target = build_identifier(children[0]["text"])
         target.setCstPointer(children[0])
         value = build_expr(children[2])
-        value.setCstPointer(children[2])
         stmt_ast_node = Stmt(expr=value, target=target)
         target.setParent(stmt_ast_node)
         value.setParent(stmt_ast_node)
@@ -426,7 +415,6 @@ def build_stmt(cst: dict) -> Stmt:
 
     # expression-only
     expr = build_expr(children[len(children) - 1])
-    expr.setCstPointer(children[len(children) - 1])
     stmt_ast_node = Stmt(expr=expr, target=None)
     expr.setParent(stmt_ast_node)
     return stmt_ast_node
@@ -438,7 +426,41 @@ def build_identifier(name: str):
 # Entry
 # ==================================================
 
-def build_ast_entry(cst: dict) -> Program:
+def build_ast(cst: dict) -> Program:
     program_ast_node = build_program(cst)
     program_ast_node.setCstPointer(cst)
     return program_ast_node
+
+def dump_ast(node: Any, level: int = 0, INDENT = "  "):
+    pad = INDENT * level
+
+    if node is None:
+        print(pad + "None")
+        return
+
+    cls = node.__class__.__name__
+    print(pad + cls)
+
+    # 约定：AST 节点只包含简单字段
+    for name, value in vars(node).items():
+        print(pad + INDENT + f"{name}:")
+        if (name in { 'parent', 'cstPointer' }):
+            print(pad + INDENT * 2 + '<recur>')
+            continue
+
+        if isinstance(value, list):
+            if not value:
+                print(pad + INDENT * 2 + "[]")
+            else:
+                for item in value:
+                    dump_ast(item, level + 2)
+
+        elif _is_ast_node(value):
+            dump_ast(value, level + 2)
+
+        else:
+            print(pad + INDENT * 2 + repr(value))
+
+
+def _is_ast_node(obj: Any) -> bool:
+    return hasattr(obj, "__class__") and hasattr(obj, "__dict__")

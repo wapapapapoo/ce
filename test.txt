@@ -1,20 +1,28 @@
-// 基础绑定：字面量
+pwp := get!(awa, a);
+
+awa := (a: 1, b: 2);
+
+/*// 基础绑定：字面量
 x := 42;
 y := true;
 z := "hello";
 
-// 非 indexed list
-nums := (1, 2, 3,);
+nihao := (): unit => {
 
-// indexed list（作为 record / 参数）
-point := (x: 10, y: 20);
+    // 非 indexed list
+    nums := (1, 2, 3,);
 
-// mixed list（你 grammar 允许）
-mixed := (1, a: 2, 3, b: 4);
+    // indexed list（作为 record / 参数）
+    point := (x: 10, y: 20);
 
-// 简单函数，无返回类型标注，无 annotation
-id := (v: T) => {
-    v
+    // mixed list（你 grammar 允许）
+    mixed := (1, a: 2, 3, b: 4);
+
+    // 简单函数，无返回类型标注，无 annotation
+    id := (v: T) => {
+        v
+    };
+
 };
 
 // 带返回类型（atom_expression）
@@ -34,7 +42,7 @@ makeAdder := (x: i32): () => { i32 } => {
     (y: i32): i32 => {
         x
     }
-};
+}; // 显然它是错的，但是parser允许
 
 // 直接调用（convenient_call）
 r1 := add(1, 2);
@@ -64,3 +72,10 @@ fn := args: i32 => !pure { get!(arg, 0) };
 
 type := (chrs: ...);
 print := (len: i32, str: type) => !effect { };
+
+add := (a: i32, b: i32): i32 => {
+    +(a, b);
+};
+
+awa := add(2, 2);
+*/

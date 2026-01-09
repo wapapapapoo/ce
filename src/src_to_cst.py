@@ -3,9 +3,40 @@ from grammar.MainLexer import MainLexer
 from grammar.MainParser import MainParser
 
 from antlr4 import InputStream, ParserRuleContext, TerminalNode
+from antlr4.error.Errors import CancellationException
 import xml.etree.ElementTree as ET
-import argparse
 import json
+import logging
+from wcwidth import wcwidth
+
+def visual_width(s: str) -> int:
+    w = 0
+    for ch in s:
+        cw = wcwidth(ch)
+        if cw > 0:
+            w += cw
+    return w
+
+
+def print_error(input_text: str, token):
+    lines = input_text.splitlines()
+    line_text = lines[token.line - 1]
+
+    lineno = f"{token.line} | "
+
+    # token.column 是字符索引
+    prefix = line_text[:token.column]
+
+    caret_offset = visual_width(prefix)
+    caret_width = max(1, visual_width(token.text))
+
+    return (
+        lineno + line_text + '\n'
+        + " " * len(lineno)
+        + " " * caret_offset
+        + "^" * caret_width
+    )
+
 
 
 def parse_cst_to_dict(node, parser):
@@ -87,14 +118,26 @@ def indent_xml(elem, indent=2, level=0):
     if level and (not elem.tail or not elem.tail.strip()):
         elem.tail = i
 
-def run_antlr(input_text: str):
+def build_cst(input_text: str):
+    logger = logging.getLogger(__name__)
+
     input_stream = InputStream(input_text)
     lexer = MainLexer(input_stream)
     # tokens = CommonTokenStream(lexer)
     tokens = WarpedTokenStream(lexer)
     parser = MainParser(tokens)
+    from antlr4.error.ErrorStrategy import BailErrorStrategy
+    parser._errHandler = BailErrorStrategy()
 
-    tree = parser.program()
+    try:
+        tree = parser.program()
+    except CancellationException as e:
+        earg = e.args[0]
+        token = earg.offendingToken
+        logger.error(
+            f"Syntax Error: Unexpect {parser.symbolicNames[token.type]} token `{token.text}` at line {token.line}:{token.column},\n"
+            + print_error(input_text, token))
+        raise
     cst_dict = parse_cst_to_dict(tree, parser)
     return cst_dict
 

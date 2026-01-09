@@ -1,22 +1,15 @@
-from ast_convert import build_ast_entry
-from cst import run_antlr
-from ast_dump import dump_ast
+import logging
+import sys
+from src_to_cst import build_cst
+from cst_to_ast import build_ast, dump_ast
+from ast_to_bdg import build_bdg
 
 import xml.etree.ElementTree as ET
 import argparse
 import json
 
-def run_cst(args):
-    if args.source == "-":
-        input_text = sys.stdin.read()
-    else:
-        with open(args.source, "r", encoding="utf-8") as f:
-            input_text = f.read()
 
-    return run_antlr(input_text)
-
-
-if __name__ == "__main__":
+def run():
     parser = argparse.ArgumentParser(description="YAFL Compiler - Yet Another Functional Language")
     parser.add_argument(
         "source",
@@ -30,14 +23,40 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    cst = run_cst(args)
-    ast = build_ast_entry(cst)
-
-    if args.output:
-        import sys
-        from contextlib import redirect_stdout
-        with open(args.output, "w", encoding="utf-8") as f:
-            with redirect_stdout(f):
-                dump_ast(ast)
+    if args.source == "-":
+        src = sys.stdin.read()
     else:
-        dump_ast(ast)
+        with open(args.source, "r", encoding="utf-8") as f:
+            src = f.read()
+
+    cst = build_cst(src)
+    ast = build_ast(cst)
+
+    # if args.output:
+    #     import sys
+    #     from contextlib import redirect_stdout
+    #     with open(args.output, "w", encoding="utf-8") as f:
+    #         with redirect_stdout(f):
+    #             dump_ast(ast)
+    # else:
+    #     dump_ast(ast)
+
+    bdg, block_index, point_index, bindphi_index = build_bdg(ast)
+
+    for item in bindphi_index:
+        print(item.entry.name, end=' ')
+        # print(item.entry, ': ')
+        print(f"at {item.entry.getCstPointer()['line']} {item.entry.getCstPointer()['column']}", ': ')
+        for k in item.candidates:
+            print('  ', k, ': ')
+            for i in item.candidates[k]:
+                # print('    ', i.identifier.getCstPointer())
+                print('    ', i.name, f"at {i.identifier.getCstPointer()['line']} {i.identifier.getCstPointer()['column']}" if i.identifier.point.define_depth != -1 else '<builtin>', ', ')
+            print('; ', end='')
+        print('')
+
+if __name__ == "__main__":
+    # try:
+    run()
+    # except Exception as e:
+    #     logging.info('Compiler Fail.')

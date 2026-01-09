@@ -1,7 +1,7 @@
 INTRINSIC = [
     # ===== type atoms =====
     'typ',        # Type 本身的类型（Type of Type）
-    'symbol',     # 结构字段 key，仅用于类型结构
+    'sym',        # 结构字段 key，仅用于类型结构
     'ptr',        # 指针宽度整数（target dependent）
 
     'i8', 'u8',   # 8-bit integer
@@ -13,7 +13,11 @@ INTRINSIC = [
     'f32', 'f64', # floating point
     'bool',       # boolean
     'uint',       # uint
-    'null_t',     # null type
+    'nul',        # null type
+
+    # ===== builtin annotation =====
+    '!pure',      # pure function
+    '!effect',    # side effect
 
     # ===== type constructors (affect type id) =====
     'join!',      # join!((a:T1),(b:T2)) -> (a: T1, b: T2)
@@ -23,7 +27,7 @@ INTRINSIC = [
     'opaque!',    # opaque!(T) -> new opaque type (new type id)
 
     # ===== type destruct / reflection (no new type id) =====
-    'split!',    # ~tuple!(T) -> field list
+    'split!',     # split!(T) -> field list
     '~arr!',      # ~arr!(T) -> (elem_type, len)
     '~union!',    # ~union!(T) -> field list
     '~fn!',       # ~fn!(T) -> (params, ret, anno)

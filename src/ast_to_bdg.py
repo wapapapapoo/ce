@@ -1,6 +1,10 @@
 from typing import Dict, List, Optional
-from ast_types import AstList, BindPhi, Block, BlockInfo, Call, Expr, Function, Identifier, Literal, Point, Program, Stmt
+from ast_types import (
+    AstList, BindPhi, Block, BlockInfo, Call, Expr,
+    Function, Identifier, Literal, Point, Program, Stmt
+)
 from intr import INTRINSIC
+
 
 def build_bdg(ast: Program):
     block_index: List[BlockInfo] = []
@@ -11,37 +15,34 @@ def build_bdg(ast: Program):
     point_id = 0
     bindphi_id = 0
 
-    # =============================
+    # ==================================================
     # builtin identifiers (depth = -1)
-    # =============================
+    # ==================================================
     builtin_scope: Dict[str, set[Point]] = {}
 
     def add_builtin(name: str):
         nonlocal point_id
-        fake_block = None
-        fake_ident = Identifier(name)
-        fake_stmt = None
+        ident = Identifier(name)
         p = Point(
-            id=point_id,
-            name=name,
-            block=None,
-            identifier=fake_ident,
-            stmt=fake_stmt,
-            define_depth=-1,
-            typ='builtin'
+            point_id,
+            name,
+            'builtin',
+            None,
+            ident,
+            None,
+            -1,
         )
         point_id += 1
-        fake_ident.point = p
+        ident.point = p
         builtin_scope.setdefault(name, set()).add(p)
         point_index.append(p)
 
-    # 你可以在这里预置 builtin
     for intr in INTRINSIC:
         add_builtin(intr)
 
-    # =============================
+    # ==================================================
     # helpers
-    # =============================
+    # ==================================================
     def new_block(parent: Optional[BlockInfo], block: Block) -> BlockInfo:
         nonlocal block_id
         bi = BlockInfo(block_id, parent, block)
@@ -54,27 +55,26 @@ def build_bdg(ast: Program):
 
     def new_point(
         name: str,
+        typ: str,
         block: Optional[BlockInfo],
         ident: Identifier,
         stmt: Optional[Stmt],
         depth: int,
-        typ: str,
     ) -> Point:
         nonlocal point_id
         p = Point(
-            id=point_id,
-            name=name,
-            block=block,
-            identifier=ident,
-            stmt=stmt,
-            define_depth=depth,
-            typ=typ,
+            point_id,
+            name,
+            typ,
+            block,
+            ident,
+            stmt,
+            depth,
         )
         point_id += 1
-        assert ident.bindphi is None
         ident.point = p
         point_index.append(p)
-        if block is not None:
+        if block:
             block.points.append(p)
         return p
 
@@ -85,48 +85,104 @@ def build_bdg(ast: Program):
         bindphi_index.append(bp)
         return bp
 
-    # =============================
-    # Phase 1: build block tree + stmt target points
-    # =============================
-    def visit_block(block: Block, parent: Optional[BlockInfo]):
-        bi = new_block(parent, block)
+    # ==================================================
+    # Phase 0: 全程序 symbol 扫描（AstList.key）
+    # ==================================================
+    symbol_scope: Dict[str, set[Point]] = {}
 
-        # stmt targets: simultaneous
-        for stmt in block.stmts:
-            if stmt.target:
-                p = new_point(
-                    name=stmt.target.name,
-                    block=bi,
-                    ident=stmt.target,
-                    stmt=stmt,
-                    depth=bi.depth,
-                    typ='point',
-                )
-                stmt.point = p
+    def scan_symbols_expr(expr: Expr):
+        if isinstance(expr, AstList):
+            for item in expr.items:
+                if item.key:
+                    p = new_point(
+                        item.key.name,
+                        'symbol',
+                        None,
+                        item.key,
+                        None,
+                        -2,
+                    )
+                    symbol_scope.setdefault(item.key.name, set()).add(p)
+                scan_symbols_expr(item.value)
 
-        # visit RHS
-        for stmt in block.stmts:
-            visit_expr(stmt.expr, bi)
+        elif isinstance(expr, Call):
+            scan_symbols_expr(expr.fn)
+            scan_symbols_expr(expr.arg)
 
-    # =============================
-    # Phase 2: identifier resolution
-    # =============================
-    def resolve_identifier(ident: Identifier, bi: BlockInfo):
-        # 已经是定义位（target / key / builtin）
-        if ident.point is not None:
+        elif isinstance(expr, Function):
+            scan_symbols_expr(expr.params)
+            if expr.ret:
+                scan_symbols_expr(expr.ret)
+            scan_symbols_block(expr.body)
+
+        elif isinstance(expr, (Identifier, Literal)):
             return
 
-        # 已经解析过 use
-        if ident.bindphi is not None:
+        else:
+            raise NotImplementedError(type(expr))
+
+    def scan_symbols_block(block: Block):
+        for stmt in block.stmts:
+            scan_symbols_expr(stmt.expr)
+
+    scan_symbols_block(ast.block)
+
+    # ==================================================
+    # Phase 1: 构建 block 树 + block 内 point（无顺序）
+    # ==================================================
+    def build_blocks(block: Block, parent: Optional[BlockInfo]):
+        bi = new_block(parent, block)
+
+        # stmt targets
+        for stmt in block.stmts:
+            if stmt.target:
+                new_point(
+                    stmt.target.name,
+                    'point',
+                    bi,
+                    stmt.target,
+                    stmt,
+                    bi.depth,
+                )
+
+        # function params 属于 outer block
+        for stmt in block.stmts:
+            if isinstance(stmt.expr, Function):
+                params = stmt.expr.params
+                if isinstance(params, AstList):
+                    for item in params.items:
+                        ident = item.value
+                        if isinstance(ident, Identifier):
+                            new_point(
+                                ident.name,
+                                'point',
+                                bi,
+                                ident,
+                                None,
+                                bi.depth,
+                            )
+
+        # children blocks
+        for stmt in block.stmts:
+            if isinstance(stmt.expr, Function):
+                build_blocks(stmt.expr.body, bi)
+
+    build_blocks(ast.block, None)
+
+    # ==================================================
+    # Phase 2: identifier resolve（按 block depth BFS）
+    # ==================================================
+    def resolve_identifier(ident: Identifier, bi: BlockInfo):
+        if ident.point or ident.bindphi:
             return
 
         bp = new_bindphi(ident.name, ident)
 
-        # symbol scope (depth = -2)
+        # symbol
         for p in symbol_scope.get(ident.name, []):
             bp.add(p, depth=-2)
 
-        # block scopes
+        # block chain
         cur = bi
         while cur:
             for p in cur.points:
@@ -134,19 +190,13 @@ def build_bdg(ast: Program):
                     bp.add(p, depth=cur.depth)
             cur = cur.parent
 
-        # builtin (depth = -1)
+        # builtin
         for p in builtin_scope.get(ident.name, []):
             bp.add(p, depth=-1)
 
         ident.bindphi = bp
 
-
-    # =============================
-    # Phase 3: expression traversal
-    # =============================
-    symbol_scope: Dict[str, set[Point]] = {}
-
-    def visit_expr(expr: Expr, bi: BlockInfo):
+    def resolve_expr(expr: Expr, bi: BlockInfo):
         if isinstance(expr, Identifier):
             resolve_identifier(expr, bi)
 
@@ -154,43 +204,24 @@ def build_bdg(ast: Program):
             return
 
         elif isinstance(expr, Call):
-            visit_expr(expr.fn, bi)
-            visit_expr(expr.arg, bi)
+            resolve_expr(expr.fn, bi)
+            resolve_expr(expr.arg, bi)
 
         elif isinstance(expr, AstList):
             for item in expr.items:
-                if item.key:
-                    # symbol
-                    p = new_point(
-                        name=item.key.name,
-                        block=None,
-                        ident=item.key,
-                        stmt=None,
-                        depth=-2,
-                        typ='symbol'
-                    )
-                    symbol_scope.setdefault(item.key.name, set()).add(p)
-                visit_expr(item.value, bi)
+                resolve_expr(item.value, bi)
 
         elif isinstance(expr, Function):
-            # params are in outer block
-            visit_expr(expr.params, bi)
-            # body is new block
-            visit_block(expr.body, bi)
+            resolve_expr(expr.params, bi)
             if expr.ret:
-                visit_expr(expr.ret, bi)
+                resolve_expr(expr.ret, bi)
+            # body later by BFS
 
         else:
             raise NotImplementedError(type(expr))
 
-    # =============================
-    # run
-    # =============================
-    visit_block(ast.block, None)
+    for bi in sorted(block_index, key=lambda b: b.depth):
+        for stmt in bi.ast_block.stmts:
+            resolve_expr(stmt.expr, bi)
 
-    return (
-        ast,
-        block_index,
-        point_index,
-        bindphi_index,
-    )
+    return ast, block_index, point_index, bindphi_index

@@ -1,6 +1,6 @@
 import logging
 import sys
-from src_to_cst import build_cst
+from src_to_cst import build_cst, cst_dict_to_xml, parse_cst_to_dict
 from cst_to_ast import build_ast, dump_ast
 from ast_to_bdg import build_bdg
 

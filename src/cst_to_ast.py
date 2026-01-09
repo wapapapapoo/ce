@@ -176,16 +176,11 @@ def build_list_item(cst: dict) -> ListItem:
 # ==================================================
 # Call
 # ==================================================
-
 def build_call(cst: dict) -> Call:
-    # function_call :
-    #   atom_expression function_arg_list
-    # | '[' expression ',' expression ']'
-
     children = cst["children"]
 
-    # fn(arg)
-    if is_rule(children[0], "atom_expression"):
+    # curry / convenient: callee arglist
+    if is_rule(children[0], "atom_expression") or is_rule(children[0], "function_call"):
         fn = build_expr(children[0])
 
         arg_list = children[1]
@@ -195,43 +190,98 @@ def build_call(cst: dict) -> Call:
         # case 1: (expression)
         if len(arg_list_children) == 3:
             expr_node = arg_list_children[1]
-            assert is_rule(expr_node, 'expression')
             arg = build_expr(expr_node)
             arg_li = ListItem(value=arg)
-            arg_list = AstList([arg_li])
-            call = Call(fn=fn, arg=arg_list).setCstPointer(cst)
+            arg_list_ast = AstList([arg_li])
+
+            call = Call(fn=fn, arg=arg_list_ast).setCstPointer(cst)
+
             arg.setParent(arg_li)
-            arg_li.setParent(arg_list)
-            arg_list.setParent(call)
-            arg_li.setCstPointer(arg_list_children[1])
-            arg_list.setCstPointer(arg_list_children[0])
+            arg_li.setParent(arg_list_ast)
+            arg_list_ast.setParent(call)
             fn.setParent(call)
-            assert isinstance(call.arg, AstList)
+
             return call
 
         # case 2: list
         elif len(arg_list_children) == 1:
             list_node = arg_list_children[0]
-            assert is_rule(list_node, 'list')
             arg = build_list(list_node)
+
             call = Call(fn=fn, arg=arg).setCstPointer(cst)
             arg.setParent(call)
             fn.setParent(call)
-            assert isinstance(call.arg, AstList)
+
             return call
 
-        raise RuntimeError(
-            "function_arg_list contains neither expression nor list"
-        )
+        raise RuntimeError("invalid function_arg_list structure")
 
-    # [expr, expr] common_call
+    # common_call: [expr, expr]
+    assert is_token(children[0], "LBRACK")
     fn = build_expr(children[1])
     arg = build_expr(children[3])
+
     call = Call(fn=fn, arg=arg).setCstPointer(cst)
     fn.setParent(call)
     arg.setParent(call)
-    assert isinstance(call.arg, Expr)
     return call
+
+
+# def build_call(cst: dict) -> Call:
+#     # function_call :
+#     #   atom_expression function_arg_list
+#     # | '[' expression ',' expression ']'
+
+#     children = cst["children"]
+
+#     # fn(arg)
+#     if is_rule(children[0], "atom_expression"):
+#         fn = build_expr(children[0])
+
+#         arg_list = children[1]
+#         assert is_rule(arg_list, 'function_arg_list')
+#         arg_list_children = arg_list['children']
+
+#         # case 1: (expression)
+#         if len(arg_list_children) == 3:
+#             expr_node = arg_list_children[1]
+#             assert is_rule(expr_node, 'expression')
+#             arg = build_expr(expr_node)
+#             arg_li = ListItem(value=arg)
+#             arg_list = AstList([arg_li])
+#             call = Call(fn=fn, arg=arg_list).setCstPointer(cst)
+#             arg.setParent(arg_li)
+#             arg_li.setParent(arg_list)
+#             arg_list.setParent(call)
+#             arg_li.setCstPointer(arg_list_children[1])
+#             arg_list.setCstPointer(arg_list_children[0])
+#             fn.setParent(call)
+#             assert isinstance(call.arg, AstList)
+#             return call
+
+#         # case 2: list
+#         elif len(arg_list_children) == 1:
+#             list_node = arg_list_children[0]
+#             assert is_rule(list_node, 'list')
+#             arg = build_list(list_node)
+#             call = Call(fn=fn, arg=arg).setCstPointer(cst)
+#             arg.setParent(call)
+#             fn.setParent(call)
+#             assert isinstance(call.arg, AstList)
+#             return call
+
+#         raise RuntimeError(
+#             "function_arg_list contains neither expression nor list"
+#         )
+
+#     # [expr, expr] common_call
+#     fn = build_expr(children[1])
+#     arg = build_expr(children[3])
+#     call = Call(fn=fn, arg=arg).setCstPointer(cst)
+#     fn.setParent(call)
+#     arg.setParent(call)
+#     assert isinstance(call.arg, Expr)
+#     return call
 
 
 # ==================================================

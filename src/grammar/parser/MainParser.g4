@@ -79,6 +79,7 @@ function_body
 
 function_call
     : atom_expression function_arg_list         # convenient_call
+    | function_call function_arg_list           # curry_call
     | LBRACK expression COMMA expression RBRACK # common_call
     ;
 

@@ -130,6 +130,23 @@ def build_bdg(ast: Program):
     # ==================================================
     # Phase 1: 构建 block 树 + block 内 point（无顺序）
     # ==================================================
+
+    def inject_function_params(params: Expr, bi: BlockInfo):
+        if not isinstance(params, AstList):
+            return
+
+        for item in params.items:
+            if item.key is None:
+                continue
+            new_point(
+                name=item.key.name,
+                typ='point',
+                block=bi,
+                ident=item.key,
+                stmt=None,          # 参数不是 stmt 定义
+                depth=bi.depth,     # 和函数体 block 同一层
+            )
+
     def build_blocks(block: Block, parent: Optional[BlockInfo]):
         bi = new_block(parent, block)
 
@@ -146,9 +163,15 @@ def build_bdg(ast: Program):
                 )
 
         # children blocks
+        # for stmt in block.stmts:
+        #     if isinstance(stmt.expr, Function):
+        #         build_blocks(stmt.expr.body, bi)
         for stmt in block.stmts:
             if isinstance(stmt.expr, Function):
-                build_blocks(stmt.expr.body, bi)
+                fn = stmt.expr
+                body_bi = new_block(bi, fn.body)
+                inject_function_params(fn.params, body_bi)
+                build_blocks(fn.body, bi)
 
     build_blocks(ast.block, None)
 

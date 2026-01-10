@@ -1,5 +1,6 @@
 import logging
 import sys
+from snapshot_closure_convert import closure_convert
 from src_to_cst import build_cst, cst_dict_to_xml, parse_cst_to_dict
 from cst_to_ast import build_ast, dump_ast
 from ast_to_bdg import build_bdg
@@ -60,6 +61,12 @@ def run():
     #     print('')
 
     vg = build_value_graph(bdg, block_index, point_index, bindphi_index)
+    # dump_value_graph(vg)
+
+    from snapshot_resolve_phi import resolve_all_phis
+    resolve_all_phis(vg)
+    closure_convert(vg)
+    dump_value_graph(vg)
     
 
 if __name__ == "__main__":

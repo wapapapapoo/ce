@@ -49,7 +49,7 @@ INTRINSIC = [
 
     # ===== compile-time query / control =====
     'if!',        # if!(cond, then, else) -> compile-time branch
-    'loop!'       # loop!(fn, first_expr) -> unit, fn := (expr: T): (expr: T, flag: !default(bool, false))
+    'loop!',      # loop!(fn, first_expr) -> unit, fn := (expr: T): (expr: T, flag: !default(bool, false))
     'typeof!',    # typeof!(expr) -> typ
     'sizeof!',    # sizeof!(typ) -> ptr
     'offsetof!',  # offsetof!(T, symbol|number) -> ptr

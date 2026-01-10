@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import List, Optional
+from typing import List, Optional, Set
 
 # ============================================================
 # AST imports（你已有）
@@ -105,40 +105,31 @@ def dump_edges(graph: ValueGraph):
 
 
 
-
-from typing import List, Deque
-from collections import deque
+# bdg_to_vg_fixed.py
+from typing import List, Deque, Optional, Any, Dict
+from collections import deque, defaultdict
 
 from ast_types import (
     Program, Block, BlockInfo, Point, BindPhi,
-    AstList, Function, Call, Identifier, Literal as AstLiteral
+    AstList, Function, Call, Identifier, Literal as AstLiteral, ListItem, Stmt
 )
-from vg_types import ValueGraph, PhiNode
+from vg_types import ValueGraph, PhiNode, ValueNode, Edge
 
-# ============================================================
-# Entry: 接收 BDG 全量产物
-# ============================================================
+# -------------------------
+# Helper: re-export graph.value_of_expr if needed
+# -------------------------
+# (Assumes ValueGraph has method value_of_expr as in your code.)
 
+# -------------------------
+# Build Value Graph
+# -------------------------
 def build_value_graph(
     ast: Program,
     block_index: List[BlockInfo],
     point_index: List[Point],
     bindphi_index: List[BindPhi],
 ) -> ValueGraph:
-    """
-    Step 1:
-    - 接收 BDG 四个返回值
-
-    Step 2:
-    - 以 block_index[0] 作为根
-    - BFS 遍历整个 BlockInfo 树
-    - 当前只搭遍历框架，不做任何语义处理
-    """
     graph = ValueGraph()
-
-    # ------------------------------
-    # Block BFS skeleton
-    # ------------------------------
 
     assert len(block_index) > 0
     root: BlockInfo = block_index[0]
@@ -146,315 +137,244 @@ def build_value_graph(
     q: Deque[BlockInfo] = deque()
     q.append(root)
 
+    # BFS over block tree (keeps same ordering as before)
     while q:
         bi = q.popleft()
-
-        # TODO: 后续步骤在这里处理 block
         process_block(graph, bi)
-
         for child in bi.children:
             q.append(child)
-    
-    connect_identifiers(graph, bi, point_index)
+
+    # connect identifiers (resolve placeholder phis to real bindphis)
+    connect_identifiers(graph)
 
     return graph
 
-# ============================================================
-# Step 3: block 处理框架 + stmt DFS 骨架
-# ============================================================
 
-def process_block(
-    graph: ValueGraph,
-    bi: BlockInfo,
-):
-    """
-    在 BFS 中调用：
-    - 遍历该 block 内的每一条语句
-    - 对 stmt.expr 做 DFS 拆解
-    - 目标只是：ValueNode -> Edge -> PhiNode -> ValueNode 的树形结构
-    - 不做 resolve / merge / 多候选处理
-    """
+
+# -------------------------
+# process_block: build expression trees for each stmt in block
+# -------------------------
+def process_block(graph: ValueGraph, bi: BlockInfo):
     block = bi.ast_block
-
     for stmt in block.stmts:
         build_expr_tree(graph, stmt.expr)
 
 
-# ============================================================
-# DFS: Expr → ValueNode / Edge / PhiNode（骨架）
-# ============================================================
+# -------------------------
+# build_expr_tree: recursive construction
+# - reuses graph.value_of_expr(expr) when available
+# - creates placeholder ValueNodes for Identifiers (placeholder=True)
+# - creates PhiNodes for calls/list items with those placeholder values as candidates
+# -------------------------
+def build_expr_tree(graph: ValueGraph, expr: Any) -> ValueNode:
+    # try reuse
+    existing = graph.value_of_expr(expr)
+    if existing is not None:
+        return existing
 
-def build_expr_tree(
-    graph: ValueGraph,
-    expr,
-):
-    """
-    DFS 拆 expr，生成一棵：
-        ValueNode(root)
-          <- Edge
-              <- 单候选 PhiNode
-                  <- ValueNode(child)
-    规则（当前步）：
-    - Literal / Identifier / Block 为递归终止
-    - Identifier：用 expr ValueNode 表示，不解析 phi
-    - Function / AstList / Call：继续 DFS
-    """
-
-    # ---------- Literal ----------
+    # Literal
     if isinstance(expr, AstLiteral):
-        return graph.new_value(
-            kind="literal",
-            ast=expr,
-            cst=expr.cstPointer,
-        )
+        return graph.new_value(kind="literal", ast=expr, cst=expr.cstPointer)
 
-    # ---------- Identifier（终止，作为 expr value） ----------
+    # Identifier -> placeholder value (we will resolve later via phis)
     if isinstance(expr, Identifier):
-        return graph.new_value(
-            kind="expr",
-            ast=expr,
-            cst=expr.cstPointer,
-            placeholder=True,
-        )
+        return graph.new_value(kind="expr", ast=expr, cst=expr.cstPointer, placeholder=True)
 
-    # ---------- Call ----------
+    # Call
     if isinstance(expr, Call):
         fn_val = build_expr_tree(graph, expr.fn)
         arg_val = build_expr_tree(graph, expr.arg)
 
-        out = graph.new_value(
-            kind="expr",
-            ast=expr,
-            cst=expr.cstPointer,
-        )
+        out = graph.new_value(kind="expr", ast=expr, cst=expr.cstPointer)
 
-        fn_phi = graph.new_phi(
-            identifier=expr.fn if isinstance(expr.fn, Identifier) else None,
-            bindphi=None,
-        )
+        # create placeholder phi nodes that contain those value nodes as single-candidate
+        fn_phi = graph.new_phi(identifier=expr.fn if isinstance(expr.fn, Identifier) else None, bindphi=None)
         fn_phi.add(0, fn_val)
 
-        arg_phi = graph.new_phi(
-            identifier=expr.arg if isinstance(expr.arg, Identifier) else None,
-            bindphi=None,
-        )
+        arg_phi = graph.new_phi(identifier=expr.arg if isinstance(expr.arg, Identifier) else None, bindphi=None)
         arg_phi.add(0, arg_val)
 
-        graph.new_edge(
-            kind="call",
-            output=out,
-            transform=fn_phi,
-            inputs=[arg_phi],
-            ast=expr,
-        )
+        graph.new_edge(kind="call", output=out, transform=fn_phi, inputs=[arg_phi], ast=expr)
         return out
 
-    # ---------- Function ----------
+    # Function
     if isinstance(expr, Function):
         inputs: List[PhiNode] = []
 
         # params
         p_val = build_expr_tree(graph, expr.params)
-        p_phi = graph.new_phi(identifier=None, bindphi=None)
-        p_phi.add(0, p_val)
-        inputs.append(p_phi)
+        p_phi = graph.new_phi(identifier=None, bindphi=None); p_phi.add(0, p_val); inputs.append(p_phi)
 
-        # return type
+        # ret
         if expr.ret is not None:
             r_val = build_expr_tree(graph, expr.ret)
-            r_phi = graph.new_phi(identifier=None, bindphi=None)
-            r_phi.add(0, r_val)
-            inputs.append(r_phi)
+            r_phi = graph.new_phi(identifier=None, bindphi=None); r_phi.add(0, r_val); inputs.append(r_phi)
 
         # annotations
         for a in expr.ann:
             a_val = build_expr_tree(graph, a)
-            a_phi = graph.new_phi(identifier=None, bindphi=None)
-            a_phi.add(0, a_val)
-            inputs.append(a_phi)
+            a_phi = graph.new_phi(identifier=None, bindphi=None); a_phi.add(0, a_val); inputs.append(a_phi)
 
-        # block as value (terminal)
-        blk_val = graph.new_value(
-            kind="block",
-            ast=expr.body,
-            cst=None,
-        )
-        blk_phi = graph.new_phi(identifier=None, bindphi=None)
-        blk_phi.add(0, blk_val)
-        inputs.append(blk_phi)
+        # block as value
+        blk_val = graph.new_value(kind="block", ast=expr.body, cst=None)
+        blk_phi = graph.new_phi(identifier=None, bindphi=None); blk_phi.add(0, blk_val); inputs.append(blk_phi)
 
-        out = graph.new_value(
-            kind="expr",
-            ast=expr,
-            cst=expr.cstPointer,
-        )
-
-        fndef = graph.new_edge(
-            kind="fndef",
-            output=out,
-            transform=None,
-            inputs=inputs,
-            ast=expr,
-        )
-
-        graph.type_values.append([
-            fndef,
-            *inputs,
-        ])
-
+        out = graph.new_value(kind="expr", ast=expr, cst=expr.cstPointer)
+        fndef = graph.new_edge(kind="fndef", output=out, transform=None, inputs=inputs, ast=expr)
+        graph.type_values.append([fndef, *inputs])
         return out
 
-    # ---------- AstList ----------
+    # AstList
     if isinstance(expr, AstList):
         item_phis: List[PhiNode] = []
-
         for item in expr.items:
-            # key-value
             if item.key is not None:
-                k_val = graph.new_value(
-                    kind="symbol",
-                    ast=item.key,
-                    cst=item.key.cstPointer,
-                )
+                k_val = graph.new_value(kind="symbol", ast=item.key, cst=item.key.cstPointer)
                 v_val = build_expr_tree(graph, item.value)
-
-                k_phi = graph.new_phi(identifier=item.key, bindphi=None)
-                k_phi.add(0, k_val)
-                v_phi = graph.new_phi(identifier=None, bindphi=None)
-                v_phi.add(0, v_val)
-
-                kv_out = graph.new_value(
-                    kind="expr",
-                    ast=item,
-                    cst=item.cstPointer,
-                )
-
-                graph.new_edge(
-                    kind="kvdef",
-                    output=kv_out,
-                    transform=None,
-                    inputs=[k_phi, v_phi],
-                    ast=item,
-                )
-
-                kv_phi = graph.new_phi(identifier=None, bindphi=None)
-                kv_phi.add(0, kv_out)
+                k_phi = graph.new_phi(identifier=item.key, bindphi=None); k_phi.add(0, k_val)
+                v_phi = graph.new_phi(identifier=None, bindphi=None); v_phi.add(0, v_val)
+                kv_out = graph.new_value(kind="expr", ast=item, cst=item.cstPointer)
+                graph.new_edge(kind="kvdef", output=kv_out, transform=None, inputs=[k_phi, v_phi], ast=item)
+                kv_phi = graph.new_phi(identifier=None, bindphi=None); kv_phi.add(0, kv_out)
                 item_phis.append(kv_phi)
-
             else:
                 v_val = build_expr_tree(graph, item.value)
-                v_phi = graph.new_phi(identifier=None, bindphi=None)
-                v_phi.add(0, v_val)
+                v_phi = graph.new_phi(identifier=None, bindphi=None); v_phi.add(0, v_val)
                 item_phis.append(v_phi)
 
-        out = graph.new_value(
-            kind="expr",
-            ast=expr,
-            cst=expr.cstPointer,
-        )
-
-        graph.new_edge(
-            kind="listdef",
-            output=out,
-            transform=None,
-            inputs=item_phis,
-            ast=expr,
-        )
+        out = graph.new_value(kind="expr", ast=expr, cst=expr.cstPointer)
+        graph.new_edge(kind="listdef", output=out, transform=None, inputs=item_phis, ast=expr)
         return out
 
-    raise NotImplementedError(type(expr))
+    raise NotImplementedError(f"Unhandled expr type: {type(expr)}")
 
 
+def materialize_value(graph: ValueGraph, v: ValueNode) -> ValueNode:
+    if not v.placeholder:
+        return v
 
-def connect_identifiers(graph: ValueGraph, bi: BlockInfo, points: Point):
-    """
-    Step 4:
-    - 将 build_expr_tree 阶段遇到的 Identifier ValueNode
-      与其 BindPhi 对应的定义点连接起来
-    """
+    new_v = graph.new_value(
+        kind=v.kind,
+        ast=v.ast,
+        cst=v.cst,
+        placeholder=False,
+    )
 
-    # symbol ValueNode 复用（同一个 symbol 只建一个）
-    symbol_cache: dict[str, ValueNode] = {}
-    builtin_cache: dict[str, ValueNode] = {}
+    replace_value_node(graph, v, new_v)
+    return new_v
 
-    # 注意：这里遍历的是“当前已经建出来的值”
-    for val in list(graph.values):
-        # 只处理 Identifier 对应的 expr value
-        if val.kind != "expr":
+
+def replace_value_node(graph: ValueGraph, old: ValueNode, new: ValueNode):
+    # 1. edge.output
+    for e in graph.edges:
+        if e.output is old:
+            e.output = new
+            new.in_edge = e
+
+    # 2. phi candidates
+    for p in graph.phis:
+        for depth, vs in p.candidates.items():
+            if old in vs:
+                vs.remove(old)
+                vs.add(new)
+
+    # 3. graph.values
+    graph.values = [new if v is old else v for v in graph.values]
+
+
+# -------------------------
+# connect_identifiers: replace placeholder phis (bindphi-less) with real bindphi phis
+# Strategy:
+#  - scan graph.phis for placeholder phis that carry identifier info (phi.identifier is Identifier, phi.bindphi is None)
+#  - for each such placeholder phi, get identifier.bindphi (BindPhi), build a new PhiNode whose candidates are
+#    resolved ValueNodes corresponding to BindPhi.candidates (stmt expr value / builtin / symbol)
+#  - replace all uses of the placeholder phi (edge.inputs / edge.transform) with the new PhiNode
+# -------------------------
+def connect_identifiers(graph: ValueGraph):
+    # caches for builtin & symbol value nodes
+    builtin_cache: Dict[str, ValueNode] = {}
+    symbol_cache: Dict[str, ValueNode] = {}
+    
+    # 提前收集所有需要 materialize 的值节点
+    values_to_materialize: Set[ValueNode] = set()
+    
+    # 第一步：收集所有需要处理的 placeholder phi 节点
+    placeholder_phis: List[PhiNode] = [
+        p for p in list(graph.phis) 
+        if getattr(p, "identifier", None) is not None and p.bindphi is None
+    ]
+    
+    # 第二步：处理每个 placeholder phi
+    for old_phi in placeholder_phis:
+        ident = old_phi.identifier
+        if ident is None:
             continue
-        if not isinstance(val.ast, Identifier):
+            
+        bp: Optional[BindPhi] = getattr(ident, "bindphi", None)
+        if bp is None:
             continue
-
-        ident: Identifier = val.ast
-        bindphi: BindPhi = ident.bindphi
-        if bindphi is None:
-            continue
-
-        # 为这个 identifier 构造一个“真实”的 PhiNode
-        phi = graph.new_phi(
-            identifier=ident,
-            bindphi=bindphi,
-        )
-
-        # BindPhi.candidates: depth -> Set[Point]
-        for depth, points in bindphi.candidates.items():
-            for pt in points:
-                # ---------- case 1: point 来自某条语句 ----------
+            
+        # 创建新的 phi 节点
+        new_phi = graph.new_phi(identifier=ident, bindphi=bp)
+        
+        # 填充候选值
+        for depth, pts in bp.candidates.items():
+            for pt in pts:
                 if pt.stmt is not None:
-                    expr = pt.stmt.expr
-                    target_val = graph.value_of_expr(expr)
-                    assert target_val is not None
-                    phi.add(depth, target_val)
-
-                elif pt.type == 'builtin':
-                    sym = Identifier(pt.name)
-                    if pt.name not in builtin_cache:
-                        builtin_cache[pt.name] = graph.new_value(
-                            kind="symbol",
-                            ast=sym,
-                            cst=sym.cstPointer,
+                    target_val = graph.value_of_expr(pt.stmt.expr)
+                    if target_val is None:
+                        # 如果值不存在，需要先构建表达式树
+                        target_val = build_expr_tree(graph, pt.stmt.expr)
+                    values_to_materialize.add(target_val)
+                    new_phi.add(depth, target_val)
+                elif pt.type == "builtin":
+                    name = pt.name
+                    if name not in builtin_cache:
+                        sym = Identifier(name)
+                        builtin_cache[name] = graph.new_value(
+                            kind="expr", ast=sym, cst=None, placeholder=False
                         )
-                    phi.add(depth, builtin_cache[pt.name])
-
-                # ---------- case 3: symbol ----------
+                    new_phi.add(depth, builtin_cache[name])
                 else:
                     sym = pt.identifier
                     if sym.name not in symbol_cache:
                         symbol_cache[sym.name] = graph.new_value(
-                            kind="symbol",
-                            ast=sym,
-                            cst=sym.cstPointer,
+                            kind="symbol", ast=sym, cst=sym.cstPointer, placeholder=False
                         )
-                    phi.add(depth, symbol_cache[sym.name])
+                    new_phi.add(depth, symbol_cache[sym.name])
+        
+        # 替换所有对 old_phi 的引用
+        for e in graph.edges:
+            if e.transform is old_phi:
+                e.transform = new_phi
+            e.inputs = [new_phi if inp is old_phi else inp for inp in e.inputs]
+    
+    # 第三步：materialize 所有收集到的值节点
+    for v in values_to_materialize:
+        if v.placeholder:
+            materialize_value(graph, v)
+    
+    # 第四步：清理不再使用的 phi 节点
+    used_phis = set()
+    for e in graph.edges:
+        if e.transform:
+            used_phis.add(e.transform)
+        used_phis.update(e.inputs)
+    
+    graph.phis = [p for p in graph.phis if p in used_phis]
+    
+    # 第五步：最后清理剩余的 placeholder 值节点
+    final_cleanup_placeholders(graph)
 
-        # 用这个新的 phi，替换掉原来 edge.inputs 里的占位 phi
-        replace_input_phi(graph, val, phi)
-
-
-def replace_input_phi(
-    graph: ValueGraph,
-    ident_val: ValueNode,
-    new_phi: PhiNode,
-):
-    """
-    ident_val: Identifier 对应的 ValueNode
-    new_phi:   用 BindPhi 构造出来的新 PhiNode
-    """
-
-    # 在所有 edge.inputs 中找这个 ident_val
-    found = False
-
-    for edge in graph.edges:
-        for i, phi in enumerate(edge.inputs):
-            # 占位 phi 一定只有一个 candidate，且指向 ident_val
-            for values in phi.candidates.values():
-                if ident_val in values:
-                    edge.inputs[i] = new_phi
-                    found = True
-                    break
-            if found:
-                break
-        if found:
-            break
-
-    # assert found, f"identifier value v{ident_val.id} not used by any edge"
+def final_cleanup_placeholders(graph: ValueGraph):
+    """清理所有剩余的 placeholder 值节点"""
+    for v in list(graph.values):
+        if v.placeholder:
+            # 对于仍然存在的 placeholder，强制创建非 placeholder 版本
+            new_v = graph.new_value(
+                kind=v.kind,
+                ast=v.ast,
+                cst=v.cst,
+                placeholder=False,
+            )
+            replace_value_node(graph, v, new_v)

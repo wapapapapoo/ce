@@ -45,7 +45,7 @@ def resolve_point_to_value(
     # ---------------- builtin ----------------
     if pt.type == "builtin":
         for v in graph.values:
-            if v.kind == "symbol" and isinstance(v.ast, Identifier):
+            if v.kind == "expr" and isinstance(v.ast, Identifier):
                 if v.ast.name == pt.name:
                     return v
         raise PhiResolveError(

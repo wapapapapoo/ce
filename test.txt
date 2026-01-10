@@ -1,3 +1,9 @@
-(a: i32): (fn!((b: i32), i32, ())) => {
-    (b: i32): i32 => { +(a, b); };
+awa := print!("nihao");
+
+qwq();
+
+pwp := print!("hello");
+
+qwq := () => !effect {
+    print!("hello lain");
 };

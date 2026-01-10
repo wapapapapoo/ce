@@ -66,8 +66,25 @@ def run():
     from snapshot_resolve_phi import resolve_all_phis
     resolve_all_phis(vg)
     closure_convert(vg)
-    dump_value_graph(vg)
-    
+    # dump_value_graph(vg)
+
+    from vg_effects import apply_effects
+    effect = apply_effects(vg, block_index)
+
+    def dump_edge(e):
+        print(
+            f"E{e.id} "
+            f"effect={getattr(e, '_is_effect', None)} "
+            f"idx={getattr(e, '_effect_index', None)} "
+            f"ast={type(e.ast).__name__}"
+            f"{e.ast.getCstPointer().get('start', '<rule>') if e.ast.getCstPointer() is not None else '<none>'}"
+            f"placeholder={e.transform.placeholder if e.kind == 'call' else ''}"
+        )
+    for edge in vg.edges:
+        dump_edge(edge)
+
+
+
 
 if __name__ == "__main__":
     # try:

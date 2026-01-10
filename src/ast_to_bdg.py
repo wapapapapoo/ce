@@ -145,23 +145,6 @@ def build_bdg(ast: Program):
                     bi.depth,
                 )
 
-        # function params 属于 outer block
-        for stmt in block.stmts:
-            if isinstance(stmt.expr, Function):
-                params = stmt.expr.params
-                if isinstance(params, AstList):
-                    for item in params.items:
-                        ident = item.value
-                        if isinstance(ident, Identifier):
-                            new_point(
-                                ident.name,
-                                'point',
-                                bi,
-                                ident,
-                                None,
-                                bi.depth,
-                            )
-
         # children blocks
         for stmt in block.stmts:
             if isinstance(stmt.expr, Function):

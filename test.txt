@@ -1,15 +1,15 @@
-add := (a: arr!(i32, ...)) => {
-    loop!((pass: (i: i32, sum: i32), keepon: bool) => {
-        ((+(i, 1), +(sum, a(i))), <(i, len(a)));
-    }, (0, 0))(sum);
-};
-
-awa()();
+eq := (a: i64): i32 => { a; };
 
 /*// 基础绑定：字面量
 x := 42;
 y := true;
 z := "hello";
+
+add := (a: arr!(i32, ...)) => {
+    loop!((pass: (i: i32, sum: i32), keepon: bool) => {
+        ((+(i, 1), +(sum, a(i))), <(i, len(a)));
+    }, (0, 0))(sum);
+};
 
 nihao := (): unit => {
 

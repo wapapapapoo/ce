@@ -60,8 +60,6 @@ def run():
     #     print('')
 
     vg = build_value_graph(bdg, block_index, point_index, bindphi_index)
-
-    dump_value_graph(vg)
     
 
 if __name__ == "__main__":

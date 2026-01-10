@@ -77,6 +77,7 @@ class PhiNode:
         *,
         identifier: Identifier,
         bindphi: Optional[BindPhi],
+        placeholder: bool = False,
     ):
         self.id: int = id
         # 对应的 AST identifier/bindphi
@@ -84,6 +85,7 @@ class PhiNode:
         self.bindphi: Optional[BindPhi] = bindphi
         # level -> 可能的 ValueNode
         self.candidates: Dict[int, Set[ValueNode]] = {}
+        self.placeholder = placeholder
 
     def add(self, level: int, value: ValueNode):
         self.candidates.setdefault(level, set()).add(value)
@@ -142,6 +144,8 @@ class ValueGraph:
         self._pid = 0
         self._eid = 0
 
+        self.type_values: List[ValueNode] = []
+
     # ---------------- Value ----------------
 
     def new_value(
@@ -170,11 +174,13 @@ class ValueGraph:
         *,
         identifier: Identifier,
         bindphi: Optional[BindPhi],
+        placeholder: bool = False,
     ) -> PhiNode:
         p = PhiNode(
             id=self._pid,
             identifier=identifier,
             bindphi=bindphi,
+            placeholder=placeholder,
         )
         self._pid += 1
         self.phis.append(p)
@@ -203,3 +209,8 @@ class ValueGraph:
         self.edges.append(e)
         return e
 
+    def value_of_expr(self, expr):
+        for v in self.values:
+            if v.ast is expr:
+                return v
+        return None

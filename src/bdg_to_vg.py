@@ -53,14 +53,17 @@ def dump_values(graph: ValueGraph):
             f"kind={v.kind:<7} "
             f"ast={ast:<12} "
             f"in_edge={in_edge}"
-            f"  {v.ast.getCstPointer().get('text', '<rule>') if v.ast.getCstPointer() is not None else '<pseudo>'}"
+            f"  {v.ast.getCstPointer().get('text', '<rule>') if v.ast.getCstPointer() is not None else '<builtin>'}"
         )
 
 
 def dump_phis(graph: ValueGraph):
     print("\n[PhiNodes]")
     for p in graph.phis:
-        name = p.identifier.name
+        if p.identifier is not None:
+            name = p.identifier.name
+        else:
+            name = '<not an identifier>'
         bind = f"BindPhi#{p.bindphi.id}" if p.bindphi else None
 
         print(f"  p{p.id:<3} id={name} bindphi={bind}")
@@ -152,7 +155,7 @@ def build_value_graph(
         for child in bi.children:
             q.append(child)
     
-    connect_identifiers(graph, bi)
+    connect_identifiers(graph, bi, point_index)
 
     return graph
 
@@ -226,13 +229,13 @@ def build_expr_tree(
         )
 
         fn_phi = graph.new_phi(
-            identifier=expr.fn if isinstance(expr.fn, Identifier) else Identifier("<tmp>"),
+            identifier=expr.fn if isinstance(expr.fn, Identifier) else None,
             bindphi=None,
         )
         fn_phi.add(0, fn_val)
 
         arg_phi = graph.new_phi(
-            identifier=expr.arg if isinstance(expr.arg, Identifier) else Identifier("<tmp>"),
+            identifier=expr.arg if isinstance(expr.arg, Identifier) else None,
             bindphi=None,
         )
         arg_phi.add(0, arg_val)
@@ -252,21 +255,21 @@ def build_expr_tree(
 
         # params
         p_val = build_expr_tree(graph, expr.params)
-        p_phi = graph.new_phi(identifier=Identifier("<param>"), bindphi=None)
+        p_phi = graph.new_phi(identifier=None, bindphi=None)
         p_phi.add(0, p_val)
         inputs.append(p_phi)
 
         # return type
         if expr.ret is not None:
             r_val = build_expr_tree(graph, expr.ret)
-            r_phi = graph.new_phi(identifier=Identifier("<ret>"), bindphi=None)
+            r_phi = graph.new_phi(identifier=None, bindphi=None)
             r_phi.add(0, r_val)
             inputs.append(r_phi)
 
         # annotations
         for a in expr.ann:
             a_val = build_expr_tree(graph, a)
-            a_phi = graph.new_phi(identifier=Identifier("<ann>"), bindphi=None)
+            a_phi = graph.new_phi(identifier=None, bindphi=None)
             a_phi.add(0, a_val)
             inputs.append(a_phi)
 
@@ -276,7 +279,7 @@ def build_expr_tree(
             ast=expr.body,
             cst=None,
         )
-        blk_phi = graph.new_phi(identifier=Identifier("<block>"), bindphi=None)
+        blk_phi = graph.new_phi(identifier=None, bindphi=None)
         blk_phi.add(0, blk_val)
         inputs.append(blk_phi)
 
@@ -286,13 +289,19 @@ def build_expr_tree(
             cst=expr.cstPointer,
         )
 
-        graph.new_edge(
+        fndef = graph.new_edge(
             kind="fndef",
             output=out,
             transform=None,
             inputs=inputs,
             ast=expr,
         )
+
+        graph.type_values.append([
+            fndef,
+            *inputs,
+        ])
+
         return out
 
     # ---------- AstList ----------
@@ -311,7 +320,7 @@ def build_expr_tree(
 
                 k_phi = graph.new_phi(identifier=item.key, bindphi=None)
                 k_phi.add(0, k_val)
-                v_phi = graph.new_phi(identifier=Identifier("<val>"), bindphi=None)
+                v_phi = graph.new_phi(identifier=None, bindphi=None)
                 v_phi.add(0, v_val)
 
                 kv_out = graph.new_value(
@@ -328,13 +337,13 @@ def build_expr_tree(
                     ast=item,
                 )
 
-                kv_phi = graph.new_phi(identifier=Identifier("<kv>"), bindphi=None)
+                kv_phi = graph.new_phi(identifier=None, bindphi=None)
                 kv_phi.add(0, kv_out)
                 item_phis.append(kv_phi)
 
             else:
                 v_val = build_expr_tree(graph, item.value)
-                v_phi = graph.new_phi(identifier=Identifier("<val>"), bindphi=None)
+                v_phi = graph.new_phi(identifier=None, bindphi=None)
                 v_phi.add(0, v_val)
                 item_phis.append(v_phi)
 
@@ -357,7 +366,7 @@ def build_expr_tree(
 
 
 
-def connect_identifiers(graph: ValueGraph, bi: BlockInfo):
+def connect_identifiers(graph: ValueGraph, bi: BlockInfo, points: Point):
     """
     Step 4:
     - 将 build_expr_tree 阶段遇到的 Identifier ValueNode
@@ -365,7 +374,8 @@ def connect_identifiers(graph: ValueGraph, bi: BlockInfo):
     """
 
     # symbol ValueNode 复用（同一个 symbol 只建一个）
-    symbol_cache: dict[Identifier, ValueNode] = {}
+    symbol_cache: dict[str, ValueNode] = {}
+    builtin_cache: dict[str, ValueNode] = {}
 
     # 注意：这里遍历的是“当前已经建出来的值”
     for val in list(graph.values):
@@ -396,7 +406,17 @@ def connect_identifiers(graph: ValueGraph, bi: BlockInfo):
                     assert target_val is not None
                     phi.add(depth, target_val)
 
-                # ---------- case 2: symbol / builtin ----------
+                elif pt.type == 'builtin':
+                    sym = Identifier(pt.name)
+                    if pt.name not in builtin_cache:
+                        builtin_cache[pt.name] = graph.new_value(
+                            kind="symbol",
+                            ast=sym,
+                            cst=sym.cstPointer,
+                        )
+                    phi.add(depth, builtin_cache[pt.name])
+
+                # ---------- case 3: symbol ----------
                 else:
                     sym = pt.identifier
                     if sym.name not in symbol_cache:

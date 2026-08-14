@@ -1,0 +1,10 @@
+// 字符串字面量: 单引号/双引号/反引号 + 转义
+s00 := "hello";
+s01 := 'world';
+s02 := `raw`;
+s03 := "with\nnewline";
+s04 := "quote\"escaped";
+s05 := 'tab\there';
+s06 := "";
+s07 := '';
+s08 := `backtick raw`;

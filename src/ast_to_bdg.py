@@ -130,6 +130,24 @@ def build_bdg(ast: Program):
     # ==================================================
     # Phase 1: 构建 block 树 + block 内 point（无顺序）
     # ==================================================
+    def scan_blocks_expr(expr: Expr, bi: BlockInfo):
+        # 全表达式遍历：给任意深度的函数体建 BlockInfo（与 Phase 0 对称）
+        if isinstance(expr, Function):
+            scan_blocks_expr(expr.params, bi)
+            if expr.ret:
+                scan_blocks_expr(expr.ret, bi)
+            build_blocks(expr.body, bi)
+        elif isinstance(expr, Call):
+            scan_blocks_expr(expr.fn, bi)
+            scan_blocks_expr(expr.arg, bi)
+        elif isinstance(expr, AstList):
+            for item in expr.items:
+                scan_blocks_expr(item.value, bi)
+        elif isinstance(expr, (Identifier, Literal)):
+            return
+        else:
+            raise NotImplementedError(type(expr))
+
     def build_blocks(block: Block, parent: Optional[BlockInfo]):
         bi = new_block(parent, block)
 
@@ -145,10 +163,9 @@ def build_bdg(ast: Program):
                     bi.depth,
                 )
 
-        # children blocks
+        # children blocks（嵌套在任意深度表达式里的函数）
         for stmt in block.stmts:
-            if isinstance(stmt.expr, Function):
-                build_blocks(stmt.expr.body, bi)
+            scan_blocks_expr(stmt.expr, bi)
 
     build_blocks(ast.block, None)
 

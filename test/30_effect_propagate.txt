@@ -1,0 +1,5 @@
+// 语义: 副作用标注与传染(!effect 链)
+read := (): i32 => !effect { 0 };
+print := (x: i32): i32 => !effect { x };
+compute := (x: i32): i32 => !effect { print(+(read(), x)) };
+r := compute(1);

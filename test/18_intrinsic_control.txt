@@ -1,0 +1,4 @@
+// 控制流: if! / loop!
+c00 := if!(true, 1, 2);
+c01 := if!(false, 1, 2);
+c02 := loop!((x: i32) => { (x, false) }, 0);

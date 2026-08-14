@@ -1,0 +1,5 @@
+// 函数注解: !pure / !effect / 多个
+a00 := (a: i32): i32 => !pure { a };
+a01 := (a: i32): i32 => !effect { a };
+a02 := (a: i32): i32 => !pure !effect { a };
+a03 := (a: i32) => !pure { a };

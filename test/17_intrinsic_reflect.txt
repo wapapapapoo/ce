@@ -1,0 +1,19 @@
+// 内建析构 / 关系 / 编辑 / 反射
+d00 := split!(join!((a: i32), (b: i32)));
+d01 := ~arr!(arr!(i32, 10));
+d02 := ~union!(union!(i32, i64));
+d03 := ~fn!(fn!((a: i32), i32));
+d04 := ~opaque!(opaque!(i32));
+d05 := eq!(i32, i32);
+d06 := has!(join!((a: i32), (b: i32)), a);
+d07 := fn?(fn!((a: i32), i32));
+d08 := opaque?(opaque!(i32));
+d09 := add!(join!((a: i32)), b, i32);
+d10 := rm!(join!((a: i32), (b: i32)), b);
+d11 := default!(i32, 0);
+d12 := strip!(default!(i32, 0));
+d13 := typeof!(42);
+d14 := sizeof!(i32);
+d15 := offsetof!(join!((a: i32), (b: i32)), b);
+d16 := get!((a: 1, b: 2), a);
+d17 := as!(42, i32);

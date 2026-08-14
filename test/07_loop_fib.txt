@@ -1,0 +1,8 @@
+// 语义: loop! 斐波那契第 n 项
+fib := (n: i32): i32 => {
+    loop!((st: (i: i32, a: i32, b: i32)) => {
+        ((+(get!(st, i), 1), get!(st, b), +(get!(st, a), get!(st, b))), <(get!(st, i), n))
+    }, (i: 0, a: 0, b: 1))(a)
+};
+
+fib10 := fib(10);

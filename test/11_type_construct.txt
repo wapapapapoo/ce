@@ -1,0 +1,6 @@
+// 语义: 类型构造器组合出复合类型
+pair := join!((x: i32), (y: i32));
+pairArr := arr!(pair, 10);
+fnType := fn!((a: i32, b: i32), i32);
+unionT := union!(i32, i64);
+opaqueT := opaque!(i32);

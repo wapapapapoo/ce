@@ -1,0 +1,10 @@
+// 语义: 条件分支 if!
+sign := (x: i32): i32 => { if!(<(x, 0), -1, if!(==(x, 0), 0, 1)) };
+clamp := (x: i32, lo: i32, hi: i32): i32 => { if!(<(x, lo), lo, if!(>(x, hi), hi, x)) };
+
+s0 := sign(-5);
+s1 := sign(0);
+s2 := sign(5);
+c0 := clamp(10, 0, 5);
+c1 := clamp(3, 0, 5);
+c2 := clamp(-1, 0, 5);

@@ -1,0 +1,9 @@
+// 语义: 高阶函数——函数作为参数
+apply := (f: (i32, i32), x: i32): i32 => { f(x) };
+applyTwice := (f: (i32, i32), x: i32): i32 => { f(f(x)) };
+inc := (x: i32): i32 => { +(x, 1) };
+sqr := (x: i32): i32 => { *(x, x) };
+
+r1 := apply(inc, 5);
+r2 := applyTwice(inc, 5);
+r3 := apply(sqr, 7);

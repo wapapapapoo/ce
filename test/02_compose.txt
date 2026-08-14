@@ -1,0 +1,9 @@
+// 语义: 函数复合 compose(f, g)(x) = f(g(x))
+compose := (f: (i32, i32), g: (i32, i32)) => { (x: i32) => { f(g(x)) } };
+inc := (x: i32): i32 => { +(x, 1) };
+dbl := (x: i32): i32 => { *(x, 2) };
+
+incAfterDbl := compose(inc, dbl);
+r1 := incAfterDbl(5);
+dblAfterInc := compose(dbl, inc);
+r2 := dblAfterInc(5);

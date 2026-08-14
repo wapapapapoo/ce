@@ -1,0 +1,8 @@
+// 语义: 记录构造与字段访问
+point := (x: 10, y: 20);
+px := get!(point, x);
+py := get!(point, y);
+
+person := (name: "alice", age: 30);
+name := get!(person, name);
+age := get!(person, age);

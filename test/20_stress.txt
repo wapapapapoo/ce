@@ -1,0 +1,8 @@
+// 压力: 深嵌套 + 长调用链 + 组合
+deep := (((((((1)))))));
+nestedData := (a: (b: (c: (d: 1))), e: (f: 2));
+compose := (f: (i32, i32), g: (i32, i32)) => { (x: i32) => { f(g(x)) } };
+inc := (x: i32): i32 => { +(x, 1) };
+incInc := compose(inc, inc);
+chain := incInc(incInc(incInc(1)));
+expr := +(*(-(10, 2), 3), /(100, 4));

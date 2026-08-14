@@ -441,20 +441,15 @@ def replace_input_phi(
     new_phi:   用 BindPhi 构造出来的新 PhiNode
     """
 
-    # 在所有 edge.inputs 中找这个 ident_val
-    found = False
+    # 在所有 edge 的 transform(callee) / inputs(参数) 中找这个 ident_val
+    def contains(phi: PhiNode) -> bool:
+        return any(ident_val in vals for vals in phi.candidates.values())
 
     for edge in graph.edges:
+        if edge.transform is not None and contains(edge.transform):
+            edge.transform = new_phi
+            return
         for i, phi in enumerate(edge.inputs):
-            # 占位 phi 一定只有一个 candidate，且指向 ident_val
-            for values in phi.candidates.values():
-                if ident_val in values:
-                    edge.inputs[i] = new_phi
-                    found = True
-                    break
-            if found:
-                break
-        if found:
-            break
-
-    # assert found, f"identifier value v{ident_val.id} not used by any edge"
+            if contains(phi):
+                edge.inputs[i] = new_phi
+                return

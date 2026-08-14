@@ -1,0 +1,6 @@
+// 语义: 泛型——类型作为值参数,编译期实例化
+makeArray := (elemType: typ, len: i32) => { arr!(elemType, len) };
+intArr := makeArray(i32, 10);
+floatArr := makeArray(f64, 5);
+pairOf := (t: typ) => { join!((a: t), (b: t)) };
+intPair := pairOf(i32);

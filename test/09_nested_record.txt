@@ -1,0 +1,7 @@
+// 语义: 嵌套记录逐层访问
+inner := (v: 42);
+outer := (a: inner, b: (x: 1, y: 2));
+
+av := get!(get!(outer, a), v);
+bx := get!(get!(outer, b), x);
+by := get!(get!(outer, b), y);

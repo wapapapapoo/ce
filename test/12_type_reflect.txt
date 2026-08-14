@@ -1,0 +1,9 @@
+// 语义: 类型反射与查询
+pair := join!((x: i32), (y: i32));
+fields := split!(pair);
+size := sizeof!(pair);
+off := offsetof!(pair, y);
+isFn := fn?(fn!((a: i32), i32));
+isOpaque := opaque?(opaque!(i32));
+sameType := eq!(i32, i32);
+hasX := has!(pair, x);

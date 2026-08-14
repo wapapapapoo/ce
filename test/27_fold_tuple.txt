@@ -1,0 +1,8 @@
+// 语义: fold 高阶——二元函数折叠 tuple
+fold3 := (f: (i32, i32), init: i32, t: (i32, i32, i32)): i32 => {
+    f(f(f(init, get!(t, 0)), get!(t, 1)), get!(t, 2))
+};
+add := (a: i32, b: i32): i32 => { +(a, b) };
+mul := (a: i32, b: i32): i32 => { *(a, b) };
+sum := fold3(add, 0, (1, 2, 3));
+prod := fold3(mul, 1, (1, 2, 3));

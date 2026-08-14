@@ -1,0 +1,9 @@
+// 语义: loop! 累加 1..n
+sumTo := (n: i32): i32 => {
+    loop!((st: (i: i32, acc: i32)) => {
+        ((+(get!(st, i), 1), +(get!(st, acc), get!(st, i))), <(get!(st, i), n))
+    }, (i: 1, acc: 0))(acc)
+};
+
+sum10 := sumTo(10);
+sum100 := sumTo(100);

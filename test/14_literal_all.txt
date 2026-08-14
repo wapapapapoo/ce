@@ -1,0 +1,15 @@
+// 语义: 各类字面量(进制/后缀/科学计数/nan/inf)作为值
+intVal := 42;
+hexVal := 0xff;
+binVal := 0b1010;
+octVal := 0o17;
+withUnderscore := 1_000_000;
+floatVal := 3.14;
+sciVal := 1.5e3;
+hexFloat := 0x1.8p2;
+boolVal := true;
+nullVal := null;
+strVal := "hello";
+rawStr := `raw`;
+nanVal := nan;
+infVal := inf;

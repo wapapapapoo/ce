@@ -90,3 +90,6 @@ dmypy.json
 *.sqlite3
 *.db
 bin
+
+# test
+/test/*.out

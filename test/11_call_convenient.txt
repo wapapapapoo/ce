@@ -1,0 +1,9 @@
+// convenient call: f(args)
+id := (x: i32) => { x };
+c00 := id(1);
+c01 := id(1, 2);
+c02 := id();
+c03 := id((1, 2));
+c04 := id(true);
+c05 := id("str");
+c06 := id(id(1));

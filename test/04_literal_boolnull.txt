@@ -1,0 +1,4 @@
+// bool + null 字面量
+b00 := true;
+b01 := false;
+n00 := null;

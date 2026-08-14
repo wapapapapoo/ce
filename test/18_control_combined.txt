@@ -1,0 +1,8 @@
+// 语义: 控制流组合 loop! + if!
+// 统计 0..n 中偶数的个数
+countEven := (n: i32): i32 => {
+    loop!((st: (i: i32, acc: i32)) => {
+        ((+(get!(st, i), 1), +(get!(st, acc), if!(==(%(get!(st, i), 2), 0), 1, 0))), <(get!(st, i), n))
+    }, (i: 0, acc: 0))(acc)
+};
+r := countEven(10);

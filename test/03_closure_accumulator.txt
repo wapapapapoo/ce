@@ -1,0 +1,8 @@
+// 语义: 闭包捕获外部绑定(累加器)
+makeAcc := (start: i32) => { (delta: i32): i32 => { +(start, delta) } };
+
+acc0 := makeAcc(0);
+acc100 := makeAcc(100);
+a1 := acc0(1);
+a2 := acc0(2);
+a3 := acc100(5);
